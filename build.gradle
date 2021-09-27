@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31'
+    }
+}
+
+configure(allprojects - project(':src')) {
+    apply plugin: 'kotlin'
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = '11'
+        }
+    }
+
+    compileTestKotlin {
+        kotlinOptions {
+            jvmTarget = '11'
+        }
+    }
+
+    dependencies {
+        // Kotlin
+        implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.31'
+
+        // JUnit
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.0'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.8.0'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.0'
+
+        // Hamcrest
+        testImplementation 'org.hamcrest:hamcrest-library:2.2'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
