@@ -47,4 +47,51 @@ class DependencyRelationTest {
             assertThat(e.message, `is`("Invalid dependency relation: abc:def"))
         }
     }
+
+    @Nested
+    @DisplayName("parse list")
+    inner class ParseList {
+        @Test
+        @DisplayName("empty")
+        fun empty() {
+            val rel = DependencyRelation.parse("_")
+            assertThat(rel.size, `is`(0))
+        }
+
+        @Test
+        @DisplayName("invalid: missing value")
+        fun missingValue() {
+            val e = assertThrows<DependencyRelation.MissingDependencyRelationException> {
+                DependencyRelation.parse("")
+            }
+            assertThat(e.message, `is`("Missing dependency relation"))
+        }
+
+        @Test
+        @DisplayName("one")
+        fun one() {
+            val rel = DependencyRelation.parse("1:lorem")
+            assertThat(rel[0], `is`(DependencyRelation(1, "lorem")))
+            assertThat(rel.size, `is`(1))
+        }
+
+        @Test
+        @DisplayName("multiple")
+        fun multiple() {
+            val rel = DependencyRelation.parse("1:lorem|2:ipsum|3:dolor")
+            assertThat(rel[0], `is`(DependencyRelation(1, "lorem")))
+            assertThat(rel[1], `is`(DependencyRelation(2, "ipsum")))
+            assertThat(rel[2], `is`(DependencyRelation(3, "dolor")))
+            assertThat(rel.size, `is`(3))
+        }
+
+        @Test
+        @DisplayName("invalid: too many parts")
+        fun tooManyParts() {
+            val e = assertThrows<DependencyRelation.InvalidDependencyRelationException> {
+                DependencyRelation.parse("1:lorem:ipsum")
+            }
+            assertThat(e.message, `is`("Invalid dependency relation: 1:lorem:ipsum"))
+        }
+    }
 }
