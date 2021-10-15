@@ -14,6 +14,8 @@ data class TokenId(
         else -> "$start-$endInclusive"
     }
 
+    class MissingTokenIdException: RuntimeException("Missing token ID")
+
     class InvalidTokenIdException(id: String): RuntimeException("Invalid token ID: $id")
 
     companion object {
@@ -31,6 +33,7 @@ data class TokenId(
         }
 
         fun parse(id: String): TokenId = when {
+            id == "" -> throw MissingTokenIdException()
             // ConLL-U token range
             id.contains('-') -> split(id, '-', isRange = true).let {
                 TokenId(it.first, it.second)

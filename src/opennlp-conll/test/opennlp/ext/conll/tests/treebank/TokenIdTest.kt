@@ -31,6 +31,13 @@ class TokenIdTest {
             val e = assertThrows<TokenId.InvalidTokenIdException> { TokenId.parse("abc") }
             assertThat(e.message, `is`("Invalid token ID: abc"))
         }
+
+        @Test
+        @DisplayName("Missing token ID")
+        fun missingTokenId() {
+            val e = assertThrows<TokenId.MissingTokenIdException> { TokenId.parse("") }
+            assertThat(e.message, `is`("Missing token ID"))
+        }
     }
 
     @Nested
