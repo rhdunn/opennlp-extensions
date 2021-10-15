@@ -2,4 +2,6 @@ sourceSets.main.kotlin.srcDirs = ['main']
 sourceSets.test.kotlin.srcDirs = ['test']
 
 dependencies {
+    // Apache OpenNLP
+    implementation 'org.apache.opennlp:opennlp-tools:1.9.3'
 }
