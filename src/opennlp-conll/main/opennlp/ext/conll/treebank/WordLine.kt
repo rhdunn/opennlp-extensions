@@ -9,8 +9,8 @@ data class WordLine(
     val lemma: String,
     val upos: String?,
     val xpos: String?,
-    val feats: Map<String, String>,
+    val feats: List<Feature>,
     val dep: DependencyRelation?,
     val deps: List<DependencyRelation>,
-    val misc: List<String>
+    val misc: List<Feature>
 )
