@@ -5,10 +5,11 @@ package opennlp.ext.conll.treebank
 // Reference: [CoNLL-U Format](https://universaldependencies.org/format.html)
 data class TokenId(
     override val start: Int,
-    override val endInclusive: Int
+    override val endInclusive: Int,
+    val emptyNodeIndex: Int? = null
 ): ClosedRange<Int> {
-
     override fun toString(): String = when {
+        emptyNodeIndex != null -> "$start.$emptyNodeIndex"
         start == endInclusive -> start.toString()
         else -> "$start-$endInclusive"
     }
@@ -16,19 +17,27 @@ data class TokenId(
     class InvalidTokenIdException(id: String): RuntimeException("Invalid token ID: $id")
 
     companion object {
+        private fun split(id: String, separator: Char, isRange: Boolean): Pair<Int, Int> {
+            val parts = id.split(separator)
+            return when (parts.size) {
+                2 -> {
+                    val start = parts[0].toIntOrNull() ?: throw InvalidTokenIdException(id)
+                    val end = parts[1].toIntOrNull() ?: throw InvalidTokenIdException(id)
+                    if (isRange && start > end) throw InvalidTokenIdException(id)
+                    start to end
+                }
+                else -> throw InvalidTokenIdException(id)
+            }
+        }
+
         fun parse(id: String): TokenId = when {
             // ConLL-U token range
-            id.contains('-') -> {
-                val parts = id.split('-')
-                when (parts.size) {
-                    2 -> {
-                        val start = parts[0].toIntOrNull() ?: throw InvalidTokenIdException(id)
-                        val end = parts[1].toIntOrNull() ?: throw InvalidTokenIdException(id)
-                        if (start > end) throw InvalidTokenIdException(id)
-                        TokenId(start, end)
-                    }
-                    else -> throw InvalidTokenIdException(id)
-                }
+            id.contains('-') -> split(id, '-', isRange = true).let {
+                TokenId(it.first, it.second)
+            }
+            // ConLL-U empty node token counter
+            id.contains('.') -> split(id, '.', isRange = false).let {
+                TokenId(it.first, it.first, it.second)
             }
             // ConLL-X token counter
             else -> {

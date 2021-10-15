@@ -3,6 +3,7 @@ package opennlp.ext.conll.tests.treebank
 
 import opennlp.ext.conll.treebank.TokenId
 import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -20,6 +21,7 @@ class TokenIdTest {
             val id = TokenId.parse("1")
             assertThat(id.start, `is`(1))
             assertThat(id.endInclusive, `is`(1))
+            assertThat(id.emptyNodeIndex, `is`(nullValue()))
             assertThat(id.toString(), `is`("1"))
         }
 
@@ -40,6 +42,7 @@ class TokenIdTest {
             val id = TokenId.parse("1-4")
             assertThat(id.start, `is`(1))
             assertThat(id.endInclusive, `is`(4))
+            assertThat(id.emptyNodeIndex, `is`(nullValue()))
             assertThat(id.toString(), `is`("1-4"))
         }
 
@@ -69,6 +72,41 @@ class TokenIdTest {
         fun invalidRangeOrder() {
             val e = assertThrows<TokenId.InvalidTokenIdException> { TokenId.parse("4-1") }
             assertThat(e.message, `is`("Invalid token ID: 4-1"))
+        }
+    }
+
+    @Nested
+    @DisplayName("CoNLL-U empty node token ID counter")
+    inner class EmptyNodeToken {
+        @Test
+        @DisplayName("empty node token ID counter")
+        fun emptyNodeTokenCounter() {
+            val id = TokenId.parse("1.4")
+            assertThat(id.start, `is`(1))
+            assertThat(id.endInclusive, `is`(1))
+            assertThat(id.emptyNodeIndex, `is`(4))
+            assertThat(id.toString(), `is`("1.4"))
+        }
+
+        @Test
+        @DisplayName("Invalid start")
+        fun invalidStart() {
+            val e = assertThrows<TokenId.InvalidTokenIdException> { TokenId.parse("ab.4") }
+            assertThat(e.message, `is`("Invalid token ID: ab.4"))
+        }
+
+        @Test
+        @DisplayName("Invalid end")
+        fun invalidEnd() {
+            val e = assertThrows<TokenId.InvalidTokenIdException> { TokenId.parse("1.bc") }
+            assertThat(e.message, `is`("Invalid token ID: 1.bc"))
+        }
+
+        @Test
+        @DisplayName("Invalid with multiple parts")
+        fun invalidMultipleParts() {
+            val e = assertThrows<TokenId.InvalidTokenIdException> { TokenId.parse("1.4.8") }
+            assertThat(e.message, `is`("Invalid token ID: 1.4.8"))
         }
     }
 }
