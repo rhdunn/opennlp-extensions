@@ -40,8 +40,8 @@ configure(allprojects - project(':src')) {
         // Hamcrest
         testImplementation 'org.hamcrest:hamcrest-library:2.2'
     }
-}
 
-test {
-    useJUnitPlatform()
+    test {
+        useJUnitPlatform()
+    }
 }
