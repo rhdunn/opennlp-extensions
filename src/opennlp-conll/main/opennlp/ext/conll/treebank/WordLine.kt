@@ -13,4 +13,6 @@ data class WordLine(
     val dep: DependencyRelation?,
     val deps: List<DependencyRelation>,
     val misc: List<Feature>
-)
+) {
+    class InvalidWorldLineException(line: String): RuntimeException("Invalid word line: $line")
+}
