@@ -2,8 +2,7 @@
 package opennlp.ext.conll.tests.treebank
 
 import opennlp.ext.conll.treebank.DependencyRelation
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.nullValue
+import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -45,6 +44,35 @@ class DependencyRelationTest {
                 DependencyRelation.create("abc", "def")
             }
             assertThat(e.message, `is`("Invalid dependency relation: abc:def"))
+        }
+    }
+
+    @Nested
+    @DisplayName("root")
+    inner class Root {
+        @Test
+        @DisplayName("root")
+        fun root() {
+            val rel = DependencyRelation.create("0", "root")
+            assertThat(rel, `is`(sameInstance(DependencyRelation.ROOT)))
+        }
+
+        @Test
+        @DisplayName("Invalid root head")
+        fun invalidRootHead() {
+            val e = assertThrows<DependencyRelation.InvalidRootException> {
+                DependencyRelation.create("1", "root")
+            }
+            assertThat(e.message, `is`("Invalid root node dependency relation: 1:root"))
+        }
+
+        @Test
+        @DisplayName("Invalid root relation")
+        fun invalidRootRelation() {
+            val e = assertThrows<DependencyRelation.InvalidRootException> {
+                DependencyRelation.create("0", "lorem")
+            }
+            assertThat(e.message, `is`("Invalid root node dependency relation: 0:lorem"))
         }
     }
 
