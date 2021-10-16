@@ -115,12 +115,11 @@ class DependencyRelationTest {
         }
 
         @Test
-        @DisplayName("invalid: too many parts")
-        fun tooManyParts() {
-            val e = assertThrows<DependencyRelation.InvalidDependencyRelationException> {
-                DependencyRelation.parse("1:lorem:ipsum")
-            }
-            assertThat(e.message, `is`("Invalid dependency relation: 1:lorem:ipsum"))
+        @DisplayName("multiple parts")
+        fun multipleParts() {
+            val rel = DependencyRelation.parse("1:lorem:ipsum")
+            assertThat(rel[0], `is`(DependencyRelation(1, "lorem:ipsum")))
+            assertThat(rel.size, `is`(1))
         }
     }
 }

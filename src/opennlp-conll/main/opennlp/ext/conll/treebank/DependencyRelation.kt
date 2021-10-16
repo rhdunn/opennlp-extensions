@@ -30,11 +30,9 @@ data class DependencyRelation(val head: Int, val deprel: String) {
         private fun parseItem(rel: String): DependencyRelation? = when (rel) {
             "" -> throw MissingDependencyRelationException()
             else -> {
-                val parts = rel.split(':')
-                when (parts.size) {
-                    2 -> create(parts[0], parts[1])
-                    else -> throw InvalidDependencyRelationException(rel)
-                }
+                val head = rel.substringBefore(':')
+                val deprel = rel.substringAfter(':')
+                create(head, deprel)
             }
         }
 
