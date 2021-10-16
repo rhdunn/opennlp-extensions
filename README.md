@@ -36,6 +36,12 @@ The following properties are supported for `TrainingParameters` objects:
 | `training.cutoff`     | `integer` | 5        |
 | `training.threads`    | `integer` | 4        |
 
+The following properties are supported for `TokenizerFactory` objects:
+
+| Parameter             | Type      | Default  |
+|-----------------------|-----------|----------|
+| `language`            | `string`  | `en`     |
+
 ## License
 Copyright (C) 2021 Reece H. Dunn
 
