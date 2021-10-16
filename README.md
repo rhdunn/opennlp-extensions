@@ -2,6 +2,8 @@
 This is a set of extensions for working with OpenNLP.
 1. [opennlp-conll](#opennlp-conll) &ndash; a collection of classes for working
    with CoNLL-X and CoNLL-U treebanks.
+2. [opennlp-train](#opennlp-train) &ndash; a collection of classes for training
+   different OpenNLP models.
 
 ## opennlp-conll
 This is a collection of classes for working with CoNLL-X and CoNLL-U treebanks.
@@ -21,6 +23,9 @@ treebank sentences.
 The `opennlp.ext.conll.stream.sample` package contains streams for creating
 different training sample streams.
 1. `TokenSampleStream` creates token samples from treebank sentences.
+
+## opennlp-train
+This is a collection of classes for training different OpenNLP models.
 
 ## License
 Copyright (C) 2021 Reece H. Dunn
