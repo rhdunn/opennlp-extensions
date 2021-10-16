@@ -1,8 +1,10 @@
 # OpenNLP Extensions
 This is a set of extensions for working with OpenNLP.
+1. [opennlp-conll](#opennlp-conll) &ndash; a collection of classes for working
+   with CoNLL-X and CoNLL-U treebanks.
 
 ## opennlp-conll
-This is a collection of classes for working with CoNLL-X and CoNLL-U files.
+This is a collection of classes for working with CoNLL-X and CoNLL-U treebanks.
 
 The `opennlp.ext.conll.treebank` package contains the data model classes for
 CoNLL based treebanks. It provides a unified model between the data in
@@ -15,6 +17,10 @@ treebank sentences.
 2. `ConlluSentenceStream` is a CoNLL-U file parser.
 3. `SentenceStream` is a helper class for constructing a given sentence stream
    in the specified format from a variety of sources.
+
+The `opennlp.ext.conll.stream.sample` package contains streams for creating
+different training sample streams.
+1. `TokenSampleStream` creates token samples from treebank sentences.
 
 ## License
 Copyright (C) 2021 Reece H. Dunn
