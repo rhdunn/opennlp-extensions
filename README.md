@@ -38,11 +38,12 @@ The following properties are supported for `TrainingParameters` objects:
 
 The following properties are supported for `TokenizerFactory` objects:
 
-| Parameter                   | Type      | Default  |
-|-----------------------------|-----------|----------|
-| `language`                  | `string`  | `en`     |
-| `abbreviations.dictionary`  | `path`    |          |
-| `alphanumeric.optimization` | `boolean` | `false`  |
+| Parameter                   | Type      | Default          |
+|-----------------------------|-----------|------------------|
+| `language`                  | `string`  | `en`             |
+| `abbreviations.dictionary`  | `path`    |                  |
+| `alphanumeric.optimization` | `boolean` | `false`          |
+| `alphanumeric.pattern`      | `regex`   | `^[A-Za-z0-9]+$` |
 
 ## License
 Copyright (C) 2021 Reece H. Dunn

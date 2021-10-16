@@ -4,6 +4,7 @@ package opennlp.ext.train.properties
 import opennlp.tools.dictionary.Dictionary
 import java.io.FileReader
 import java.util.*
+import java.util.regex.Pattern
 
 private const val LANGUAGE: String = "language" // integer
 private const val LANGUAGE_DEFAULT: String = "en"
@@ -25,4 +26,12 @@ private const val ALPHANUMERIC_OPTIMIZATION_DEFAULT: String = "false"
 fun alphanumericOptimization(properties: Properties): Boolean {
     val value = properties.getOrDefault(ALPHANUMERIC_OPTIMIZATION, ALPHANUMERIC_OPTIMIZATION_DEFAULT) as String
     return value == "true"
+}
+
+private const val ALPHANUMERIC_PATTERN: String = "alphanumeric.pattern" // regex
+private const val ALPHANUMERIC_PATTERN_DEFAULT: String = "^[A-Za-z0-9]+\$"
+
+fun alphanumericPattern(properties: Properties): Pattern {
+    val value = properties.getOrDefault(ALPHANUMERIC_PATTERN, ALPHANUMERIC_PATTERN_DEFAULT) as String
+    return value.toPattern()
 }
