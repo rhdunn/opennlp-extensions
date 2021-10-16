@@ -13,10 +13,11 @@ data class Sentence(
         get() = this[SENT_ID]
 
     val text: String?
-        get() = this[TEXT]
+        get() = this[TEXT] ?: this[SENTENCE_TEXT]
 
     companion object {
         const val SENT_ID = "sent_id"
+        const val SENTENCE_TEXT = "sentence-text"
         const val TEXT = "text"
     }
 }

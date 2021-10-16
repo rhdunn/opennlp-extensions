@@ -107,6 +107,22 @@ class ConlluSentenceStreamTest {
             assertThat(sentence.sentenceId, `is`("lorem-1"))
             assertThat(sentence.text, `is`("The hats."))
         }
+
+        @Test
+        @DisplayName("sentence-text (UD r1.4)")
+        fun sentenceText() {
+            val sentence = parse(
+                """
+                # sentence-text = The hats.
+                2	hats	hat	NOUN	NN	Number=Plur	1	det	3:test	SpaceAfter=No
+                """.trimIndent()
+            )[0]
+            assertThat(sentence.comments[0], `is`(Comment("sentence-text", "The hats.")))
+            assertThat(sentence.comments.size, `is`(1))
+
+            assertThat(sentence.sentenceId, `is`(nullValue()))
+            assertThat(sentence.text, `is`("The hats."))
+        }
     }
 
     @Nested
