@@ -38,9 +38,10 @@ The following properties are supported for `TrainingParameters` objects:
 
 The following properties are supported for `TokenizerFactory` objects:
 
-| Parameter             | Type      | Default  |
-|-----------------------|-----------|----------|
-| `language`            | `string`  | `en`     |
+| Parameter                  | Type      | Default  |
+|----------------------------|-----------|----------|
+| `language`                 | `string`  | `en`     |
+| `abbreviations.dictionary` | `path`    |          |
 
 ## License
 Copyright (C) 2021 Reece H. Dunn
