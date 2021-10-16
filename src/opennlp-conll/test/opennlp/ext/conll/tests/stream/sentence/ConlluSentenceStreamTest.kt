@@ -256,4 +256,17 @@ class ConlluSentenceStreamTest {
         assertThat(token.deps, `is`(listOf(DependencyRelation(3, "test"))))
         assertThat(token.misc, `is`(listOf(Feature("SpaceAfter", "No"))))
     }
+
+    @Test
+    @DisplayName("SpaceAfter MISC feature")
+    fun spaceAfter() {
+        val sentences = parse(
+            """
+            1	the	the	DET	DT	_	_	_	_	_
+            2	hats	hat	NOUN	NN	Number=Plur	1	det	3:test	SpaceAfter=No
+            """.trimIndent()
+        )
+        assertThat(sentences[0].wordLines[0].spaceAfter, `is`(true))
+        assertThat(sentences[0].wordLines[1].spaceAfter, `is`(false))
+    }
 }

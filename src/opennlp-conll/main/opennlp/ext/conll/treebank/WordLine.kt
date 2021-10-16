@@ -18,5 +18,13 @@ data class WordLine(
         return feats.find { it.name == name }?.value ?: misc.find { it.name == name }?.value
     }
 
+    val spaceAfter: Boolean
+        get() = this[SPACE_AFTER] != NO
+
     class InvalidWorldLineException(line: String): RuntimeException("Invalid word line: $line")
+
+    companion object {
+        const val SPACE_AFTER = "SpaceAfter"
+        const val NO = "No"
+    }
 }
