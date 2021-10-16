@@ -6,4 +6,13 @@ package opennlp.ext.conll.treebank
 data class Sentence(
     val comments: List<Comment>,
     val wordLines: List<WordLine>
-)
+) {
+    operator fun get(name: String): String? = comments.find { it.name == name }?.value
+
+    val sentenceId: String?
+        get() = this[SENT_ID]
+
+    companion object {
+        const val SENT_ID = "sent_id"
+    }
+}
