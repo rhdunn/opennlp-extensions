@@ -27,6 +27,12 @@ different training sample streams.
 ## opennlp-train
 This is a collection of classes for training different OpenNLP models.
 
+The following properties are supported for `TrainingParameters` objects:
+
+| Parameter             | Type      | Default  |
+|-----------------------|-----------|----------|
+| `training.algorithm`  | `string`  | `maxent` |
+
 ## License
 Copyright (C) 2021 Reece H. Dunn
 
