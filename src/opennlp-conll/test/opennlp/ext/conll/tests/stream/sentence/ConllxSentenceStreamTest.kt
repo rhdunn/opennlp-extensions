@@ -28,7 +28,7 @@ class ConllxSentenceStreamTest {
     }
 
     @Nested
-    @DisplayName("Word Lines")
+    @DisplayName("word lines")
     inner class WordLines {
         private fun wordLine(text: String): WordLine {
             val sentences = parse(text)
