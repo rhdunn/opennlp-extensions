@@ -1,12 +1,14 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.train.properties
 
+import opennlp.tools.ml.EventTrainer
 import opennlp.tools.util.TrainingParameters
 import java.util.*
 
 fun trainingParameters(properties: Properties): TrainingParameters {
     val params = TrainingParameters()
     params.put(TrainingParameters.ALGORITHM_PARAM, algorithm(properties))
+    params.put(TrainingParameters.TRAINER_TYPE_PARAM, EventTrainer.EVENT_VALUE)
     return params
 }
 
