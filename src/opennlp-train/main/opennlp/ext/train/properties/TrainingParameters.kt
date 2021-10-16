@@ -10,6 +10,7 @@ fun trainingParameters(properties: Properties): TrainingParameters {
     params.put(TrainingParameters.ALGORITHM_PARAM, algorithm(properties))
     params.put(TrainingParameters.TRAINER_TYPE_PARAM, EventTrainer.EVENT_VALUE)
     params.put(TrainingParameters.ITERATIONS_PARAM, iterations(properties))
+    params.put(TrainingParameters.CUTOFF_PARAM, cutoff(properties))
     return params
 }
 
@@ -26,5 +27,13 @@ private const val ITERATIONS_DEFAULT: String = "100"
 
 fun iterations(properties: Properties): Int {
     val value = properties.getOrDefault(ITERATIONS, ITERATIONS_DEFAULT) as String
+    return value.toInt()
+}
+
+private const val CUTOFF: String = "training.cutoff" // integer
+private const val CUTOFF_DEFAULT: String = "5"
+
+fun cutoff(properties: Properties): Int {
+    val value = properties.getOrDefault(CUTOFF, CUTOFF_DEFAULT) as String
     return value.toInt()
 }
