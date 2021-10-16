@@ -14,5 +14,9 @@ data class WordLine(
     val deps: List<DependencyRelation>,
     val misc: List<Feature>
 ) {
+    operator fun get(name: String): String? {
+        return feats.find { it.name == name }?.value ?: misc.find { it.name == name }?.value
+    }
+
     class InvalidWorldLineException(line: String): RuntimeException("Invalid word line: $line")
 }
