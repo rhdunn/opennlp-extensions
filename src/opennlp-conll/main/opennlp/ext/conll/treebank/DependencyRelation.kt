@@ -6,11 +6,11 @@ package opennlp.ext.conll.treebank
 data class DependencyRelation(val head: Int, val deprel: String) {
     override fun toString(): String = "$head:$deprel"
 
-    class MissingDependencyRelationException: RuntimeException("Missing dependency relation")
+    class MissingDependencyRelationException : RuntimeException("Missing dependency relation")
 
-    class InvalidDependencyRelationException(rel: String): RuntimeException("Invalid dependency relation: $rel")
+    class InvalidDependencyRelationException(rel: String) : RuntimeException("Invalid dependency relation: $rel")
 
-    class InvalidRootException(rel: String): RuntimeException("Invalid root node dependency relation: $rel")
+    class InvalidRootException(rel: String) : RuntimeException("Invalid root node dependency relation: $rel")
 
     companion object {
         val ROOT: DependencyRelation = DependencyRelation(0, "root")

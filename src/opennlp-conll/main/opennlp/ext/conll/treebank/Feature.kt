@@ -9,9 +9,9 @@ data class Feature(val name: String?, val value: String) {
         else -> "$name=$value"
     }
 
-    class MissingFeatureException: RuntimeException("Missing feature")
+    class MissingFeatureException : RuntimeException("Missing feature")
 
-    class InvalidFeatureException(feat: String): RuntimeException("Invalid feature: $feat")
+    class InvalidFeatureException(feat: String) : RuntimeException("Invalid feature: $feat")
 
     companion object {
         private fun parseItem(feat: String): Feature = when (feat) {

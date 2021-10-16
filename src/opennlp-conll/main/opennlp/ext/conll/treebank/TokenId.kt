@@ -7,16 +7,16 @@ data class TokenId(
     override val start: Int,
     override val endInclusive: Int,
     val emptyNodeIndex: Int? = null
-): ClosedRange<Int> {
+) : ClosedRange<Int> {
     override fun toString(): String = when {
         emptyNodeIndex != null -> "$start.$emptyNodeIndex"
         start == endInclusive -> start.toString()
         else -> "$start-$endInclusive"
     }
 
-    class MissingTokenIdException: RuntimeException("Missing token ID")
+    class MissingTokenIdException : RuntimeException("Missing token ID")
 
-    class InvalidTokenIdException(id: String): RuntimeException("Invalid token ID: $id")
+    class InvalidTokenIdException(id: String) : RuntimeException("Invalid token ID: $id")
 
     companion object {
         private fun split(id: String, separator: Char, isRange: Boolean): Pair<Int, Int> {

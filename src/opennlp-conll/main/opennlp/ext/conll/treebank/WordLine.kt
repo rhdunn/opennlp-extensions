@@ -21,7 +21,7 @@ data class WordLine(
     val spaceAfter: Boolean
         get() = this[SPACE_AFTER] != NO
 
-    class InvalidWorldLineException(line: String): RuntimeException("Invalid word line: $line")
+    class InvalidWorldLineException(line: String) : RuntimeException("Invalid word line: $line")
 
     companion object {
         const val SPACE_AFTER: String = "SpaceAfter"
