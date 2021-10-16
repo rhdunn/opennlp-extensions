@@ -32,6 +32,9 @@ configure(allprojects - project(':src')) {
         // Kotlin
         implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.31'
 
+        // Apache OpenNLP
+        implementation 'org.apache.opennlp:opennlp-tools:1.9.3'
+
         // JUnit
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.0'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.8.0'

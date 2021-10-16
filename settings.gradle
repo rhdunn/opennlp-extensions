@@ -1,1 +1,2 @@
 include ':src:opennlp-conll'
+include ':src:opennlp-train'
