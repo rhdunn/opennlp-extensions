@@ -2,11 +2,16 @@
 package opennlp.ext.conll.treebank
 
 // Reference: [CoNLL-U Format](https://universaldependencies.org/format.html)
-data class Comment(val value: String) {
+data class Comment(val name: String?, val value: String) {
     companion object {
         fun parse(line: String): Comment {
-            val text = line.substringAfter('#').trim()
-            return Comment(text)
+            val parts = line.substring(1).trim().split(RE_EQUALS)
+            return when (parts.size) {
+                2 -> Comment(parts[0], parts[1])
+                else -> Comment(null, parts[0])
+            }
         }
+
+        private val RE_EQUALS = "\\s*=\\s*".toRegex()
     }
 }

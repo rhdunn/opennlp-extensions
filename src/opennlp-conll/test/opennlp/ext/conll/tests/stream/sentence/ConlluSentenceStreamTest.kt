@@ -50,7 +50,7 @@ class ConlluSentenceStreamTest {
                 2	hats	hat	NOUN	NN	Number=Plur	1	det	3:test	SpaceAfter=No
                 """.trimIndent()
             )[0]
-            assertThat(sentence.comments[0], `is`(Comment("Lorem ipsum dolor.")))
+            assertThat(sentence.comments[0], `is`(Comment(null, "Lorem ipsum dolor.")))
             assertThat(sentence.comments.size, `is`(1))
         }
     }
@@ -67,7 +67,7 @@ class ConlluSentenceStreamTest {
                 2	hats	hat	NOUN	NN	Number=Plur	1	det	3:test	SpaceAfter=No
                 """.trimIndent()
             )[0]
-            assertThat(sentence.comments[0], `is`(Comment("sent_id = lorem-ipsum")))
+            assertThat(sentence.comments[0], `is`(Comment("sent_id", "lorem-ipsum")))
             assertThat(sentence.comments.size, `is`(1))
         }
 
@@ -80,7 +80,7 @@ class ConlluSentenceStreamTest {
                 2	hats	hat	NOUN	NN	Number=Plur	1	det	3:test	SpaceAfter=No
                 """.trimIndent()
             )[0]
-            assertThat(sentence.comments[0], `is`(Comment("text = The hats.")))
+            assertThat(sentence.comments[0], `is`(Comment("text", "The hats.")))
             assertThat(sentence.comments.size, `is`(1))
         }
 
@@ -94,8 +94,8 @@ class ConlluSentenceStreamTest {
                 2	hats	hat	NOUN	NN	Number=Plur	1	det	3:test	SpaceAfter=No
                 """.trimIndent()
             )[0]
-            assertThat(sentence.comments[0], `is`(Comment("sent_id = lorem-1")))
-            assertThat(sentence.comments[1], `is`(Comment("text = The hats.")))
+            assertThat(sentence.comments[0], `is`(Comment("sent_id", "lorem-1")))
+            assertThat(sentence.comments[1], `is`(Comment("text", "The hats.")))
             assertThat(sentence.comments.size, `is`(2))
         }
     }
