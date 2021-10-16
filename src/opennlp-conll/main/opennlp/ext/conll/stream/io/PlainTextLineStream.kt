@@ -9,6 +9,7 @@ import java.io.File
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 
+@Suppress("MemberVisibilityCanBePrivate")
 object PlainTextLineStream {
     fun create(stream: InputStreamFactory, charset: Charset = StandardCharsets.UTF_8): ObjectStream<String> {
         return PlainTextByLineStream(stream, charset)

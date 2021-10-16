@@ -4,6 +4,7 @@ package opennlp.ext.conll.stream.sentence
 import opennlp.ext.conll.treebank.Sentence
 import opennlp.tools.util.ObjectStream
 
+@Suppress("MemberVisibilityCanBePrivate")
 object SentenceStream {
     const val CONLLX: String = "conllx"
     const val CONLLU: String = "conllu"
