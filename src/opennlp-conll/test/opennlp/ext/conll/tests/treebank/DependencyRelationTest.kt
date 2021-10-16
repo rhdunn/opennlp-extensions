@@ -2,6 +2,7 @@
 package opennlp.ext.conll.tests.treebank
 
 import opennlp.ext.conll.treebank.DependencyRelation
+import opennlp.ext.conll.treebank.TokenId
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -12,6 +13,10 @@ import org.junit.jupiter.api.assertThrows
 @Suppress("RedundantInnerClassModifier", "ReplaceNotNullAssertionWithElvisReturn")
 @DisplayName("CoNLL DependencyRelation")
 class DependencyRelationTest {
+    private val token1 = TokenId(1, 1, null)
+    private val token2 = TokenId(2, 2, null)
+    private val token3 = TokenId(3, 3, null)
+
     @Nested
     @DisplayName("create")
     inner class Create {
@@ -33,7 +38,7 @@ class DependencyRelationTest {
         @DisplayName("dependency relation")
         fun dependencyRelation() {
             val rel = DependencyRelation.create("1", "test")!!
-            assertThat(rel.head, `is`(1))
+            assertThat(rel.head, `is`(token1))
             assertThat(rel.deprel, `is`("test"))
             assertThat(rel.toString(), `is`("1:test"))
         }
@@ -100,7 +105,7 @@ class DependencyRelationTest {
         @DisplayName("one")
         fun one() {
             val rel = DependencyRelation.parse("1:lorem")
-            assertThat(rel[0], `is`(DependencyRelation(1, "lorem")))
+            assertThat(rel[0], `is`(DependencyRelation(token1, "lorem")))
             assertThat(rel.size, `is`(1))
         }
 
@@ -108,9 +113,9 @@ class DependencyRelationTest {
         @DisplayName("multiple")
         fun multiple() {
             val rel = DependencyRelation.parse("1:lorem|2:ipsum|3:dolor")
-            assertThat(rel[0], `is`(DependencyRelation(1, "lorem")))
-            assertThat(rel[1], `is`(DependencyRelation(2, "ipsum")))
-            assertThat(rel[2], `is`(DependencyRelation(3, "dolor")))
+            assertThat(rel[0], `is`(DependencyRelation(token1, "lorem")))
+            assertThat(rel[1], `is`(DependencyRelation(token2, "ipsum")))
+            assertThat(rel[2], `is`(DependencyRelation(token3, "dolor")))
             assertThat(rel.size, `is`(3))
         }
 
@@ -118,7 +123,7 @@ class DependencyRelationTest {
         @DisplayName("multiple parts")
         fun multipleParts() {
             val rel = DependencyRelation.parse("1:lorem:ipsum")
-            assertThat(rel[0], `is`(DependencyRelation(1, "lorem:ipsum")))
+            assertThat(rel[0], `is`(DependencyRelation(token1, "lorem:ipsum")))
             assertThat(rel.size, `is`(1))
         }
     }

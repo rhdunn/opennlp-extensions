@@ -14,6 +14,10 @@ import org.junit.jupiter.api.assertThrows
 
 @DisplayName("CoNLL-X Sentence Stream")
 class ConllxSentenceStreamTest {
+    private val token1 = TokenId(1, 1, null)
+    private val token2 = TokenId(2, 2, null)
+    private val token3 = TokenId(3, 3, null)
+
     private fun parse(text: String): List<Sentence> {
         val lines = PlainTextLineStream.create(text)
         val sentences = ConllxSentenceStream(lines)
@@ -41,14 +45,14 @@ class ConllxSentenceStreamTest {
         @DisplayName("full annotation")
         fun fullAnnotation() {
             val token = wordLine("2\thats\that\tNOUN\tNN\tNumber=Plur\t1\tdet\t3\ttest")
-            assertThat(token.id, `is`(TokenId(2, 2, null)))
+            assertThat(token.id, `is`(token2))
             assertThat(token.form, `is`("hats"))
             assertThat(token.lemma, `is`("hat"))
             assertThat(token.upos, `is`("NOUN"))
             assertThat(token.xpos, `is`("NN"))
             assertThat(token.feats, `is`(listOf(Feature("Number", "Plur"))))
-            assertThat(token.dep, `is`(DependencyRelation(1, "det")))
-            assertThat(token.deps, `is`(listOf(DependencyRelation(3, "test"))))
+            assertThat(token.dep, `is`(DependencyRelation(token1, "det")))
+            assertThat(token.deps, `is`(listOf(DependencyRelation(token3, "test"))))
             assertThat(token.misc, `is`(listOf()))
         }
 
@@ -56,7 +60,7 @@ class ConllxSentenceStreamTest {
         @DisplayName("minimal annotation")
         fun minimalAnnotation() {
             val token = wordLine("2\thats\that\t_\t_\t_\t_\t_\t_\t_")
-            assertThat(token.id, `is`(TokenId(2, 2, null)))
+            assertThat(token.id, `is`(token2))
             assertThat(token.form, `is`("hats"))
             assertThat(token.lemma, `is`("hat"))
             assertThat(token.upos, `is`(nullValue()))
@@ -71,7 +75,7 @@ class ConllxSentenceStreamTest {
         @DisplayName("underscore form")
         fun underscoreForm() {
             val token = wordLine("2\t_\t_\t_\t_\t_\t_\t_\t_\t_")
-            assertThat(token.id, `is`(TokenId(2, 2, null)))
+            assertThat(token.id, `is`(token2))
             assertThat(token.form, `is`("_"))
             assertThat(token.lemma, `is`("_"))
             assertThat(token.upos, `is`(nullValue()))
@@ -102,7 +106,7 @@ class ConllxSentenceStreamTest {
         assertThat(sentences.size, `is`(1))
 
         var token = sentences[0].wordLines[0]
-        assertThat(token.id, `is`(TokenId(1, 1, null)))
+        assertThat(token.id, `is`(token1))
         assertThat(token.form, `is`("the"))
         assertThat(token.lemma, `is`("the"))
         assertThat(token.upos, `is`("DET"))
@@ -113,14 +117,14 @@ class ConllxSentenceStreamTest {
         assertThat(token.misc, `is`(listOf()))
 
         token = sentences[0].wordLines[1]
-        assertThat(token.id, `is`(TokenId(2, 2, null)))
+        assertThat(token.id, `is`(token2))
         assertThat(token.form, `is`("hats"))
         assertThat(token.lemma, `is`("hat"))
         assertThat(token.upos, `is`("NOUN"))
         assertThat(token.xpos, `is`("NN"))
         assertThat(token.feats, `is`(listOf(Feature("Number", "Plur"))))
-        assertThat(token.dep, `is`(DependencyRelation(1, "det")))
-        assertThat(token.deps, `is`(listOf(DependencyRelation(3, "test"))))
+        assertThat(token.dep, `is`(DependencyRelation(token1, "det")))
+        assertThat(token.deps, `is`(listOf(DependencyRelation(token3, "test"))))
         assertThat(token.misc, `is`(listOf()))
     }
 
@@ -137,7 +141,7 @@ class ConllxSentenceStreamTest {
         assertThat(sentences.size, `is`(2))
 
         var token = sentences[0].wordLines[0]
-        assertThat(token.id, `is`(TokenId(1, 1, null)))
+        assertThat(token.id, `is`(token1))
         assertThat(token.form, `is`("the"))
         assertThat(token.lemma, `is`("the"))
         assertThat(token.upos, `is`("DET"))
@@ -148,14 +152,14 @@ class ConllxSentenceStreamTest {
         assertThat(token.misc, `is`(listOf()))
 
         token = sentences[1].wordLines[0]
-        assertThat(token.id, `is`(TokenId(2, 2, null)))
+        assertThat(token.id, `is`(token2))
         assertThat(token.form, `is`("hats"))
         assertThat(token.lemma, `is`("hat"))
         assertThat(token.upos, `is`("NOUN"))
         assertThat(token.xpos, `is`("NN"))
         assertThat(token.feats, `is`(listOf(Feature("Number", "Plur"))))
-        assertThat(token.dep, `is`(DependencyRelation(1, "det")))
-        assertThat(token.deps, `is`(listOf(DependencyRelation(3, "test"))))
+        assertThat(token.dep, `is`(DependencyRelation(token1, "det")))
+        assertThat(token.deps, `is`(listOf(DependencyRelation(token3, "test"))))
         assertThat(token.misc, `is`(listOf()))
     }
 }

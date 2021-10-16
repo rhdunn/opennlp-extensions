@@ -34,7 +34,7 @@ A *paragraph boundary comment* can either be a block comment of the form
 | 4     | UPOS    | string               | The universal part of speech tag of the token. |
 | 5     | XPOS    | string               | The language specific part of speech tag of the token. |
 | 6     | FEATS   | features             | The set of syntactic and morphological features for the token. |
-| 7     | HEAD    | integer              | The head of the *dependency relation*. |
+| 7     | HEAD    | token id             | The head of the *dependency relation*. |
 | 8     | DEPREL  | string               | The relationship type of the *dependency relation*. |
 | 9     | DEPS    | dependency relations | The head of the *projected dependency relation*. |
 | 10    | MISC    | features             | The relationship type of the *projected dependency relation*. |
