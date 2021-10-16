@@ -32,6 +32,7 @@ The following properties are supported for `TrainingParameters` objects:
 | Parameter             | Type      | Default  |
 |-----------------------|-----------|----------|
 | `training.algorithm`  | `string`  | `maxent` |
+| `training.iterations` | `integer` | 100      |
 
 ## License
 Copyright (C) 2021 Reece H. Dunn

@@ -9,6 +9,7 @@ fun trainingParameters(properties: Properties): TrainingParameters {
     val params = TrainingParameters()
     params.put(TrainingParameters.ALGORITHM_PARAM, algorithm(properties))
     params.put(TrainingParameters.TRAINER_TYPE_PARAM, EventTrainer.EVENT_VALUE)
+    params.put(TrainingParameters.ITERATIONS_PARAM, iterations(properties))
     return params
 }
 
@@ -18,4 +19,12 @@ private const val ALGORITHM_DEFAULT: String = "maxent"
 fun algorithm(properties: Properties): String {
     val value = properties.getOrDefault(ALGORITHM, ALGORITHM_DEFAULT) as String
     return value.uppercase()
+}
+
+private const val ITERATIONS: String = "training.iterations" // integer
+private const val ITERATIONS_DEFAULT: String = "100"
+
+fun iterations(properties: Properties): Int {
+    val value = properties.getOrDefault(ITERATIONS, ITERATIONS_DEFAULT) as String
+    return value.toInt()
 }
