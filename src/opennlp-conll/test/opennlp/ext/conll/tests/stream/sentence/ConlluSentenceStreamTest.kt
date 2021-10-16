@@ -71,6 +71,7 @@ class ConlluSentenceStreamTest {
             assertThat(sentence.comments.size, `is`(1))
 
             assertThat(sentence.sentenceId, `is`("lorem-ipsum"))
+            assertThat(sentence.text, `is`(nullValue()))
         }
 
         @Test
@@ -86,6 +87,7 @@ class ConlluSentenceStreamTest {
             assertThat(sentence.comments.size, `is`(1))
 
             assertThat(sentence.sentenceId, `is`(nullValue()))
+            assertThat(sentence.text, `is`("The hats."))
         }
 
         @Test
@@ -103,6 +105,7 @@ class ConlluSentenceStreamTest {
             assertThat(sentence.comments.size, `is`(2))
 
             assertThat(sentence.sentenceId, `is`("lorem-1"))
+            assertThat(sentence.text, `is`("The hats."))
         }
     }
 

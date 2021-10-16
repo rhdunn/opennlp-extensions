@@ -12,7 +12,11 @@ data class Sentence(
     val sentenceId: String?
         get() = this[SENT_ID]
 
+    val text: String?
+        get() = this[TEXT]
+
     companion object {
         const val SENT_ID = "sent_id"
+        const val TEXT = "text"
     }
 }
