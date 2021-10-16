@@ -10,11 +10,11 @@ class ConlluSentenceStream(stream: ObjectStream<String>) : FilterObjectStream<St
     override fun read(): Sentence? {
         var line: String? = samples.read() ?: return null
 
-        val comments = mutableListOf<String>()
+        val comments = mutableListOf<Comment>()
         val wordLines = mutableListOf<WordLine>()
         while (!line.isNullOrEmpty()) {
             when {
-                line.startsWith('#') -> comments.add(line)
+                line.startsWith('#') -> comments.add(Comment.parse(line))
                 else -> wordLines.add(parseWordLine(line.split('\t')))
             }
             line = samples.read()

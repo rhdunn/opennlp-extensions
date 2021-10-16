@@ -27,9 +27,9 @@ class ConlluSentenceStreamTest {
         assertThat(sentences.size, `is`(0))
     }
 
-     @Nested
-     @DisplayName("comments")
-     inner class Comments {
+    @Nested
+    @DisplayName("comments")
+    inner class Comments {
         @Test
         @DisplayName("no comments")
         fun noComments() {
@@ -42,6 +42,23 @@ class ConlluSentenceStreamTest {
         }
 
         @Test
+        @DisplayName("comment")
+        fun comment() {
+            val sentence = parse(
+                """
+                # Lorem ipsum dolor.
+                2	hats	hat	NOUN	NN	Number=Plur	1	det	3:test	SpaceAfter=No
+                """.trimIndent()
+            )[0]
+            assertThat(sentence.comments[0], `is`(Comment("Lorem ipsum dolor.")))
+            assertThat(sentence.comments.size, `is`(1))
+        }
+    }
+
+    @Nested
+    @DisplayName("sentence metadata comments")
+    inner class SentenceMetadataComments {
+        @Test
         @DisplayName("sent_id")
         fun sentId() {
             val sentence = parse(
@@ -50,7 +67,7 @@ class ConlluSentenceStreamTest {
                 2	hats	hat	NOUN	NN	Number=Plur	1	det	3:test	SpaceAfter=No
                 """.trimIndent()
             )[0]
-            assertThat(sentence.comments[0], `is`("# sent_id = lorem-ipsum"))
+            assertThat(sentence.comments[0], `is`(Comment("sent_id = lorem-ipsum")))
             assertThat(sentence.comments.size, `is`(1))
         }
 
@@ -63,7 +80,7 @@ class ConlluSentenceStreamTest {
                 2	hats	hat	NOUN	NN	Number=Plur	1	det	3:test	SpaceAfter=No
                 """.trimIndent()
             )[0]
-            assertThat(sentence.comments[0], `is`("# text = The hats."))
+            assertThat(sentence.comments[0], `is`(Comment("text = The hats.")))
             assertThat(sentence.comments.size, `is`(1))
         }
 
@@ -77,8 +94,8 @@ class ConlluSentenceStreamTest {
                 2	hats	hat	NOUN	NN	Number=Plur	1	det	3:test	SpaceAfter=No
                 """.trimIndent()
             )[0]
-            assertThat(sentence.comments[0], `is`("# sent_id = lorem-1"))
-            assertThat(sentence.comments[1], `is`("# text = The hats."))
+            assertThat(sentence.comments[0], `is`(Comment("sent_id = lorem-1")))
+            assertThat(sentence.comments[1], `is`(Comment("text = The hats.")))
             assertThat(sentence.comments.size, `is`(2))
         }
     }

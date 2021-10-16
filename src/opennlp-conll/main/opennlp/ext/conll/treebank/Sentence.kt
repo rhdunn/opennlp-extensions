@@ -4,6 +4,6 @@ package opennlp.ext.conll.treebank
 // Reference: [CoNLL-X Format](https://ilk.uvt.nl/~emarsi/download/pubs/14964.pdf)
 // Reference: [CoNLL-U Format](https://universaldependencies.org/format.html)
 data class Sentence(
-    val comments: List<String>,
+    val comments: List<Comment>,
     val wordLines: List<WordLine>
 )
