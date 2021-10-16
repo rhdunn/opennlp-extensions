@@ -13,7 +13,7 @@ data class DependencyRelation(val head: Int, val deprel: String) {
     class InvalidRootException(rel: String): RuntimeException("Invalid root node dependency relation: $rel")
 
     companion object {
-        val ROOT = DependencyRelation(0, "root")
+        val ROOT: DependencyRelation = DependencyRelation(0, "root")
 
         fun create(head: String, deprel: String): DependencyRelation? = when {
             head == "_" || deprel == "_" -> null

@@ -5,8 +5,8 @@ import opennlp.ext.conll.treebank.Sentence
 import opennlp.tools.util.ObjectStream
 
 object SentenceStream {
-    const val CONLLX = "conllx"
-    const val CONLLU = "conllu"
+    const val CONLLX: String = "conllx"
+    const val CONLLU: String = "conllu"
 
     class UnsupportedSentenceFormatException(format: String) :
         RuntimeException("Unsupported sentence treebank format: $format")

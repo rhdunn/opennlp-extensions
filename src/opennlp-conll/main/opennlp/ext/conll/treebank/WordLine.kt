@@ -24,7 +24,7 @@ data class WordLine(
     class InvalidWorldLineException(line: String): RuntimeException("Invalid word line: $line")
 
     companion object {
-        const val SPACE_AFTER = "SpaceAfter"
-        const val NO = "No"
+        const val SPACE_AFTER: String = "SpaceAfter"
+        const val NO: String = "No"
     }
 }

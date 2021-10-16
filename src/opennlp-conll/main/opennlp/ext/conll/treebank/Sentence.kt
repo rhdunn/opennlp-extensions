@@ -16,8 +16,8 @@ data class Sentence(
         get() = this[TEXT] ?: this[SENTENCE_TEXT]
 
     companion object {
-        const val SENT_ID = "sent_id"
-        const val SENTENCE_TEXT = "sentence-text"
-        const val TEXT = "text"
+        const val SENT_ID: String = "sent_id"
+        const val SENTENCE_TEXT: String = "sentence-text"
+        const val TEXT: String = "text"
     }
 }
