@@ -2,9 +2,18 @@
 package opennlp.ext.train.properties
 
 import opennlp.tools.dictionary.Dictionary
+import opennlp.tools.tokenize.TokenizerFactory
 import java.io.FileReader
 import java.util.*
 import java.util.regex.Pattern
+
+fun tokenizerFactory(properties: Properties): TokenizerFactory {
+    val language = language(properties)
+    val abbreviationsDictionary = abbreviationsDictionary(properties)
+    val alphanumericOptimization = alphanumericOptimization(properties)
+    val alphanumericPattern = alphanumericPattern(properties)
+    return TokenizerFactory(language, abbreviationsDictionary, alphanumericOptimization, alphanumericPattern)
+}
 
 private const val LANGUAGE: String = "language" // integer
 private const val LANGUAGE_DEFAULT: String = "en"
