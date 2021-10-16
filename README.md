@@ -34,6 +34,7 @@ The following properties are supported for `TrainingParameters` objects:
 | `training.algorithm`  | `string`  | `maxent` |
 | `training.iterations` | `integer` | 100      |
 | `training.cutoff`     | `integer` | 5        |
+| `training.threads`    | `integer` | 4        |
 
 ## License
 Copyright (C) 2021 Reece H. Dunn

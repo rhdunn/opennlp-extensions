@@ -11,6 +11,7 @@ fun trainingParameters(properties: Properties): TrainingParameters {
     params.put(TrainingParameters.TRAINER_TYPE_PARAM, EventTrainer.EVENT_VALUE)
     params.put(TrainingParameters.ITERATIONS_PARAM, iterations(properties))
     params.put(TrainingParameters.CUTOFF_PARAM, cutoff(properties))
+    params.put(TrainingParameters.THREADS_PARAM, threads(properties))
     return params
 }
 
@@ -35,5 +36,13 @@ private const val CUTOFF_DEFAULT: String = "5"
 
 fun cutoff(properties: Properties): Int {
     val value = properties.getOrDefault(CUTOFF, CUTOFF_DEFAULT) as String
+    return value.toInt()
+}
+
+private const val THREADS: String = "training.threads" // integer
+private const val THREADS_DEFAULT: String = "4"
+
+fun threads(properties: Properties): Int {
+    val value = properties.getOrDefault(THREADS, THREADS_DEFAULT) as String
     return value.toInt()
 }
