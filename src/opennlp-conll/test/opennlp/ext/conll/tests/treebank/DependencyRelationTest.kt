@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-@Suppress("RedundantInnerClassModifier")
+@Suppress("RedundantInnerClassModifier", "ReplaceNotNullAssertionWithElvisReturn")
 @DisplayName("CoNLL DependencyRelation")
 class DependencyRelationTest {
     @Nested
