@@ -1,8 +1,8 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.tests.stream.sample
 
-import opennlp.ext.conll.stream.sample.MULTI_TOKEN_WORDS
-import opennlp.ext.conll.stream.sample.MultiTokenWords
+import opennlp.ext.conll.stream.properties.MULTI_TOKEN_WORDS
+import opennlp.ext.conll.stream.properties.MultiTokenWords
 import opennlp.ext.conll.stream.sample.TokenSampleStream
 import opennlp.ext.conll.stream.sentence.SentenceStream
 import opennlp.tools.tokenize.TokenSample
