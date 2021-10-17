@@ -127,6 +127,23 @@ e.g. `en-tokens.bin`. Any missing directories will be created.
 The `PROPERTIES_FILE` is a Java properties file (`property=value` lines). Each
 application supports different sets of properies.
 
+### Sentence Model Trainer
+The following properties are supported by the
+`opennlp.ext.train.app.SentenceModelTrainerAppKt` application to train a
+`SentenceModel`:
+
+| Parameter                   | Type          | Values                              | Default          |
+|-----------------------------|---------------|-------------------------------------|------------------|
+| `training.algorithm`        | `enumeration` | `maxent`, `perceptron`              | `maxent`         |
+| `training.iterations`       | `integer`     |                                     | 100              |
+| `training.cutoff`           | `integer`     |                                     | 5                |
+| `training.threads`          | `integer`     |                                     | 4                |
+| `language`                  | `string`      | ISO 639                             | `en`             |
+| `abbreviations.dictionary`  | `path`        |                                     |                  |
+| `use.token.end`             | `boolean`     | `true`, `false`                     | `false`          |
+| `eos.characters`            | `string`      |                                     |                  |
+| `sentences.per.sample`      | `integer`     |                                     | 5                |
+
 ### Tokenier Model Trainer
 The following properties are supported by the
 `opennlp.ext.train.app.TokeizerModelTrainerAppKt` application to train a
