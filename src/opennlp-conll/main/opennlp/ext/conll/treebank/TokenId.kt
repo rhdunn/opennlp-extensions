@@ -8,6 +8,8 @@ data class TokenId(
     override val endInclusive: Int,
     val emptyNodeIndex: Int? = null
 ) : ClosedRange<Int> {
+    fun isId(id: Int): Boolean = start == id && endInclusive == id && emptyNodeIndex == null
+
     override fun toString(): String = when {
         emptyNodeIndex != null -> "$start.$emptyNodeIndex"
         start == endInclusive -> start.toString()

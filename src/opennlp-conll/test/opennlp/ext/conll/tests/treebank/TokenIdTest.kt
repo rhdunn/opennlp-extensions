@@ -24,6 +24,9 @@ class TokenIdTest {
             assertThat(id.endInclusive, `is`(1))
             assertThat(id.emptyNodeIndex, `is`(nullValue()))
             assertThat(id.toString(), `is`("1"))
+
+            assertThat(id.isId(1), `is`(true))
+            assertThat(id.isId(2), `is`(false))
         }
 
         @Test
@@ -52,6 +55,9 @@ class TokenIdTest {
             assertThat(id.endInclusive, `is`(4))
             assertThat(id.emptyNodeIndex, `is`(nullValue()))
             assertThat(id.toString(), `is`("1-4"))
+
+            assertThat(id.isId(1), `is`(false))
+            assertThat(id.isId(2), `is`(false))
         }
 
         @Test
@@ -94,6 +100,9 @@ class TokenIdTest {
             assertThat(id.endInclusive, `is`(1))
             assertThat(id.emptyNodeIndex, `is`(4))
             assertThat(id.toString(), `is`("1.4"))
+
+            assertThat(id.isId(1), `is`(false))
+            assertThat(id.isId(2), `is`(false))
         }
 
         @Test
