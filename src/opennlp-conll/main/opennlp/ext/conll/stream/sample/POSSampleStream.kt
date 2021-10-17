@@ -1,7 +1,9 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.stream.sample
 
+import opennlp.ext.conll.stream.properties.posTagset
 import opennlp.ext.conll.stream.sentence.SentenceStream
+import opennlp.ext.conll.treebank.POSTagset
 import opennlp.ext.conll.treebank.Sentence
 import opennlp.tools.postag.POSSample
 import opennlp.tools.util.FilterObjectStream
@@ -10,8 +12,14 @@ import opennlp.tools.util.ObjectStream
 import java.io.File
 import java.util.*
 
-class POSSampleStream(stream: ObjectStream<Sentence>) : FilterObjectStream<Sentence, POSSample>(stream) {
-    constructor(stream: ObjectStream<Sentence>, properties: Properties) : this(stream)
+class POSSampleStream(
+    stream: ObjectStream<Sentence>,
+    private val posTagset: POSTagset
+) : FilterObjectStream<Sentence, POSSample>(stream) {
+    constructor(stream: ObjectStream<Sentence>, properties: Properties) : this(
+        stream,
+        posTagset(properties)
+    )
 
     override fun read(): POSSample? {
         val sentence = samples.read() ?: return null
@@ -19,7 +27,7 @@ class POSSampleStream(stream: ObjectStream<Sentence>) : FilterObjectStream<Sente
         val tokens = mutableListOf<String>()
         val tags = mutableListOf<String>()
         sentence.wordLines.forEach { wordLine ->
-            val pos = wordLine.upos ?: return@forEach
+            val pos = wordLine.postag(posTagset) ?: return@forEach
 
             tokens.add(wordLine.form)
             tags.add(pos)

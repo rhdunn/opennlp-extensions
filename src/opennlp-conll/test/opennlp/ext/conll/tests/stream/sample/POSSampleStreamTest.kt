@@ -1,6 +1,7 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.tests.stream.sample
 
+import opennlp.ext.conll.stream.properties.POS_TAGSET
 import opennlp.ext.conll.stream.sample.POSSampleStream
 import opennlp.ext.conll.stream.sentence.SentenceStream
 import opennlp.tools.postag.POSSample
@@ -33,7 +34,7 @@ class POSSampleStreamTest {
         fun single() {
             val samples = parse(
                 """
-                1	I	I	PRON	PRN	_	_	_	_	_
+                1	I	I	PRON	PRP	_	_	_	_	_
                 2	like	like	VERB	VBP	_	_	_	_	_
                 3	cars	car	NOUN	NNS	_	_	_	_	_
                 4	.	.	PUNCT	.	_	_	_	_	_
@@ -70,6 +71,98 @@ class POSSampleStreamTest {
             assertThat(samples[1].tags, `is`(arrayOf("PRON", "VERB", "PRON", "PUNCT")))
 
             assertThat(samples.size, `is`(2))
+        }
+    }
+
+    @Nested
+    @DisplayName("part of speech tagsets")
+    inner class PosTagSets {
+        @Test
+        @DisplayName("UPOS")
+        fun upos() {
+            val properties = Properties()
+            properties[POS_TAGSET] = "UPOS"
+
+            val samples = parse(
+                """
+                1	I	I	PRON	PRP	_	_	_	_	_
+                2	like	like	VERB	VBP	_	_	_	_	_
+                3	cars	car	NOUN	NNS	_	_	_	_	_
+                4	.	.	PUNCT	.	_	_	_	_	_
+                """.trimIndent(),
+                properties
+            )
+
+            assertThat(samples[0].sentence, `is`(arrayOf("I", "like", "cars", ".")))
+            assertThat(samples[0].tags, `is`(arrayOf("PRON", "VERB", "NOUN", "PUNCT")))
+
+            assertThat(samples.size, `is`(1))
+        }
+
+        @Test
+        @DisplayName("CPOSTAG")
+        fun cpostag() {
+            val properties = Properties()
+            properties[POS_TAGSET] = "CPOSTAG"
+
+            val samples = parse(
+                """
+                1	I	I	PRON	PRP	_	_	_	_	_
+                2	like	like	VERB	VBP	_	_	_	_	_
+                3	cars	car	NOUN	NNS	_	_	_	_	_
+                4	.	.	PUNCT	.	_	_	_	_	_
+                """.trimIndent(),
+                properties
+            )
+
+            assertThat(samples[0].sentence, `is`(arrayOf("I", "like", "cars", ".")))
+            assertThat(samples[0].tags, `is`(arrayOf("PRON", "VERB", "NOUN", "PUNCT")))
+
+            assertThat(samples.size, `is`(1))
+        }
+
+        @Test
+        @DisplayName("XPOS")
+        fun xpos() {
+            val properties = Properties()
+            properties[POS_TAGSET] = "XPOS"
+
+            val samples = parse(
+                """
+                1	I	I	PRON	PRP	_	_	_	_	_
+                2	like	like	VERB	VBP	_	_	_	_	_
+                3	cars	car	NOUN	NNS	_	_	_	_	_
+                4	.	.	PUNCT	.	_	_	_	_	_
+                """.trimIndent(),
+                properties
+            )
+
+            assertThat(samples[0].sentence, `is`(arrayOf("I", "like", "cars", ".")))
+            assertThat(samples[0].tags, `is`(arrayOf("PRP", "VBP", "NNS", ".")))
+
+            assertThat(samples.size, `is`(1))
+        }
+
+        @Test
+        @DisplayName("POSTAG")
+        fun postag() {
+            val properties = Properties()
+            properties[POS_TAGSET] = "POSTAG"
+
+            val samples = parse(
+                """
+                1	I	I	PRON	PRP	_	_	_	_	_
+                2	like	like	VERB	VBP	_	_	_	_	_
+                3	cars	car	NOUN	NNS	_	_	_	_	_
+                4	.	.	PUNCT	.	_	_	_	_	_
+                """.trimIndent(),
+                properties
+            )
+
+            assertThat(samples[0].sentence, `is`(arrayOf("I", "like", "cars", ".")))
+            assertThat(samples[0].tags, `is`(arrayOf("PRP", "VBP", "NNS", ".")))
+
+            assertThat(samples.size, `is`(1))
         }
     }
 }
