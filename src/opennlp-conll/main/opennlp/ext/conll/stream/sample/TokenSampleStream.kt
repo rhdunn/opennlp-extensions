@@ -16,12 +16,17 @@ class TokenSampleStream(stream: ObjectStream<Sentence>) : FilterObjectStream<Sen
         val sentence = samples.read() ?: return null
 
         var needSpace = false
+        var noSpaceUntil = 0
+
         val text = StringBuilder()
         val spans = mutableListOf<Span>()
         sentence.wordLines.forEach { wordLine ->
             when (wordLine.id.type) {
                 TokenId.Type.EmptyNodeCounter -> {
                     // Ignore empty node word lines.
+                }
+                TokenId.Type.Range -> {
+                    noSpaceUntil = wordLine.id.endInclusive - 1
                 }
                 else -> {
                     if (needSpace) text.append(' ')
@@ -30,7 +35,7 @@ class TokenSampleStream(stream: ObjectStream<Sentence>) : FilterObjectStream<Sen
                     text.append(wordLine.form)
                     spans.add(Span(spanStart, text.length))
 
-                    needSpace = wordLine.spaceAfter
+                    needSpace = wordLine.spaceAfter && wordLine.id.start > noSpaceUntil
                 }
             }
         }

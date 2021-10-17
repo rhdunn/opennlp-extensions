@@ -97,6 +97,26 @@ class TokenSampleStreamTest {
     }
 
     @Test
+    @DisplayName("multi-token words")
+    fun multiTokenWords() {
+        val samples = parse(
+            """
+            1	I	I	_	_	_	_	_	_	_
+            2-3	wanna	_	_	_	_	_	_	_	_
+            2	wan	want	_	_	_	_	_	_	_
+            3	na	to	_	_	_	_	_	_	_
+            4	dance	dance	_	_	_	_	_	_	SpaceAfter=No
+            5	!	!	_	_	_	_	_	_	_
+            """.trimIndent()
+        )
+
+        assertThat(samples[0].text, `is`("I wanna dance!"))
+        assertThat(tokens(samples[0]), `is`(listOf("I", "wan", "na", "dance", "!")))
+
+        assertThat(samples.size, `is`(1))
+    }
+
+    @Test
     @DisplayName("empty node")
     fun emptyNode() {
         val samples = parse(
