@@ -1,9 +1,13 @@
 # OpenNLP Extensions
 This is a set of extensions for working with OpenNLP.
-1. [opennlp-conll](#opennlp-conll) &ndash; a collection of classes for working
+1. [opennlp-conll](#opennlp-conll) is a collection of classes for working
    with CoNLL-X and CoNLL-U treebanks.
-2. [opennlp-train](#opennlp-train) &ndash; a collection of classes for training
-   different OpenNLP models.
+2. [opennlp-train](#opennlp-train) is a collection of helper classes and
+   functions for training different OpenNLP models.
+
+These extensions provide several [Training Applications](#training-applications)
+for creating the different OpenNLP model objects using the supported treebank
+files and configuration properties.
 
 ## opennlp-conll
 This is a collection of classes for working with CoNLL-X and CoNLL-U treebanks.
@@ -25,9 +29,12 @@ different training sample streams.
 1. `TokenSampleStream` creates token samples from treebank sentences.
 
 ## opennlp-train
-This is a collection of classes for training different OpenNLP models.
+This is a collection of helper classes and functions for training OpenNLP
+models.
 
-The following properties are supported for `TrainingParameters` objects:
+### Training Parameters
+The following properties are supported for creating `TrainingParameters`
+objects:
 
 | Parameter             | Type      | Default  |
 |-----------------------|-----------|----------|
@@ -36,7 +43,8 @@ The following properties are supported for `TrainingParameters` objects:
 | `training.cutoff`     | `integer` | 5        |
 | `training.threads`    | `integer` | 4        |
 
-The following properties are supported for `TokenizerFactory` objects:
+### Tokenizer Factory
+The following properties are supported for creating `TokenizerFactory` objects:
 
 | Parameter                   | Type      | Default          |
 |-----------------------------|-----------|------------------|
@@ -44,6 +52,27 @@ The following properties are supported for `TokenizerFactory` objects:
 | `abbreviations.dictionary`  | `path`    |                  |
 | `alphanumeric.optimization` | `boolean` | `false`          |
 | `alphanumeric.pattern`      | `regex`   | `^[A-Za-z0-9]+$` |
+
+## Training Applications
+The training applications are located in`opennlp.ext.train.app`:
+1. `TokenizerModelTrainerAppKt` trains a `TokenizerModel`.
+
+The applications have the following command line arguments:
+
+    TRAINING_FILE OUTPUT_MODEL_FILE PROPERTIES_FILE
+    TRAINING_FILE OUTPUT_MODEL_FILE
+
+The `TRAINING_FILE` has one of the following supported extensions:
+1. `conllx` for CoNLL-X treebank files.
+2. `conllu` for CoNLL-U treebank files.
+
+The `OUTPUT_MODEL_FILE` is the name of the file to save the created model to,
+e.g. `en-tokens.bin`. Any missing directories will be created.
+
+The `PROPERTIES_FILE` is a Java properties file (`property=value` lines). Each
+application supports different sets of properies:
+1. `TokenizerModelTrainerAppKt` &ndash; [Training Parameters](#training-parameters)
+   and [Tokenizer Factory](#tokenizer-factory) parameters.
 
 ## License
 Copyright (C) 2021 Reece H. Dunn
