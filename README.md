@@ -46,6 +46,17 @@ The following properties are supported by the `POSSampleStream` class:
 | `multi.token.words` | `enumeration` | `split`, `join`                     | `split` |
 | `pos.tagset`        | `enumeration` | `UPOS`, `XPOS`, `CPOSTAG`, `POSTAG` | `UPOS`  |
 
+### Lemma Sample Stream
+The `opennlp.ext.conll.stream.sample.LemmaSampleStream` class creates `LemmaSample`
+values from treebank sentences that can be used to train a `LemmaModel`.
+
+The following properties are supported by the `LemmaSampleStream` class:
+
+| Parameter           | Type          | Values                              | Default |
+|---------------------|---------------|-------------------------------------|---------|
+| `multi.token.words` | `enumeration` | `split`, `join`                     | `split` |
+| `pos.tagset`        | `enumeration` | `UPOS`, `XPOS`, `CPOSTAG`, `POSTAG` | `UPOS`  |
+
 ## opennlp-train
 This is a collection of helper classes and functions for training OpenNLP
 models.
