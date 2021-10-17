@@ -71,6 +71,13 @@ The following properties are supported for creating `TokenizerFactory` objects:
 | `alphanumeric.optimization` | `boolean` | `true`, `false` | `false`          |
 | `alphanumeric.pattern`      | `regex`   |                 | `^[A-Za-z0-9]+$` |
 
+### POS Tagger Factory
+The following properties are supported for creating `POSTaggerFactory` objects:
+
+| Parameter         | Type   | Values | Default |
+|-------------------|--------|--------|---------|
+| `pos.dictionary`  | `path` |        |         |
+
 ## Training Applications
 The training applications are located in`opennlp.ext.train.app`:
 1. `TokenizerModelTrainerAppKt` trains a `TokenizerModel`.
