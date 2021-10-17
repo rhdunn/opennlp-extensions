@@ -165,4 +165,49 @@ class POSSampleStreamTest {
             assertThat(samples.size, `is`(1))
         }
     }
+
+    @Nested
+    @DisplayName("empty node (inserted) token")
+    inner class EmptyNode {
+        @Test
+        @DisplayName("CopyOf")
+        fun copyOf() {
+            val samples = parse(
+                """
+                1	I	I	PRON	PRP	_	_	_	_	_
+                2	like	like	VERB	VBP	_	_	_	_	_
+                3	cars	car	NOUN	NNS	_	_	_	_	_
+                4	and	and	CCONJ	CC	_	_	_	_	_
+                4.1	like	like	VERB	VBP	_	_	_	_	CopyOf=2
+                5	bikes	bike	NOUN	NNS	_	_	_	_	_
+                6	.	.	PUNCT	.	_	_	_	_	_
+                """.trimIndent()
+            )
+
+            assertThat(samples[0].sentence, `is`(arrayOf("I", "like", "cars", "and", "bikes", ".")))
+            assertThat(samples[0].tags, `is`(arrayOf("PRON", "VERB", "NOUN", "CCONJ", "NOUN", "PUNCT")))
+
+            assertThat(samples.size, `is`(1))
+        }
+
+        @Test
+        @DisplayName("Typo=Yes")
+        fun typo() {
+            val samples = parse(
+                """
+                1	As	as	ADV	RB	_	_	_	_	_
+                2	far	far	ADV	RB	_	_	_	_	_
+                2.1	_	as	SCONJ	IN	Typo=Yes	_	_	_	CorrectForm=as
+                3	I	I	PRON	PRP	_	_	_	_	_
+                4	know	know	VERB	VBP	_	_	_	_	_
+                5	.	.	PUNCT	.	_	_	_	_	_
+                """.trimIndent()
+            )
+
+            assertThat(samples[0].sentence, `is`(arrayOf("As", "far", "as", "I", "know", ".")))
+            assertThat(samples[0].tags, `is`(arrayOf("ADV", "ADV", "SCONJ", "PRON", "VERB", "PUNCT")))
+
+            assertThat(samples.size, `is`(1))
+        }
+    }
 }

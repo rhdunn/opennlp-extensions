@@ -5,6 +5,7 @@ import opennlp.ext.conll.stream.properties.posTagset
 import opennlp.ext.conll.stream.sentence.SentenceStream
 import opennlp.ext.conll.treebank.POSTagset
 import opennlp.ext.conll.treebank.Sentence
+import opennlp.ext.conll.treebank.TokenId
 import opennlp.tools.postag.POSSample
 import opennlp.tools.util.FilterObjectStream
 import opennlp.tools.util.InputStreamFactory
@@ -21,6 +22,7 @@ class POSSampleStream(
         posTagset(properties)
     )
 
+    @Suppress("ReplaceNotNullAssertionWithElvisReturn")
     override fun read(): POSSample? {
         val sentence = samples.read() ?: return null
 
@@ -28,9 +30,22 @@ class POSSampleStream(
         val tags = mutableListOf<String>()
         sentence.wordLines.forEach { wordLine ->
             val pos = wordLine.postag(posTagset) ?: return@forEach
-
-            tokens.add(wordLine.form)
-            tags.add(pos)
+            when (wordLine.id.type) {
+                TokenId.Type.EmptyNodeCounter -> when {
+                    wordLine["Typo"] == "Yes" && wordLine["CorrectForm"] != null -> {
+                        // Keep tokens that are correcting typos using the corrected form.
+                        tokens.add(wordLine["CorrectForm"]!!)
+                        tags.add(pos)
+                    }
+                    else -> {
+                        // Ignore nodes that are inserted as copies of other nodes.
+                    }
+                }
+                TokenId.Type.Counter, TokenId.Type.Range -> {
+                    tokens.add(wordLine.form)
+                    tags.add(pos)
+                }
+            }
         }
         return POSSample(tokens, tags)
     }
