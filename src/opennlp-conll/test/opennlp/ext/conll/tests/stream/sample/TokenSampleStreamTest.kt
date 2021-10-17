@@ -1,6 +1,8 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.tests.stream.sample
 
+import opennlp.ext.conll.stream.sample.MULTI_TOKEN_WORDS
+import opennlp.ext.conll.stream.sample.MultiTokenWords
 import opennlp.ext.conll.stream.sample.TokenSampleStream
 import opennlp.ext.conll.stream.sentence.SentenceStream
 import opennlp.tools.tokenize.TokenSample
@@ -9,11 +11,12 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import java.util.*
 
 @DisplayName("TokenSample Stream")
 class TokenSampleStreamTest {
-    private fun parse(text: String): List<TokenSample> {
-        val tokens = TokenSampleStream.create(text, SentenceStream.CONLLU)
+    private fun parse(text: String, properties: Properties = Properties()): List<TokenSample> {
+        val tokens = TokenSampleStream.create(text, SentenceStream.CONLLU, properties)
         return generateSequence { tokens.read() }.toList()
     }
 
@@ -96,24 +99,76 @@ class TokenSampleStreamTest {
         assertThat(samples.size, `is`(1))
     }
 
-    @Test
+    @Nested
     @DisplayName("multi-token words")
-    fun multiTokenWords() {
-        val samples = parse(
-            """
-            1	I	I	_	_	_	_	_	_	_
-            2-3	wanna	_	_	_	_	_	_	_	_
-            2	wan	want	_	_	_	_	_	_	_
-            3	na	to	_	_	_	_	_	_	_
-            4	dance	dance	_	_	_	_	_	_	SpaceAfter=No
-            5	!	!	_	_	_	_	_	_	_
-            """.trimIndent()
-        )
+    inner class MultiTokenWordsTest {
+        @Test
+        @DisplayName("default")
+        fun default() {
+            val samples = parse(
+                """
+                1	I	I	_	_	_	_	_	_	_
+                2-3	wanna	_	_	_	_	_	_	_	_
+                2	wan	want	_	_	_	_	_	_	_
+                3	na	to	_	_	_	_	_	_	_
+                4	dance	dance	_	_	_	_	_	_	SpaceAfter=No
+                5	!	!	_	_	_	_	_	_	_
+                """.trimIndent()
+            )
 
-        assertThat(samples[0].text, `is`("I wanna dance!"))
-        assertThat(tokens(samples[0]), `is`(listOf("I", "wan", "na", "dance", "!")))
+            assertThat(samples[0].text, `is`("I wanna dance!"))
+            assertThat(tokens(samples[0]), `is`(listOf("I", "wan", "na", "dance", "!")))
 
-        assertThat(samples.size, `is`(1))
+            assertThat(samples.size, `is`(1))
+        }
+
+        @Test
+        @DisplayName("split")
+        fun split() {
+            val properties = Properties()
+            properties[MULTI_TOKEN_WORDS] = MultiTokenWords.Split.value
+
+            val samples = parse(
+                """
+                1	I	I	_	_	_	_	_	_	_
+                2-3	wanna	_	_	_	_	_	_	_	_
+                2	wan	want	_	_	_	_	_	_	_
+                3	na	to	_	_	_	_	_	_	_
+                4	dance	dance	_	_	_	_	_	_	SpaceAfter=No
+                5	!	!	_	_	_	_	_	_	_
+                """.trimIndent(),
+                properties
+            )
+
+            assertThat(samples[0].text, `is`("I wanna dance!"))
+            assertThat(tokens(samples[0]), `is`(listOf("I", "wan", "na", "dance", "!")))
+
+            assertThat(samples.size, `is`(1))
+        }
+
+        @Test
+        @DisplayName("join")
+        fun join() {
+            val properties = Properties()
+            properties[MULTI_TOKEN_WORDS] = MultiTokenWords.Join.value
+
+            val samples = parse(
+                """
+                1	I	I	_	_	_	_	_	_	_
+                2-3	wanna	_	_	_	_	_	_	_	_
+                2	wan	want	_	_	_	_	_	_	_
+                3	na	to	_	_	_	_	_	_	_
+                4	dance	dance	_	_	_	_	_	_	SpaceAfter=No
+                5	!	!	_	_	_	_	_	_	_
+                """.trimIndent(),
+                properties
+            )
+
+            assertThat(samples[0].text, `is`("I wanna dance!"))
+            assertThat(tokens(samples[0]), `is`(listOf("I", "wanna", "dance", "!")))
+
+            assertThat(samples.size, `is`(1))
+        }
     }
 
     @Test

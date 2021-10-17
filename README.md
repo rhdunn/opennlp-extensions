@@ -24,9 +24,16 @@ treebank sentences.
 3. `SentenceStream` is a helper class for constructing a given sentence stream
    in the specified format from a variety of sources.
 
-The `opennlp.ext.conll.stream.sample` package contains streams for creating
-different training sample streams.
-1. `TokenSampleStream` creates token samples from treebank sentences.
+### Token Sample Stream
+The `opennlp.ext.conll.stream.sample.TokenSampleStream` class creates
+`TokenSample` values from treebank sentences that can be used to train
+a `TokenizerModel`.
+
+The following properties are supported by the `TokenSampleStream` class:
+
+| Parameter           | Type          | Values          | Default  |
+|---------------------|---------------|-----------------|----------|
+| `multi.token.words` | `enumeration` | `split`, `join` | `split`  |
 
 ## opennlp-train
 This is a collection of helper classes and functions for training OpenNLP
@@ -71,8 +78,9 @@ e.g. `en-tokens.bin`. Any missing directories will be created.
 
 The `PROPERTIES_FILE` is a Java properties file (`property=value` lines). Each
 application supports different sets of properies:
-1. `TokenizerModelTrainerAppKt` &ndash; [Training Parameters](#training-parameters)
-   and [Tokenizer Factory](#tokenizer-factory) parameters.
+1. `TokenizerModelTrainerAppKt` &ndash; [Training Parameters](#training-parameters),
+   [Tokenizer Factory](#tokenizer-factory), and
+   [Token Sample Stream](#token-sample-stream) parameters.
 
 ## License
 Copyright (C) 2021 Reece H. Dunn

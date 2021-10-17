@@ -10,13 +10,22 @@ import opennlp.tools.util.InputStreamFactory
 import opennlp.tools.util.ObjectStream
 import opennlp.tools.util.Span
 import java.io.File
+import java.util.*
 
-class TokenSampleStream(stream: ObjectStream<Sentence>) : FilterObjectStream<Sentence, TokenSample>(stream) {
+class TokenSampleStream(
+    stream: ObjectStream<Sentence>,
+    private val multiTokenWords: MultiTokenWords
+) : FilterObjectStream<Sentence, TokenSample>(stream) {
+    constructor(stream: ObjectStream<Sentence>, properties: Properties) : this(
+        stream,
+        multiTokenWords(properties)
+    )
+
     override fun read(): TokenSample? {
         val sentence = samples.read() ?: return null
 
         var needSpace = false
-        var noSpaceUntil = 0
+        var currentIndex = 0
 
         val text = StringBuilder()
         val spans = mutableListOf<Span>()
@@ -25,17 +34,36 @@ class TokenSampleStream(stream: ObjectStream<Sentence>) : FilterObjectStream<Sen
                 TokenId.Type.EmptyNodeCounter -> {
                     // Ignore empty node word lines.
                 }
-                TokenId.Type.Range -> {
-                    noSpaceUntil = wordLine.id.endInclusive - 1
+                TokenId.Type.Range -> when (multiTokenWords) {
+                    MultiTokenWords.Split -> {
+                        // Ignore token ranges when splitting multi-token words and spaces between the tokens.
+                        currentIndex = wordLine.id.endInclusive
+                    }
+                    MultiTokenWords.Join -> {
+                        if (needSpace) text.append(' ')
+
+                        val spanStart = text.length
+                        text.append(wordLine.form)
+                        spans.add(Span(spanStart, text.length))
+
+                        needSpace = wordLine.spaceAfter
+                        currentIndex = wordLine.id.endInclusive
+                    }
                 }
-                else -> {
-                    if (needSpace) text.append(' ')
+                TokenId.Type.Counter -> when {
+                    multiTokenWords == MultiTokenWords.Join && wordLine.id.start <= currentIndex -> {
+                        // Ignore token counters when not splitting multi-token words.
+                    }
+                    else -> {
+                        if (needSpace) text.append(' ')
 
-                    val spanStart = text.length
-                    text.append(wordLine.form)
-                    spans.add(Span(spanStart, text.length))
+                        val spanStart = text.length
+                        text.append(wordLine.form)
+                        spans.add(Span(spanStart, text.length))
 
-                    needSpace = wordLine.spaceAfter && wordLine.id.start > noSpaceUntil
+                        needSpace = wordLine.spaceAfter && wordLine.id.start > currentIndex
+                        currentIndex = wordLine.id.endInclusive
+                    }
                 }
             }
         }
@@ -43,34 +71,34 @@ class TokenSampleStream(stream: ObjectStream<Sentence>) : FilterObjectStream<Sen
     }
 
     companion object {
-        fun create(stream: ObjectStream<String>, format: String): ObjectStream<TokenSample> {
+        fun create(stream: ObjectStream<String>, format: String, properties: Properties): ObjectStream<TokenSample> {
             val sentences = SentenceStream.create(stream, format)
-            return TokenSampleStream(sentences)
+            return TokenSampleStream(sentences, properties)
         }
 
-        fun create(stream: InputStreamFactory, format: String): ObjectStream<TokenSample> {
+        fun create(stream: InputStreamFactory, format: String, properties: Properties): ObjectStream<TokenSample> {
             val sentences = SentenceStream.create(stream, format)
-            return TokenSampleStream(sentences)
+            return TokenSampleStream(sentences, properties)
         }
 
-        fun create(bytes: ByteArray, format: String): ObjectStream<TokenSample> {
+        fun create(bytes: ByteArray, format: String, properties: Properties): ObjectStream<TokenSample> {
             val sentences = SentenceStream.create(bytes, format)
-            return TokenSampleStream(sentences)
+            return TokenSampleStream(sentences, properties)
         }
 
-        fun create(string: String, format: String): ObjectStream<TokenSample> {
+        fun create(string: String, format: String, properties: Properties): ObjectStream<TokenSample> {
             val sentences = SentenceStream.create(string, format)
-            return TokenSampleStream(sentences)
+            return TokenSampleStream(sentences, properties)
         }
 
-        fun load(file: File): ObjectStream<TokenSample> {
+        fun load(file: File, properties: Properties): ObjectStream<TokenSample> {
             val sentences = SentenceStream.load(file)
-            return TokenSampleStream(sentences)
+            return TokenSampleStream(sentences, properties)
         }
 
-        fun load(path: String): ObjectStream<TokenSample> {
+        fun load(path: String, properties: Properties): ObjectStream<TokenSample> {
             val sentences = SentenceStream.load(path)
-            return TokenSampleStream(sentences)
+            return TokenSampleStream(sentences, properties)
         }
     }
 }
