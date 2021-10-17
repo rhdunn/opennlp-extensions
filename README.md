@@ -24,6 +24,17 @@ treebank sentences.
 3. `SentenceStream` is a helper class for constructing a given sentence stream
    in the specified format from a variety of sources.
 
+### Sentence Sample Stream
+The `opennlp.ext.conll.stream.sample.SentenceSampleStream` class creates
+`SentenceSample` values from treebank sentences that can be used to train
+a `SentenceModel`.
+
+The following properties are supported by the `SentenceSampleStream` class:
+
+| Parameter              | Type      | Values | Default |
+|------------------------|-----------|--------|---------|
+| `sentences.per.sample` | `integer` |        | 5       |
+
 ### Token Sample Stream
 The `opennlp.ext.conll.stream.sample.TokenSampleStream` class creates
 `TokenSample` values from treebank sentences that can be used to train

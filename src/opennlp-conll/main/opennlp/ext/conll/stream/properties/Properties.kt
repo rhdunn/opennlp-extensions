@@ -28,7 +28,7 @@ fun posTagset(properties: Properties): POSTagset {
     }
 }
 
-private const val SENTENCES_PER_SAMPLE: String = "sentences.per.sample" // integer
+const val SENTENCES_PER_SAMPLE: String = "sentences.per.sample" // integer
 private const val SENTENCES_PER_SAMPLE_DEFAULT: String = "5"
 
 fun sentencesPerSample(properties: Properties): Int {
