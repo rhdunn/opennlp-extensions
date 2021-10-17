@@ -152,6 +152,9 @@ class ConlluSentenceStreamTest {
             assertThat(token.dep, `is`(DependencyRelation(token1, "det")))
             assertThat(token.deps, `is`(listOf(DependencyRelation(token3, "test"))))
             assertThat(token.misc, `is`(listOf(Feature("SpaceAfter", "No"))))
+
+            assertThat(token.postag(POSTagset.Universal), `is`("NOUN"))
+            assertThat(token.postag(POSTagset.LanguageSpecific), `is`("NN"))
         }
 
         @Test
@@ -167,6 +170,9 @@ class ConlluSentenceStreamTest {
             assertThat(token.dep, `is`(nullValue()))
             assertThat(token.deps, `is`(listOf()))
             assertThat(token.misc, `is`(listOf()))
+
+            assertThat(token.postag(POSTagset.Universal), `is`(nullValue()))
+            assertThat(token.postag(POSTagset.LanguageSpecific), `is`(nullValue()))
         }
 
         @Test
@@ -182,6 +188,9 @@ class ConlluSentenceStreamTest {
             assertThat(token.dep, `is`(nullValue()))
             assertThat(token.deps, `is`(listOf()))
             assertThat(token.misc, `is`(listOf()))
+
+            assertThat(token.postag(POSTagset.Universal), `is`(nullValue()))
+            assertThat(token.postag(POSTagset.LanguageSpecific), `is`(nullValue()))
         }
 
         @Test

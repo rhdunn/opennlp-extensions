@@ -18,6 +18,11 @@ data class WordLine(
         return feats.find { it.name == name }?.value ?: misc.find { it.name == name }?.value
     }
 
+    fun postag(tagset: POSTagset): String? = when (tagset) {
+        POSTagset.Universal -> upos
+        POSTagset.LanguageSpecific -> xpos
+    }
+
     val spaceAfter: Boolean
         get() = this[SPACE_AFTER] != NO
 
