@@ -43,22 +43,22 @@ models.
 The following properties are supported for creating `TrainingParameters`
 objects:
 
-| Parameter             | Type      | Default  |
-|-----------------------|-----------|----------|
-| `training.algorithm`  | `string`  | `maxent` |
-| `training.iterations` | `integer` | 100      |
-| `training.cutoff`     | `integer` | 5        |
-| `training.threads`    | `integer` | 4        |
+| Parameter             | Type          | Values                 | Default  |
+|-----------------------|---------------|------------------------|----------|
+| `training.algorithm`  | `enumeration` | `maxent`, `perceptron` | `maxent` |
+| `training.iterations` | `integer`     |                        | 100      |
+| `training.cutoff`     | `integer`     |                        | 5        |
+| `training.threads`    | `integer`     |                        | 4        |
 
 ### Tokenizer Factory
 The following properties are supported for creating `TokenizerFactory` objects:
 
-| Parameter                   | Type      | Default          |
-|-----------------------------|-----------|------------------|
-| `language`                  | `string`  | `en`             |
-| `abbreviations.dictionary`  | `path`    |                  |
-| `alphanumeric.optimization` | `boolean` | `false`          |
-| `alphanumeric.pattern`      | `regex`   | `^[A-Za-z0-9]+$` |
+| Parameter                   | Type      | Values          | Default          |
+|-----------------------------|-----------|-----------------|------------------|
+| `language`                  | `string`  | ISO 639         | `en`             |
+| `abbreviations.dictionary`  | `path`    |                 |                  |
+| `alphanumeric.optimization` | `boolean` | `true`, `false` | `false`          |
+| `alphanumeric.pattern`      | `regex`   |                 | `^[A-Za-z0-9]+$` |
 
 ## Training Applications
 The training applications are located in`opennlp.ext.train.app`:
