@@ -10,3 +10,10 @@ fun useTokenEnd(properties: Properties): Boolean {
     val value = properties.getOrDefault(USE_TOKEN_END, USE_TOKEN_END_DEFAULT) as String
     return value == "true"
 }
+
+private const val EOS_CHARACTERS: String = "eos.characters" // string
+
+fun eosCharacters(properties: Properties): CharArray? {
+    val value = properties[EOS_CHARACTERS] as? String
+    return value?.toCharArray()
+}
