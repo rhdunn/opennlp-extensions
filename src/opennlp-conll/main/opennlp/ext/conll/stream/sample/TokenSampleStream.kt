@@ -3,6 +3,7 @@ package opennlp.ext.conll.stream.sample
 
 import opennlp.ext.conll.stream.sentence.SentenceStream
 import opennlp.ext.conll.treebank.Sentence
+import opennlp.ext.conll.treebank.TokenId
 import opennlp.tools.tokenize.TokenSample
 import opennlp.tools.util.FilterObjectStream
 import opennlp.tools.util.InputStreamFactory
@@ -18,13 +19,20 @@ class TokenSampleStream(stream: ObjectStream<Sentence>) : FilterObjectStream<Sen
         val text = StringBuilder()
         val spans = mutableListOf<Span>()
         sentence.wordLines.forEach { wordLine ->
-            if (needSpace) text.append(' ')
+            when (wordLine.id.type) {
+                TokenId.Type.EmptyNodeCounter -> {
+                    // Ignore empty node word lines.
+                }
+                else -> {
+                    if (needSpace) text.append(' ')
 
-            val spanStart = text.length
-            text.append(wordLine.form)
-            spans.add(Span(spanStart, text.length))
+                    val spanStart = text.length
+                    text.append(wordLine.form)
+                    spans.add(Span(spanStart, text.length))
 
-            needSpace = wordLine.spaceAfter
+                    needSpace = wordLine.spaceAfter
+                }
+            }
         }
         return TokenSample(text.toString(), spans.toTypedArray())
     }

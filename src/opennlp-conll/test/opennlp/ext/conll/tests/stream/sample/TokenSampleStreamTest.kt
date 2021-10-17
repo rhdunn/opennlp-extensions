@@ -95,4 +95,21 @@ class TokenSampleStreamTest {
 
         assertThat(samples.size, `is`(1))
     }
+
+    @Test
+    @DisplayName("empty node")
+    fun emptyNode() {
+        val samples = parse(
+            """
+            1	one	one	_	_	_	_	_	_	_
+            1.1	+	plus	_	_	_	_	_	_	_
+            2	two	two	_	_	_	_	_	_	_
+            """.trimIndent()
+        )
+
+        assertThat(samples[0].text, `is`("one two"))
+        assertThat(tokens(samples[0]), `is`(listOf("one", "two")))
+
+        assertThat(samples.size, `is`(1))
+    }
 }
