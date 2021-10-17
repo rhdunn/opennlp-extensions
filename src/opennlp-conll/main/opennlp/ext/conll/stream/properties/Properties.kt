@@ -27,3 +27,11 @@ fun posTagset(properties: Properties): POSTagset {
         else -> throw InvalidPropertyValue(POS_TAGSET, value)
     }
 }
+
+private const val SENTENCES_PER_SAMPLE: String = "sentences.per.sample" // integer
+private const val SENTENCES_PER_SAMPLE_DEFAULT: String = "5"
+
+fun sentencesPerSample(properties: Properties): Int {
+    val value = properties.getOrDefault(SENTENCES_PER_SAMPLE, SENTENCES_PER_SAMPLE_DEFAULT) as String
+    return value.toIntOrNull() ?: throw InvalidPropertyValue(SENTENCES_PER_SAMPLE, value)
+}
