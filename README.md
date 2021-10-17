@@ -90,10 +90,6 @@ The following properties are supported for creating `POSTaggerFactory` objects:
 | `pos.dictionary`  | `path` |        |         |
 
 ## Training Applications
-The training applications are located in`opennlp.ext.train.app`.
-1. `POSModelTrainerAppKt` trains a `POSModel`.
-2. `TokenizerModelTrainerAppKt` trains a `TokenizerModel`.
-
 The applications have the following command line arguments:
 
     TRAINING_FILE OUTPUT_MODEL_FILE PROPERTIES_FILE
@@ -108,12 +104,53 @@ e.g. `en-tokens.bin`. Any missing directories will be created.
 
 The `PROPERTIES_FILE` is a Java properties file (`property=value` lines). Each
 application supports different sets of properies.
-1. `POSModelTrainerAppKt` supports [Training Parameters](#training-parameters),
-   [Part of Speech Tagger Factory](#part-of-speech-tagger-factory), and
-   [Part of Speech Sample Stream](#part-of-speech-sample-stream) parameters.
-2. `TokenizerModelTrainerAppKt` supports [Training Parameters](#training-parameters),
-   [Tokenizer Factory](#tokenizer-factory), and
-   [Token Sample Stream](#token-sample-stream) parameters.
+
+### Tokenier Model Trainer
+The following properties are supported by the
+`opennlp.ext.train.app.TokeizerModelTrainerAppKt` application to train a
+`TokenizerModel`:
+
+| Parameter                   | Type          | Values                              | Default          |
+|-----------------------------|---------------|-------------------------------------|------------------|
+| `training.algorithm`        | `enumeration` | `maxent`, `perceptron`              | `maxent`         |
+| `training.iterations`       | `integer`     |                                     | 100              |
+| `training.cutoff`           | `integer`     |                                     | 5                |
+| `training.threads`          | `integer`     |                                     | 4                |
+| `language`                  | `string`      | ISO 639                             | `en`             |
+| `abbreviations.dictionary`  | `path`        |                                     |                  |
+| `alphanumeric.optimization` | `boolean`     | `true`, `false`                     | `false`          |
+| `alphanumeric.pattern`      | `regex`       |                                     | `^[A-Za-z0-9]+$` |
+| `multi.token.words`         | `enumeration` | `split`, `join`                     | `split`          |
+
+### Part of Speech Model Trainer
+The following properties are supported by the
+`opennlp.ext.train.app.POSModelTrainerAppKt` application to train a `POSModel`:
+
+| Parameter             | Type          | Values                              | Default  |
+|-----------------------|---------------|-------------------------------------|----------|
+| `training.algorithm`  | `enumeration` | `maxent`, `perceptron`              | `maxent` |
+| `training.iterations` | `integer`     |                                     | 100      |
+| `training.cutoff`     | `integer`     |                                     | 5        |
+| `training.threads`    | `integer`     |                                     | 4        |
+| `language`            | `string`      | ISO 639                             | `en`     |
+| `pos.dictionary`      | `path`        |                                     |          |
+| `multi.token.words`   | `enumeration` | `split`, `join`                     | `split`  |
+| `pos.tagset`          | `enumeration` | `UPOS`, `XPOS`, `CPOSTAG`, `POSTAG` | `UPOS`   |
+
+### Lemmatizer Model Trainer
+The following properties are supported by the
+`opennlp.ext.train.app.LemmatizerModelTrainerAppKt` application to train a
+`LemmatizerModel`:
+
+| Parameter             | Type          | Values                              | Default  |
+|-----------------------|---------------|-------------------------------------|----------|
+| `training.algorithm`  | `enumeration` | `maxent`, `perceptron`              | `maxent` |
+| `training.iterations` | `integer`     |                                     | 100      |
+| `training.cutoff`     | `integer`     |                                     | 5        |
+| `training.threads`    | `integer`     |                                     | 4        |
+| `language`            | `string`      | ISO 639                             | `en`     |
+| `multi.token.words`   | `enumeration` | `split`, `join`                     | `split`  |
+| `pos.tagset`          | `enumeration` | `UPOS`, `XPOS`, `CPOSTAG`, `POSTAG` | `UPOS`   |
 
 ## License
 Copyright (C) 2021 Reece H. Dunn
