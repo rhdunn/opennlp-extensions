@@ -10,6 +10,18 @@ data class TokenId(
 ) : ClosedRange<Int> {
     fun isId(id: Int): Boolean = start == id && endInclusive == id && emptyNodeIndex == null
 
+    enum class Type {
+        Counter,
+        Range,
+        EmptyNodeCounter,
+    }
+
+    val type: Type = when {
+        emptyNodeIndex != null -> Type.EmptyNodeCounter
+        start != endInclusive -> Type.Range
+        else -> Type.Counter
+    }
+
     override fun toString(): String = when {
         emptyNodeIndex != null -> "$start.$emptyNodeIndex"
         start == endInclusive -> start.toString()

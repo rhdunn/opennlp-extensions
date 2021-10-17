@@ -23,6 +23,7 @@ class TokenIdTest {
             assertThat(id.start, `is`(1))
             assertThat(id.endInclusive, `is`(1))
             assertThat(id.emptyNodeIndex, `is`(nullValue()))
+            assertThat(id.type, `is`(TokenId.Type.Counter))
             assertThat(id.toString(), `is`("1"))
 
             assertThat(id.isId(1), `is`(true))
@@ -54,6 +55,7 @@ class TokenIdTest {
             assertThat(id.start, `is`(1))
             assertThat(id.endInclusive, `is`(4))
             assertThat(id.emptyNodeIndex, `is`(nullValue()))
+            assertThat(id.type, `is`(TokenId.Type.Range))
             assertThat(id.toString(), `is`("1-4"))
 
             assertThat(id.isId(1), `is`(false))
@@ -99,6 +101,7 @@ class TokenIdTest {
             assertThat(id.start, `is`(1))
             assertThat(id.endInclusive, `is`(1))
             assertThat(id.emptyNodeIndex, `is`(4))
+            assertThat(id.type, `is`(TokenId.Type.EmptyNodeCounter))
             assertThat(id.toString(), `is`("1.4"))
 
             assertThat(id.isId(1), `is`(false))
