@@ -1,6 +1,8 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.stream.sample
 
+import opennlp.ext.conll.stream.properties.MultiTokenWords
+import opennlp.ext.conll.stream.properties.multiTokenWords
 import opennlp.ext.conll.stream.properties.posTagset
 import opennlp.ext.conll.stream.sentence.SentenceStream
 import opennlp.ext.conll.treebank.POSTagset
@@ -15,11 +17,13 @@ import java.util.*
 
 class POSSampleStream(
     stream: ObjectStream<Sentence>,
-    private val posTagset: POSTagset
+    private val posTagset: POSTagset,
+    private val multiTokenWords: MultiTokenWords
 ) : FilterObjectStream<Sentence, POSSample>(stream) {
     constructor(stream: ObjectStream<Sentence>, properties: Properties) : this(
         stream,
-        posTagset(properties)
+        posTagset(properties),
+        multiTokenWords(properties)
     )
 
     @Suppress("ReplaceNotNullAssertionWithElvisReturn")
@@ -28,12 +32,16 @@ class POSSampleStream(
 
         val tokens = mutableListOf<String>()
         val tags = mutableListOf<String>()
+        var currentIndex = 0
+
+        var mwToken: String? = null
+        var mwTag: String? = null
         sentence.wordLines.forEach { wordLine ->
-            val pos = wordLine.postag(posTagset) ?: return@forEach
             when (wordLine.id.type) {
                 TokenId.Type.EmptyNodeCounter -> when {
                     wordLine["Typo"] == "Yes" && wordLine["CorrectForm"] != null -> {
                         // Keep tokens that are correcting typos using the corrected form.
+                        val pos = wordLine.postag(posTagset) ?: return@forEach
                         tokens.add(wordLine["CorrectForm"]!!)
                         tags.add(pos)
                     }
@@ -41,9 +49,36 @@ class POSSampleStream(
                         // Ignore nodes that are inserted as copies of other nodes.
                     }
                 }
-                TokenId.Type.Counter, TokenId.Type.Range -> {
-                    tokens.add(wordLine.form)
-                    tags.add(pos)
+                TokenId.Type.Range -> currentIndex = when (multiTokenWords) {
+                    MultiTokenWords.Split -> {
+                        // Ignore token ranges when splitting multi-token words and spaces between the tokens.
+                        wordLine.id.endInclusive
+                    }
+                    MultiTokenWords.Join -> {
+                        mwToken = wordLine.form
+                        wordLine.id.endInclusive
+                    }
+                }
+                TokenId.Type.Counter -> when {
+                    multiTokenWords == MultiTokenWords.Join && wordLine.id.start <= currentIndex -> {
+                        // Combine part of speech tags when joining multi-token words.
+                        val pos = wordLine.postag(posTagset) ?: return@forEach
+                        mwTag = mwTag?.let { "$mwTag+$pos" } ?: pos
+                    }
+                    else -> {
+                        if (mwToken != null) {
+                            tokens.add(mwToken!!)
+                            tags.add(mwTag!!)
+
+                            mwToken = null
+                            mwTag = null
+                        }
+
+                        val pos = wordLine.postag(posTagset) ?: return@forEach
+                        tokens.add(wordLine.form)
+                        tags.add(pos)
+                        currentIndex = wordLine.id.endInclusive
+                    }
                 }
             }
         }

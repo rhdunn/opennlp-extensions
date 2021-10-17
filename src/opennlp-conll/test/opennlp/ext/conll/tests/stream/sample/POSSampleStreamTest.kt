@@ -1,6 +1,8 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.tests.stream.sample
 
+import opennlp.ext.conll.stream.properties.MULTI_TOKEN_WORDS
+import opennlp.ext.conll.stream.properties.MultiTokenWords
 import opennlp.ext.conll.stream.properties.POS_TAGSET
 import opennlp.ext.conll.stream.sample.POSSampleStream
 import opennlp.ext.conll.stream.sentence.SentenceStream
@@ -206,6 +208,81 @@ class POSSampleStreamTest {
 
             assertThat(samples[0].sentence, `is`(arrayOf("As", "far", "as", "I", "know", ".")))
             assertThat(samples[0].tags, `is`(arrayOf("ADV", "ADV", "SCONJ", "PRON", "VERB", "PUNCT")))
+
+            assertThat(samples.size, `is`(1))
+        }
+    }
+
+    @Nested
+    @DisplayName("multi-token words")
+    inner class MultiTokenWordsTest {
+        @Test
+        @DisplayName("default")
+        fun default() {
+            val samples = parse(
+                """
+                1	I	I	PRON	PRP	_	_	_	_	_
+                2-3	wanna	_	_	_	_	_	_	_	_
+                2	wan	want	VERB	VBP	_	_	_	_	_
+                3	na	to	PART	TO	_	_	_	_	_
+                4	go	go	VERB	VB	_	_	_	_	_
+                5	home	home	NOUN	NN	_	_	_	_	_
+                6	.	.	PUNCT	.	_	_	_	_	_
+                """.trimIndent()
+            )
+
+            assertThat(samples[0].sentence, `is`(arrayOf("I", "wan", "na", "go", "home", ".")))
+            assertThat(samples[0].tags, `is`(arrayOf("PRON", "VERB", "PART", "VERB", "NOUN", "PUNCT")))
+
+            assertThat(samples.size, `is`(1))
+        }
+
+        @Test
+        @DisplayName("split")
+        fun split() {
+            val properties = Properties()
+            properties[MULTI_TOKEN_WORDS] = MultiTokenWords.Split.value
+
+            val samples = parse(
+                """
+                1	I	I	PRON	PRP	_	_	_	_	_
+                2-3	wanna	_	_	_	_	_	_	_	_
+                2	wan	want	VERB	VBP	_	_	_	_	_
+                3	na	to	PART	TO	_	_	_	_	_
+                4	go	go	VERB	VB	_	_	_	_	_
+                5	home	home	NOUN	NN	_	_	_	_	_
+                6	.	.	PUNCT	.	_	_	_	_	_
+                """.trimIndent(),
+                properties
+            )
+
+            assertThat(samples[0].sentence, `is`(arrayOf("I", "wan", "na", "go", "home", ".")))
+            assertThat(samples[0].tags, `is`(arrayOf("PRON", "VERB", "PART", "VERB", "NOUN", "PUNCT")))
+
+            assertThat(samples.size, `is`(1))
+        }
+
+        @Test
+        @DisplayName("join")
+        fun join() {
+            val properties = Properties()
+            properties[MULTI_TOKEN_WORDS] = MultiTokenWords.Join.value
+
+            val samples = parse(
+                """
+                1	I	I	PRON	PRP	_	_	_	_	_
+                2-3	wanna	_	_	_	_	_	_	_	_
+                2	wan	want	VERB	VBP	_	_	_	_	_
+                3	na	to	PART	TO	_	_	_	_	_
+                4	go	go	VERB	VB	_	_	_	_	_
+                5	home	home	NOUN	NN	_	_	_	_	_
+                6	.	.	PUNCT	.	_	_	_	_	_
+                """.trimIndent(),
+                properties
+            )
+
+            assertThat(samples[0].sentence, `is`(arrayOf("I", "wanna", "go", "home", ".")))
+            assertThat(samples[0].tags, `is`(arrayOf("PRON", "VERB+PART", "VERB", "NOUN", "PUNCT")))
 
             assertThat(samples.size, `is`(1))
         }

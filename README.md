@@ -41,9 +41,10 @@ values from treebank sentences that can be used to train a `POSModel`.
 
 The following properties are supported by the `POSSampleStream` class:
 
-| Parameter    | Type          | Values                              | Default |
-|--------------|---------------|-------------------------------------|---------|
-| `pos.tagset` | `enumeration` | `UPOS`, `XPOS`, `CPOSTAG`, `POSTAG` | `UPOS`  |
+| Parameter           | Type          | Values                              | Default |
+|---------------------|---------------|-------------------------------------|---------|
+| `multi.token.words` | `enumeration` | `split`, `join`                     | `split` |
+| `pos.tagset`        | `enumeration` | `UPOS`, `XPOS`, `CPOSTAG`, `POSTAG` | `UPOS`  |
 
 ## opennlp-train
 This is a collection of helper classes and functions for training OpenNLP
