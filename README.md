@@ -83,6 +83,17 @@ objects:
 | `training.cutoff`     | `integer`     |                        | 5        |
 | `training.threads`    | `integer`     |                        | 4        |
 
+### Sentence Detector Factory
+The following properties are supported for creating `SentenceDetectorFactory`
+objects:
+
+| Parameter                   | Type      | Values          | Default |
+|-----------------------------|-----------|-----------------|---------|
+| `language`                  | `string`  | ISO 639         | `en`    |
+| `abbreviations.dictionary`  | `path`    |                 |         |
+| `use.token.end`             | `boolean` | `true`, `false` | `false` |
+| `eos.characters`            | `string`  |                 |         |
+
 ### Tokenizer Factory
 The following properties are supported for creating `TokenizerFactory` objects:
 
