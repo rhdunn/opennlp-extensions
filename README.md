@@ -71,7 +71,7 @@ The following properties are supported for creating `TokenizerFactory` objects:
 | `alphanumeric.optimization` | `boolean` | `true`, `false` | `false`          |
 | `alphanumeric.pattern`      | `regex`   |                 | `^[A-Za-z0-9]+$` |
 
-### POS Tagger Factory
+### Part of Speech Tagger Factory
 The following properties are supported for creating `POSTaggerFactory` objects:
 
 | Parameter         | Type   | Values | Default |
@@ -79,8 +79,9 @@ The following properties are supported for creating `POSTaggerFactory` objects:
 | `pos.dictionary`  | `path` |        |         |
 
 ## Training Applications
-The training applications are located in`opennlp.ext.train.app`:
-1. `TokenizerModelTrainerAppKt` trains a `TokenizerModel`.
+The training applications are located in`opennlp.ext.train.app`.
+1. `POSModelTrainerAppKt` trains a `POSModel`.
+2. `TokenizerModelTrainerAppKt` trains a `TokenizerModel`.
 
 The applications have the following command line arguments:
 
@@ -88,15 +89,18 @@ The applications have the following command line arguments:
     TRAINING_FILE OUTPUT_MODEL_FILE
 
 The `TRAINING_FILE` has one of the following supported extensions:
-1. `conllx` for CoNLL-X treebank files.
+1. `conllx` for CoNLL-X treebank files;
 2. `conllu` for CoNLL-U treebank files.
 
 The `OUTPUT_MODEL_FILE` is the name of the file to save the created model to,
 e.g. `en-tokens.bin`. Any missing directories will be created.
 
 The `PROPERTIES_FILE` is a Java properties file (`property=value` lines). Each
-application supports different sets of properies:
-1. `TokenizerModelTrainerAppKt` &ndash; [Training Parameters](#training-parameters),
+application supports different sets of properies.
+1. `POSModelTrainerAppKt` supports [Training Parameters](#training-parameters),
+   [Part of Speech Tagger Factory](#part-of-speech-tagger-factory), and
+   [Part of Speech Sample Stream](#part-of-speech-sample-stream) parameters.
+2. `TokenizerModelTrainerAppKt` supports [Training Parameters](#training-parameters),
    [Tokenizer Factory](#tokenizer-factory), and
    [Token Sample Stream](#token-sample-stream) parameters.
 
