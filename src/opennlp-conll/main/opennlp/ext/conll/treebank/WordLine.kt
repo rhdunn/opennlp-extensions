@@ -1,6 +1,7 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.treebank
 
+import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import opennlp.ext.conll.treebank.pos.PosTag
 
 // Reference: [CoNLL-X Format](https://ilk.uvt.nl/~emarsi/download/pubs/14964.pdf)
@@ -16,9 +17,12 @@ data class WordLine(
     val deps: List<DependencyRelation>,
     val misc: List<Feature>
 ) {
-    operator fun get(name: String): String? {
-        return feats.find { it.type == name }?.value ?: misc.find { it.type == name }?.value
+    operator fun get(name: String?): String? = when (name) {
+        null -> null
+        else -> feats.find { it.type == name }?.value ?: misc.find { it.type == name }?.value
     }
+
+    fun hasFeature(feature: Feature): Boolean = this[feature.type] == feature.value
 
     fun postag(tagset: POSTagset): PosTag? = when (tagset) {
         POSTagset.Universal -> upos
@@ -26,12 +30,7 @@ data class WordLine(
     }
 
     val spaceAfter: Boolean
-        get() = this[SPACE_AFTER] != NO
+        get() = !hasFeature(SpaceAfter.No)
 
     class InvalidWorldLineException(line: String) : RuntimeException("Invalid word line: $line")
-
-    companion object {
-        const val SPACE_AFTER: String = "SpaceAfter"
-        const val NO: String = "No"
-    }
 }

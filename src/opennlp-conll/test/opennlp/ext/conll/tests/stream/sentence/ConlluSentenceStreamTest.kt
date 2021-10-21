@@ -5,6 +5,7 @@ import opennlp.ext.conll.stream.io.PlainTextLineStream
 import opennlp.ext.conll.stream.sentence.ConlluSentenceStream
 import opennlp.ext.conll.treebank.*
 import opennlp.ext.conll.treebank.features.UnknownFeature
+import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import opennlp.ext.conll.treebank.pos.tags.UPennTags
 import opennlp.ext.conll.treebank.pos.tags.UPosTags
 import org.hamcrest.CoreMatchers.`is`
@@ -282,7 +283,11 @@ class ConlluSentenceStreamTest {
             2	hats	hat	NOUN	NN	Number=Plur	1	det	3:test	SpaceAfter=No
             """.trimIndent()
         )
+
         assertThat(sentences[0].wordLines[0].spaceAfter, `is`(true))
         assertThat(sentences[0].wordLines[1].spaceAfter, `is`(false))
+
+        assertThat(sentences[0].wordLines[0].hasFeature(SpaceAfter.No), `is`(false))
+        assertThat(sentences[0].wordLines[1].hasFeature(SpaceAfter.No), `is`(true))
     }
 }
