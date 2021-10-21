@@ -284,9 +284,6 @@ class ConlluSentenceStreamTest {
             """.trimIndent()
         )
 
-        assertThat(sentences[0].wordLines[0].spaceAfter, `is`(true))
-        assertThat(sentences[0].wordLines[1].spaceAfter, `is`(false))
-
         assertThat(sentences[0].wordLines[0].hasFeature(SpaceAfter.No), `is`(false))
         assertThat(sentences[0].wordLines[1].hasFeature(SpaceAfter.No), `is`(true))
     }

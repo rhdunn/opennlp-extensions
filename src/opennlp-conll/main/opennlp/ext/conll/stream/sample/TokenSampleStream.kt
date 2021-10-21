@@ -6,6 +6,7 @@ import opennlp.ext.conll.stream.properties.multiTokenWords
 import opennlp.ext.conll.stream.sentence.SentenceStream
 import opennlp.ext.conll.treebank.Sentence
 import opennlp.ext.conll.treebank.TokenId
+import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import opennlp.tools.tokenize.TokenSample
 import opennlp.tools.util.FilterObjectStream
 import opennlp.tools.util.InputStreamFactory
@@ -48,7 +49,7 @@ class TokenSampleStream(
                         text.append(wordLine.form)
                         spans.add(Span(spanStart, text.length))
 
-                        needSpace = wordLine.spaceAfter
+                        needSpace = !wordLine.hasFeature(SpaceAfter.No)
                         currentIndex = wordLine.id.endInclusive
                     }
                 }
@@ -63,7 +64,7 @@ class TokenSampleStream(
                         text.append(wordLine.form)
                         spans.add(Span(spanStart, text.length))
 
-                        needSpace = wordLine.spaceAfter && wordLine.id.start > currentIndex
+                        needSpace = !wordLine.hasFeature(SpaceAfter.No) && wordLine.id.start > currentIndex
                         currentIndex = wordLine.id.endInclusive
                     }
                 }

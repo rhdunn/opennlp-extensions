@@ -1,7 +1,6 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.treebank
 
-import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import opennlp.ext.conll.treebank.pos.PosTag
 
 // Reference: [CoNLL-X Format](https://ilk.uvt.nl/~emarsi/download/pubs/14964.pdf)
@@ -28,9 +27,6 @@ data class WordLine(
         POSTagset.Universal -> upos
         POSTagset.LanguageSpecific -> xpos
     }
-
-    val spaceAfter: Boolean
-        get() = !hasFeature(SpaceAfter.No)
 
     class InvalidWorldLineException(line: String) : RuntimeException("Invalid word line: $line")
 }
