@@ -2,6 +2,7 @@
 package opennlp.ext.conll.tests.treebank
 
 import opennlp.ext.conll.treebank.Feature
+import opennlp.ext.conll.treebank.features.UnknownFeature
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -15,14 +16,14 @@ class FeatureTest {
     @Test
     @DisplayName("unnamed feature")
     fun unnamed() {
-        val feat = Feature(null, "lorem-ipsum")
+        val feat = UnknownFeature(null, "lorem-ipsum")
         assertThat(feat.toString(), `is`("lorem-ipsum"))
     }
 
     @Test
     @DisplayName("named feature")
     fun named() {
-        val feat = Feature("lorem", "ipsum")
+        val feat = UnknownFeature("lorem", "ipsum")
         assertThat(feat.toString(), `is`("lorem=ipsum"))
     }
 
@@ -49,7 +50,7 @@ class FeatureTest {
         @DisplayName("one")
         fun one() {
             val feat = Feature.parse("one=lorem")
-            assertThat(feat[0], `is`(Feature("one", "lorem")))
+            assertThat(feat[0], `is`(UnknownFeature("one", "lorem")))
             assertThat(feat.size, `is`(1))
         }
 
@@ -57,9 +58,9 @@ class FeatureTest {
         @DisplayName("multiple")
         fun multiple() {
             val feat = Feature.parse("one=lorem|ipsum|three=dolor")
-            assertThat(feat[0], `is`(Feature("one", "lorem")))
-            assertThat(feat[1], `is`(Feature(null, "ipsum")))
-            assertThat(feat[2], `is`(Feature("three", "dolor")))
+            assertThat(feat[0], `is`(UnknownFeature("one", "lorem")))
+            assertThat(feat[1], `is`(UnknownFeature(null, "ipsum")))
+            assertThat(feat[2], `is`(UnknownFeature("three", "dolor")))
             assertThat(feat.size, `is`(3))
         }
 
