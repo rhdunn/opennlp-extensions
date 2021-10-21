@@ -2,6 +2,7 @@
 package opennlp.ext.conll.stream.properties
 
 import opennlp.ext.conll.treebank.POSTagset
+import opennlp.ext.conll.treebank.pos.PosTagset
 import java.util.*
 
 class InvalidPropertyValue(key: String, value: String) : RuntimeException("Invalid $key property value: $value")
@@ -34,4 +35,12 @@ private const val SENTENCES_PER_SAMPLE_DEFAULT: String = "5"
 fun sentencesPerSample(properties: Properties): Int {
     val value = properties.getOrDefault(SENTENCES_PER_SAMPLE, SENTENCES_PER_SAMPLE_DEFAULT) as String
     return value.toIntOrNull() ?: throw InvalidPropertyValue(SENTENCES_PER_SAMPLE, value)
+}
+
+const val UPOS_TAGSET: String = "upos.tagset" // string -- one of: "upos" | "upenn"
+private const val UPOS_TAGSET_DEFAULT: String = "upos"
+
+fun uposTagset(properties: Properties): PosTagset {
+    val value = properties.getOrDefault(UPOS_TAGSET, UPOS_TAGSET_DEFAULT) as String
+    return PosTagset.create(value)
 }
