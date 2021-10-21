@@ -43,7 +43,7 @@ class POSSampleStream(
                         // Keep tokens that are correcting typos using the corrected form.
                         val pos = wordLine.postag(posTagset) ?: return@forEach
                         tokens.add(wordLine["CorrectForm"]!!)
-                        tags.add(pos)
+                        tags.add(pos.tag)
                     }
                     else -> {
                         // Ignore nodes that are inserted as copies of other nodes.
@@ -63,7 +63,7 @@ class POSSampleStream(
                     multiTokenWords == MultiTokenWords.Join && wordLine.id.start <= currentIndex -> {
                         // Combine part of speech tags when joining multi-token words.
                         val pos = wordLine.postag(posTagset) ?: return@forEach
-                        mwTag = mwTag?.let { "$mwTag+$pos" } ?: pos
+                        mwTag = mwTag?.let { "$mwTag+${pos.tag}" } ?: pos.tag
                     }
                     else -> {
                         if (mwToken != null) {
@@ -76,7 +76,7 @@ class POSSampleStream(
 
                         val pos = wordLine.postag(posTagset) ?: return@forEach
                         tokens.add(wordLine.form)
-                        tags.add(pos)
+                        tags.add(pos.tag)
                         currentIndex = wordLine.id.endInclusive
                     }
                 }

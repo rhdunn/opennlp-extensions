@@ -155,8 +155,8 @@ class ConlluSentenceStreamTest {
             assertThat(token.deps, `is`(listOf(DependencyRelation(token3, "test"))))
             assertThat(token.misc, `is`(listOf(Feature("SpaceAfter", "No"))))
 
-            assertThat(token.postag(POSTagset.Universal), `is`("NOUN"))
-            assertThat(token.postag(POSTagset.LanguageSpecific), `is`("NN"))
+            assertThat(token.postag(POSTagset.Universal), `is`(UPosTags.NOUN))
+            assertThat(token.postag(POSTagset.LanguageSpecific), `is`(UPennTags.NN))
         }
 
         @Test

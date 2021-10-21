@@ -45,7 +45,7 @@ class LemmaSampleStream(
                         // Keep tokens that are correcting typos using the corrected form.
                         val pos = wordLine.postag(posTagset) ?: return@forEach
                         tokens.add(wordLine["CorrectForm"]!!)
-                        tags.add(pos)
+                        tags.add(pos.tag)
                         lemmas.add(wordLine.lemma)
                     }
                     else -> {
@@ -66,7 +66,7 @@ class LemmaSampleStream(
                     multiTokenWords == MultiTokenWords.Join && wordLine.id.start <= currentIndex -> {
                         // Combine part of speech tags when joining multi-token words.
                         val pos = wordLine.postag(posTagset) ?: return@forEach
-                        mwTag = mwTag?.let { "$mwTag+$pos" } ?: pos
+                        mwTag = mwTag?.let { "$mwTag+${pos.tag}" } ?: pos.tag
                         mwLemma = mwLemma?.let { "$mwLemma ${wordLine.lemma}" } ?: wordLine.lemma
                     }
                     else -> {
@@ -82,7 +82,7 @@ class LemmaSampleStream(
 
                         val pos = wordLine.postag(posTagset) ?: return@forEach
                         tokens.add(wordLine.form)
-                        tags.add(pos)
+                        tags.add(pos.tag)
                         lemmas.add(wordLine.lemma)
                         currentIndex = wordLine.id.endInclusive
                     }
