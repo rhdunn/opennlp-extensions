@@ -57,5 +57,9 @@ enum class UPennTags(
     DQUOO("``", "open double quotes", WordClass.Other),
     DQUOC("''", "close double quotes", WordClass.Other),
     SQUOO("`", "open single quotes", WordClass.Other),
-    SQUOC("'", "close single quotes", WordClass.Other)
+    SQUOC("'", "close single quotes", WordClass.Other);
+
+    companion object {
+        operator fun get(tag: String): PosTag? = values().find { it.tag == tag }
+    }
 }

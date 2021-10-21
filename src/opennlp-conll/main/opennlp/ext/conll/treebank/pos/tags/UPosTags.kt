@@ -26,5 +26,9 @@ enum class UPosTags(
     SCONJ("SCONJ", "subordinating conjunction", WordClass.Closed),
     SYM("SYM", "symbol", WordClass.Other),
     VERB("VERB", "verb", WordClass.Open),
-    X("X", "other", WordClass.Other)
+    X("X", "other", WordClass.Other);
+
+    companion object {
+        operator fun get(tag: String): PosTag? = values().find { it.tag == tag }
+    }
 }
