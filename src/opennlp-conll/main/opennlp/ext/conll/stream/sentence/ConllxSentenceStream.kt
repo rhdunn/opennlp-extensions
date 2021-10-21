@@ -2,11 +2,16 @@
 package opennlp.ext.conll.stream.sentence
 
 import opennlp.ext.conll.treebank.*
+import opennlp.ext.conll.treebank.pos.PosTagset
+import opennlp.ext.conll.treebank.pos.tags.UPosTags
 import opennlp.tools.util.FilterObjectStream
 import opennlp.tools.util.ObjectStream
 
 // Reference: [CoNLL-X Format](https://ilk.uvt.nl/~emarsi/download/pubs/14964.pdf)
-class ConllxSentenceStream(stream: ObjectStream<String>) : FilterObjectStream<String, Sentence>(stream) {
+class ConllxSentenceStream(
+    stream: ObjectStream<String>,
+    private val uposTagset: PosTagset = UPosTags
+) : FilterObjectStream<String, Sentence>(stream) {
     override fun read(): Sentence? {
         var line: String? = samples.read() ?: return null
 
@@ -23,7 +28,7 @@ class ConllxSentenceStream(stream: ObjectStream<String>) : FilterObjectStream<St
             TokenId.parse(fields[ID]),
             fields[FORM],
             fields[LEMMA],
-            fields[CPOSTAG].takeIf { it != "_" },
+            uposTagset[fields[CPOSTAG]],
             fields[POSTAG].takeIf { it != "_" },
             Feature.parse(fields[FEATS]),
             DependencyRelation.create(fields[HEAD], fields[DEPREL]),

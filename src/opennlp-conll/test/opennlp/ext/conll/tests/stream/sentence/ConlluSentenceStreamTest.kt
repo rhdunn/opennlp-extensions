@@ -4,6 +4,7 @@ package opennlp.ext.conll.tests.stream.sentence
 import opennlp.ext.conll.stream.io.PlainTextLineStream
 import opennlp.ext.conll.stream.sentence.ConlluSentenceStream
 import opennlp.ext.conll.treebank.*
+import opennlp.ext.conll.treebank.pos.tags.UPosTags
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
@@ -146,7 +147,7 @@ class ConlluSentenceStreamTest {
             assertThat(token.id, `is`(token2))
             assertThat(token.form, `is`("hats"))
             assertThat(token.lemma, `is`("hat"))
-            assertThat(token.upos, `is`("NOUN"))
+            assertThat(token.upos, `is`(UPosTags.NOUN))
             assertThat(token.xpos, `is`("NN"))
             assertThat(token.feats, `is`(listOf(Feature("Number", "Plur"))))
             assertThat(token.dep, `is`(DependencyRelation(token1, "det")))
@@ -216,7 +217,7 @@ class ConlluSentenceStreamTest {
         assertThat(token.id, `is`(token1))
         assertThat(token.form, `is`("the"))
         assertThat(token.lemma, `is`("the"))
-        assertThat(token.upos, `is`("DET"))
+        assertThat(token.upos, `is`(UPosTags.DET))
         assertThat(token.xpos, `is`("DT"))
         assertThat(token.feats, `is`(listOf()))
         assertThat(token.dep, `is`(nullValue()))
@@ -227,7 +228,7 @@ class ConlluSentenceStreamTest {
         assertThat(token.id, `is`(token2))
         assertThat(token.form, `is`("hats"))
         assertThat(token.lemma, `is`("hat"))
-        assertThat(token.upos, `is`("NOUN"))
+        assertThat(token.upos, `is`(UPosTags.NOUN))
         assertThat(token.xpos, `is`("NN"))
         assertThat(token.feats, `is`(listOf(Feature("Number", "Plur"))))
         assertThat(token.dep, `is`(DependencyRelation(token1, "det")))
@@ -251,7 +252,7 @@ class ConlluSentenceStreamTest {
         assertThat(token.id, `is`(token1))
         assertThat(token.form, `is`("the"))
         assertThat(token.lemma, `is`("the"))
-        assertThat(token.upos, `is`("DET"))
+        assertThat(token.upos, `is`(UPosTags.DET))
         assertThat(token.xpos, `is`("DT"))
         assertThat(token.feats, `is`(listOf()))
         assertThat(token.dep, `is`(nullValue()))
@@ -262,7 +263,7 @@ class ConlluSentenceStreamTest {
         assertThat(token.id, `is`(token2))
         assertThat(token.form, `is`("hats"))
         assertThat(token.lemma, `is`("hat"))
-        assertThat(token.upos, `is`("NOUN"))
+        assertThat(token.upos, `is`(UPosTags.NOUN))
         assertThat(token.xpos, `is`("NN"))
         assertThat(token.feats, `is`(listOf(Feature("Number", "Plur"))))
         assertThat(token.dep, `is`(DependencyRelation(token1, "det")))

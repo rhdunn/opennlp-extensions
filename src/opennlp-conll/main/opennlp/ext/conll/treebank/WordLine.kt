@@ -1,13 +1,15 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.treebank
 
+import opennlp.ext.conll.treebank.pos.PosTag
+
 // Reference: [CoNLL-X Format](https://ilk.uvt.nl/~emarsi/download/pubs/14964.pdf)
 // Reference: [CoNLL-U Format](https://universaldependencies.org/format.html)
 data class WordLine(
     val id: TokenId,
     val form: String,
     val lemma: String,
-    val upos: String?,
+    val upos: PosTag?,
     val xpos: String?,
     val feats: List<Feature>,
     val dep: DependencyRelation?,
@@ -19,7 +21,7 @@ data class WordLine(
     }
 
     fun postag(tagset: POSTagset): String? = when (tagset) {
-        POSTagset.Universal -> upos
+        POSTagset.Universal -> upos?.tag
         POSTagset.LanguageSpecific -> xpos
     }
 
