@@ -1,10 +1,15 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.treebank.pos.tags
 
+import opennlp.ext.conll.treebank.pos.PosTag
 import opennlp.ext.conll.treebank.pos.WordClass
 
 // Reference: [Universal POS tags](https://universaldependencies.org/u/pos/index.html)
-enum class UPosTags(val tag: String, val label: String, val wordClass: WordClass) {
+enum class UPosTags(
+    override val tag: String,
+    override val label: String,
+    override val wordClass: WordClass
+) : PosTag {
     ADJ("ADJ", "adjective", WordClass.Open),
     ADP("ADP", "adposition", WordClass.Closed),
     ADV("ADV", "adverb", WordClass.Open),
