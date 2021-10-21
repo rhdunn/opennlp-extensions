@@ -17,7 +17,7 @@ data class WordLine(
     val misc: List<Feature>
 ) {
     operator fun get(name: String): String? {
-        return feats.find { it.name == name }?.value ?: misc.find { it.name == name }?.value
+        return feats.find { it.type == name }?.value ?: misc.find { it.type == name }?.value
     }
 
     fun postag(tagset: POSTagset): PosTag? = when (tagset) {

@@ -6,11 +6,11 @@ import opennlp.ext.conll.treebank.Feature
 // Reference: [CoNLL-X Format](https://ilk.uvt.nl/~emarsi/download/pubs/14964.pdf)
 // Reference: [CoNLL-U Format](https://universaldependencies.org/format.html)
 data class UnknownFeature(
-    override val name: String?,
+    override val type: String?,
     override val value: String
 ) : Feature {
-    override fun toString(): String = when (name) {
+    override fun toString(): String = when (type) {
         null -> value
-        else -> "$name=$value"
+        else -> "$type=$value"
     }
 }

@@ -6,7 +6,7 @@ import opennlp.ext.conll.treebank.features.UnknownFeature
 // Reference: [CoNLL-X Format](https://ilk.uvt.nl/~emarsi/download/pubs/14964.pdf)
 // Reference: [CoNLL-U Format](https://universaldependencies.org/format.html)
 interface Feature {
-    val name: String?
+    val type: String?
     val value: String
 
     class MissingFeatureException : RuntimeException("Missing feature")
