@@ -24,6 +24,13 @@ treebank sentences.
 3. `SentenceStream` is a helper class for constructing a given sentence stream
    in the specified format from a variety of sources.
 
+The following properties are supported by the sentence streams:
+
+| Parameter     | Type          | Values          | Default |
+|---------------|---------------|-----------------|---------|
+| `upos.tagset` | `enumeration` | `upos`, `upenn` | `upos`  |
+| `xpos.tagset` | `enumeration` | `upos`, `upenn` | `upenn` |
+
 ### Sentence Sample Stream
 The `opennlp.ext.conll.stream.sample.SentenceSampleStream` class creates
 `SentenceSample` values from treebank sentences that can be used to train
@@ -143,6 +150,8 @@ The following properties are supported by the
 | `use.token.end`             | `boolean`     | `true`, `false`                     | `false`          |
 | `eos.characters`            | `string`      |                                     |                  |
 | `sentences.per.sample`      | `integer`     |                                     | 5                |
+| `upos.tagset`               | `enumeration` | `upos`, `upenn`                     | `upos`           |
+| `xpos.tagset`               | `enumeration` | `upos`, `upenn`                     | `upenn`          |
 
 ### Tokenier Model Trainer
 The following properties are supported by the
@@ -160,6 +169,8 @@ The following properties are supported by the
 | `alphanumeric.optimization` | `boolean`     | `true`, `false`                     | `false`          |
 | `alphanumeric.pattern`      | `regex`       |                                     | `^[A-Za-z0-9]+$` |
 | `multi.token.words`         | `enumeration` | `split`, `join`                     | `split`          |
+| `upos.tagset`               | `enumeration` | `upos`, `upenn`                     | `upos`           |
+| `xpos.tagset`               | `enumeration` | `upos`, `upenn`                     | `upenn`          |
 
 ### Part of Speech Model Trainer
 The following properties are supported by the
@@ -175,6 +186,8 @@ The following properties are supported by the
 | `pos.dictionary`      | `path`        |                                     |          |
 | `multi.token.words`   | `enumeration` | `split`, `join`                     | `split`  |
 | `pos.tagset`          | `enumeration` | `UPOS`, `XPOS`, `CPOSTAG`, `POSTAG` | `UPOS`   |
+| `upos.tagset`         | `enumeration` | `upos`, `upenn`                     | `upos`   |
+| `xpos.tagset`         | `enumeration` | `upos`, `upenn`                     | `upenn`  |
 
 ### Lemmatizer Model Trainer
 The following properties are supported by the
@@ -190,6 +203,8 @@ The following properties are supported by the
 | `language`            | `string`      | ISO 639                             | `en`     |
 | `multi.token.words`   | `enumeration` | `split`, `join`                     | `split`  |
 | `pos.tagset`          | `enumeration` | `UPOS`, `XPOS`, `CPOSTAG`, `POSTAG` | `UPOS`   |
+| `upos.tagset`         | `enumeration` | `upos`, `upenn`                     | `upos`   |
+| `xpos.tagset`         | `enumeration` | `upos`, `upenn`                     | `upenn`  |
 
 ## License
 Copyright (C) 2021 Reece H. Dunn

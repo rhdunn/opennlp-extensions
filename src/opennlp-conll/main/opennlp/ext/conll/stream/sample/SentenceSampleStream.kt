@@ -42,32 +42,32 @@ class SentenceSampleStream(
 
     companion object {
         fun create(stream: ObjectStream<String>, format: String, properties: Properties): ObjectStream<SentenceSample> {
-            val sentences = SentenceStream.create(stream, format)
+            val sentences = SentenceStream.create(stream, format, properties)
             return SentenceSampleStream(sentences, properties)
         }
 
         fun create(stream: InputStreamFactory, format: String, properties: Properties): ObjectStream<SentenceSample> {
-            val sentences = SentenceStream.create(stream, format)
+            val sentences = SentenceStream.create(stream, format, properties)
             return SentenceSampleStream(sentences, properties)
         }
 
         fun create(bytes: ByteArray, format: String, properties: Properties): ObjectStream<SentenceSample> {
-            val sentences = SentenceStream.create(bytes, format)
+            val sentences = SentenceStream.create(bytes, format, properties)
             return SentenceSampleStream(sentences, properties)
         }
 
         fun create(string: String, format: String, properties: Properties): ObjectStream<SentenceSample> {
-            val sentences = SentenceStream.create(string, format)
+            val sentences = SentenceStream.create(string, format, properties)
             return SentenceSampleStream(sentences, properties)
         }
 
         fun load(file: File, properties: Properties): ObjectStream<SentenceSample> {
-            val sentences = SentenceStream.load(file)
+            val sentences = SentenceStream.load(file, properties)
             return SentenceSampleStream(sentences, properties)
         }
 
         fun load(path: String, properties: Properties): ObjectStream<SentenceSample> {
-            val sentences = SentenceStream.load(path)
+            val sentences = SentenceStream.load(path, properties)
             return SentenceSampleStream(sentences, properties)
         }
     }

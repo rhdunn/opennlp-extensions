@@ -6,6 +6,7 @@ import opennlp.ext.conll.treebank.Sentence
 import opennlp.tools.util.InputStreamFactory
 import opennlp.tools.util.ObjectStream
 import java.io.File
+import java.util.*
 
 @Suppress("MemberVisibilityCanBePrivate")
 object SentenceStream {
@@ -15,33 +16,37 @@ object SentenceStream {
     class UnsupportedSentenceFormatException(format: String) :
         RuntimeException("Unsupported sentence treebank format: $format")
 
-    fun create(stream: ObjectStream<String>, format: String): ObjectStream<Sentence> = when (format) {
-        CONLLX -> ConllxSentenceStream(stream)
-        CONLLU -> ConlluSentenceStream(stream)
+    fun create(
+        stream: ObjectStream<String>,
+        format: String,
+        properties: Properties
+    ): ObjectStream<Sentence> = when (format) {
+        CONLLX -> ConllxSentenceStream(stream, properties)
+        CONLLU -> ConlluSentenceStream(stream, properties)
         else -> throw UnsupportedSentenceFormatException(format)
     }
 
-    fun create(stream: InputStreamFactory, format: String): ObjectStream<Sentence> {
+    fun create(stream: InputStreamFactory, format: String, properties: Properties): ObjectStream<Sentence> {
         val lines = PlainTextLineStream.create(stream)
-        return create(lines, format)
+        return create(lines, format, properties)
     }
 
-    fun create(bytes: ByteArray, format: String): ObjectStream<Sentence> {
+    fun create(bytes: ByteArray, format: String, properties: Properties): ObjectStream<Sentence> {
         val lines = PlainTextLineStream.create(bytes)
-        return create(lines, format)
+        return create(lines, format, properties)
     }
 
-    fun create(string: String, format: String): ObjectStream<Sentence> {
+    fun create(string: String, format: String, properties: Properties): ObjectStream<Sentence> {
         val lines = PlainTextLineStream.create(string)
-        return create(lines, format)
+        return create(lines, format, properties)
     }
 
-    fun load(file: File): ObjectStream<Sentence> {
+    fun load(file: File, properties: Properties): ObjectStream<Sentence> {
         val lines = PlainTextLineStream.load(file)
-        return create(lines, file.extension)
+        return create(lines, file.extension, properties)
     }
 
-    fun load(path: String): ObjectStream<Sentence> {
-        return load(File(path))
+    fun load(path: String, properties: Properties): ObjectStream<Sentence> {
+        return load(File(path), properties)
     }
 }

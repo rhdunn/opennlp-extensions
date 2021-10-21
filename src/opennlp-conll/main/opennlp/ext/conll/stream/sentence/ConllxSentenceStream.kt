@@ -1,12 +1,15 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.stream.sentence
 
+import opennlp.ext.conll.stream.properties.uposTagset
+import opennlp.ext.conll.stream.properties.xposTagset
 import opennlp.ext.conll.treebank.*
 import opennlp.ext.conll.treebank.pos.PosTagset
 import opennlp.ext.conll.treebank.pos.tags.UPennTags
 import opennlp.ext.conll.treebank.pos.tags.UPosTags
 import opennlp.tools.util.FilterObjectStream
 import opennlp.tools.util.ObjectStream
+import java.util.*
 
 // Reference: [CoNLL-X Format](https://ilk.uvt.nl/~emarsi/download/pubs/14964.pdf)
 class ConllxSentenceStream(
@@ -14,6 +17,12 @@ class ConllxSentenceStream(
     private val uposTagset: PosTagset = UPosTags,
     private val xposTagset: PosTagset = UPennTags
 ) : FilterObjectStream<String, Sentence>(stream) {
+    constructor(stream: ObjectStream<String>, properties: Properties) : this(
+        stream,
+        uposTagset(properties),
+        xposTagset(properties)
+    )
+
     override fun read(): Sentence? {
         var line: String? = samples.read() ?: return null
 
