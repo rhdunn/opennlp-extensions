@@ -2,6 +2,7 @@
 package opennlp.ext.conll.treebank.pos.tags
 
 import opennlp.ext.conll.treebank.pos.PosTag
+import opennlp.ext.conll.treebank.pos.PosTagset
 import opennlp.ext.conll.treebank.pos.WordClass
 
 // Reference: [Universal POS tags](https://universaldependencies.org/u/pos/index.html)
@@ -28,7 +29,7 @@ enum class UPosTags(
     VERB("VERB", "verb", WordClass.Open),
     X("X", "other", WordClass.Other);
 
-    companion object {
-        operator fun get(tag: String): PosTag? = values().find { it.tag == tag }
+    companion object : PosTagset {
+        override fun get(tag: String): PosTag? = values().find { it.tag == tag }
     }
 }

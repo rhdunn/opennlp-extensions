@@ -2,6 +2,7 @@
 package opennlp.ext.conll.treebank.pos.tags
 
 import opennlp.ext.conll.treebank.pos.PosTag
+import opennlp.ext.conll.treebank.pos.PosTagset
 import opennlp.ext.conll.treebank.pos.WordClass
 
 // Reference: [Penn Treebank P.O.S. Tags](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)
@@ -59,7 +60,7 @@ enum class UPennTags(
     SQUOO("`", "open single quotes", WordClass.Other),
     SQUOC("'", "close single quotes", WordClass.Other);
 
-    companion object {
-        operator fun get(tag: String): PosTag? = values().find { it.tag == tag }
+    companion object : PosTagset {
+        override fun get(tag: String): PosTag? = values().find { it.tag == tag }
     }
 }
