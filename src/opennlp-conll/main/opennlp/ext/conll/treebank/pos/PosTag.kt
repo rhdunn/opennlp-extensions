@@ -5,4 +5,9 @@ interface PosTag {
     val tag: String
     val label: String
     val wordClass: WordClass
+
+    data class Unknown(override val tag: String) : PosTag {
+        override val label: String = tag
+        override val wordClass: WordClass = WordClass.Other
+    }
 }
