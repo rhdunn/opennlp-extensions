@@ -10,7 +10,7 @@ data class WordLine(
     val form: String,
     val lemma: String,
     val upos: PosTag?,
-    val xpos: String?,
+    val xpos: PosTag?,
     val feats: List<Feature>,
     val dep: DependencyRelation?,
     val deps: List<DependencyRelation>,
@@ -22,7 +22,7 @@ data class WordLine(
 
     fun postag(tagset: POSTagset): String? = when (tagset) {
         POSTagset.Universal -> upos?.tag
-        POSTagset.LanguageSpecific -> xpos
+        POSTagset.LanguageSpecific -> xpos?.tag
     }
 
     val spaceAfter: Boolean

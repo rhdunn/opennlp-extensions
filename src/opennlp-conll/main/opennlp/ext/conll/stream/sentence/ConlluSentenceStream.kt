@@ -3,6 +3,7 @@ package opennlp.ext.conll.stream.sentence
 
 import opennlp.ext.conll.treebank.*
 import opennlp.ext.conll.treebank.pos.PosTagset
+import opennlp.ext.conll.treebank.pos.tags.UPennTags
 import opennlp.ext.conll.treebank.pos.tags.UPosTags
 import opennlp.tools.util.FilterObjectStream
 import opennlp.tools.util.ObjectStream
@@ -10,7 +11,8 @@ import opennlp.tools.util.ObjectStream
 // Reference: [CoNLL-U Format](https://universaldependencies.org/format.html)
 class ConlluSentenceStream(
     stream: ObjectStream<String>,
-    private val uposTagset: PosTagset = UPosTags
+    private val uposTagset: PosTagset = UPosTags,
+    private val xposTagset: PosTagset = UPennTags
 ) : FilterObjectStream<String, Sentence>(stream) {
     override fun read(): Sentence? {
         var line: String? = samples.read() ?: return null
@@ -33,7 +35,7 @@ class ConlluSentenceStream(
             fields[FORM],
             fields[LEMMA],
             uposTagset[fields[UPOS]],
-            fields[XPOS].takeIf { it != "_" },
+            xposTagset[fields[XPOS]],
             Feature.parse(fields[FEATS]),
             DependencyRelation.create(fields[HEAD], fields[DEPREL]),
             DependencyRelation.parse(fields[DEPS]),
