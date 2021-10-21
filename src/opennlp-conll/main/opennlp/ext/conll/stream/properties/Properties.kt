@@ -44,3 +44,11 @@ fun uposTagset(properties: Properties): PosTagset {
     val value = properties.getOrDefault(UPOS_TAGSET, UPOS_TAGSET_DEFAULT) as String
     return PosTagset.create(value)
 }
+
+const val XPOS_TAGSET: String = "xpos.tagset" // string -- one of: "upos" | "upenn"
+private const val XPOS_TAGSET_DEFAULT: String = "upenn"
+
+fun xposTagset(properties: Properties): PosTagset {
+    val value = properties.getOrDefault(XPOS_TAGSET, XPOS_TAGSET_DEFAULT) as String
+    return PosTagset.create(value)
+}
