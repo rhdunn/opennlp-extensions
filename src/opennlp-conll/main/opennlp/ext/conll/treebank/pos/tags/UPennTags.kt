@@ -5,6 +5,7 @@ import opennlp.ext.conll.treebank.pos.PosTag
 import opennlp.ext.conll.treebank.pos.WordClass
 
 // Reference: [Penn Treebank P.O.S. Tags](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)
+// Reference: [The Penn Treebank POS Tagset](https://ufal.mff.cuni.cz/pdt/Morphology_and_Tagging/Doc/PTTags.pdf)
 enum class UPennTags(
     override val tag: String,
     override val label: String,
@@ -45,5 +46,16 @@ enum class UPennTags(
     WDT("WDT", "wh-determiner", WordClass.Closed),
     WP("WP", "wh-pronoun", WordClass.Closed),
     WPS("WP$", "possessive wh-pronoun", WordClass.Closed),
-    WRB("WRB", "wh-adverb", WordClass.Open)
+    WRB("WRB", "wh-adverb", WordClass.Open),
+    POUND("#", "pound symbol", WordClass.Other),
+    DOLLAR("$", "dollar symbol", WordClass.Other),
+    SENT(".", "sentence final punctuation", WordClass.Other),
+    COMMA(",", "comma", WordClass.Other),
+    COLON(":", "other punctuation", WordClass.Other),
+    PARO("(", "open parenthesis", WordClass.Other),
+    PARC(")", "close parenthesis", WordClass.Other),
+    DQUOO("``", "open double quotes", WordClass.Other),
+    DQUOC("''", "close double quotes", WordClass.Other),
+    SQUOO("`", "open single quotes", WordClass.Other),
+    SQUOC("'", "close single quotes", WordClass.Other)
 }
