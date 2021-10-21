@@ -29,6 +29,8 @@ enum class UPosTags(
     VERB("VERB", "verb", WordClass.Open),
     X("X", "other", WordClass.Other);
 
+    override fun toString(): String = tag
+
     companion object : PosTagset {
         override fun get(tag: String): PosTag? = when (tag) {
             "_" -> null

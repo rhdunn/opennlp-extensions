@@ -60,6 +60,8 @@ enum class UPennTags(
     SQUOO("`", "open single quotes", WordClass.Other),
     SQUOC("'", "close single quotes", WordClass.Other);
 
+    override fun toString(): String = tag
+
     companion object : PosTagset {
         override fun get(tag: String): PosTag? = when (tag) {
             "_" -> null
