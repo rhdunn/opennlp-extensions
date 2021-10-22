@@ -136,4 +136,15 @@ class NominalFeatureSetsTest {
         assertThat(feature("Case=Ter"), `is`(sameInstance(Case.Ter)))
         assertThat(feature("Case=Other"), `is`(UnknownFeatureValue("Case", "Other")))
     }
+
+    @Test
+    @DisplayName("Definite")
+    fun definite() {
+        assertThat(feature("Definite=Com"), `is`(sameInstance(Definite.Com)))
+        assertThat(feature("Definite=Cons"), `is`(sameInstance(Definite.Cons)))
+        assertThat(feature("Definite=Def"), `is`(sameInstance(Definite.Def)))
+        assertThat(feature("Definite=Ind"), `is`(sameInstance(Definite.Ind)))
+        assertThat(feature("Definite=Spec"), `is`(sameInstance(Definite.Spec)))
+        assertThat(feature("Definite=Other"), `is`(UnknownFeatureValue("Definite", "Other")))
+    }
 }

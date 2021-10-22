@@ -16,6 +16,7 @@ interface FeatureSet {
             Abbr.type -> Abbr
             Animacy.type -> Animacy
             Case.type -> Case
+            Definite.type -> Definite
             Foreign.type -> Foreign
             Gender.type -> Gender
             NounClass.type -> NounClass
