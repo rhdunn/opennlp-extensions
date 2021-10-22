@@ -14,13 +14,17 @@ interface Feature {
     class InvalidFeatureException(feat: String) : RuntimeException("Invalid feature: $feat")
 
     companion object {
+        fun create(type: String, value: String): Feature {
+            return FeatureSet[type]?.create(value) ?: UnknownFeature(type, value)
+        }
+
         private fun parseItem(feat: String): Feature = when (feat) {
             "" -> throw MissingFeatureException()
             else -> {
                 val parts = feat.split('=')
                 when (parts.size) {
                     1 -> UnknownFeature(null, parts[0])
-                    2 -> UnknownFeature(parts[0], parts[1])
+                    2 -> create(parts[0], parts[1])
                     else -> throw InvalidFeatureException(feat)
                 }
             }
