@@ -147,4 +147,15 @@ class NominalFeatureSetsTest {
         assertThat(feature("Definite=Spec"), `is`(sameInstance(Definite.Spec)))
         assertThat(feature("Definite=Other"), `is`(UnknownFeatureValue("Definite", "Other")))
     }
+
+    @Test
+    @DisplayName("Degree")
+    fun degree() {
+        assertThat(feature("Degree=Abs"), `is`(sameInstance(Degree.Abs)))
+        assertThat(feature("Degree=Cmp"), `is`(sameInstance(Degree.Cmp)))
+        assertThat(feature("Degree=Equ"), `is`(sameInstance(Degree.Equ)))
+        assertThat(feature("Degree=Pos"), `is`(sameInstance(Degree.Pos)))
+        assertThat(feature("Degree=Sup"), `is`(sameInstance(Degree.Sup)))
+        assertThat(feature("Degree=Other"), `is`(UnknownFeatureValue("Degree", "Other")))
+    }
 }

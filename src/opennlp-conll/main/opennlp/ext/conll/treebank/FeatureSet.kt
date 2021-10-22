@@ -17,6 +17,7 @@ interface FeatureSet {
             Animacy.type -> Animacy
             Case.type -> Case
             Definite.type -> Definite
+            Degree.type -> Degree
             Foreign.type -> Foreign
             Gender.type -> Gender
             NounClass.type -> NounClass
