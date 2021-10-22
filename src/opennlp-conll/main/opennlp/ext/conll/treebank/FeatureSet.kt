@@ -4,6 +4,7 @@ package opennlp.ext.conll.treebank
 import opennlp.ext.conll.treebank.features.lexical.NumType
 import opennlp.ext.conll.treebank.features.lexical.Poss
 import opennlp.ext.conll.treebank.features.lexical.PronType
+import opennlp.ext.conll.treebank.features.lexical.Reflex
 import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 
 interface FeatureSet {
@@ -16,6 +17,7 @@ interface FeatureSet {
             NumType.type -> NumType
             Poss.type -> Poss
             PronType.type -> PronType
+            Reflex.type -> Reflex
             SpaceAfter.type -> SpaceAfter
             else -> null
         }
