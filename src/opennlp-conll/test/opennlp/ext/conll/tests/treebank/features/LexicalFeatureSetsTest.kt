@@ -4,6 +4,7 @@ package opennlp.ext.conll.tests.treebank.features
 import opennlp.ext.conll.treebank.Feature
 import opennlp.ext.conll.treebank.features.UnknownFeatureValue
 import opennlp.ext.conll.treebank.features.lexical.NumType
+import opennlp.ext.conll.treebank.features.lexical.Poss
 import opennlp.ext.conll.treebank.features.lexical.PronType
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.sameInstance
@@ -47,5 +48,12 @@ class LexicalFeatureSetsTest {
         assertThat(feature("NumType=Range"), `is`(sameInstance(NumType.Range)))
         assertThat(feature("NumType=Sets"), `is`(sameInstance(NumType.Sets)))
         assertThat(feature("NumType=Other"), `is`(UnknownFeatureValue("NumType", "Other")))
+    }
+
+    @Test
+    @DisplayName("Poss")
+    fun poss() {
+        assertThat(feature("Poss=Yes"), `is`(sameInstance(Poss.Yes)))
+        assertThat(feature("Poss=No"), `is`(UnknownFeatureValue("Poss", "No")))
     }
 }
