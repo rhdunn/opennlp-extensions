@@ -18,6 +18,7 @@ interface FeatureSet {
             PronType.type -> PronType
             Reflex.type -> Reflex
             SpaceAfter.type -> SpaceAfter
+            Typo.type -> Typo
             else -> null
         }
     }

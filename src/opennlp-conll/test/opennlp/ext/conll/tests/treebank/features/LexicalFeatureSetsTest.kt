@@ -75,4 +75,11 @@ class LexicalFeatureSetsTest {
         assertThat(feature("Abbr=Yes"), `is`(sameInstance(Abbr.Yes)))
         assertThat(feature("Abbr=No"), `is`(UnknownFeatureValue("Abbr", "No")))
     }
+
+    @Test
+    @DisplayName("Typo")
+    fun typo() {
+        assertThat(feature("Typo=Yes"), `is`(sameInstance(Typo.Yes)))
+        assertThat(feature("Typo=No"), `is`(UnknownFeatureValue("Typo", "No")))
+    }
 }
