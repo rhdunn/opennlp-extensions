@@ -157,6 +157,8 @@ class ConlluSentenceStreamTest {
             assertThat(token.deps, `is`(listOf(DependencyRelation(token3, "test"))))
             assertThat(token.misc, `is`(listOf(SpaceAfter.No)))
 
+            assertThat(token.hasFeature(SpaceAfter.No), `is`(true))
+
             assertThat(token.postag(POSTagset.Universal), `is`(UPosTags.NOUN))
             assertThat(token.postag(POSTagset.LanguageSpecific), `is`(UPennTags.NN))
         }
@@ -175,6 +177,8 @@ class ConlluSentenceStreamTest {
             assertThat(token.deps, `is`(listOf()))
             assertThat(token.misc, `is`(listOf()))
 
+            assertThat(token.hasFeature(SpaceAfter.No), `is`(false))
+
             assertThat(token.postag(POSTagset.Universal), `is`(nullValue()))
             assertThat(token.postag(POSTagset.LanguageSpecific), `is`(nullValue()))
         }
@@ -192,6 +196,8 @@ class ConlluSentenceStreamTest {
             assertThat(token.dep, `is`(nullValue()))
             assertThat(token.deps, `is`(listOf()))
             assertThat(token.misc, `is`(listOf()))
+
+            assertThat(token.hasFeature(SpaceAfter.No), `is`(false))
 
             assertThat(token.postag(POSTagset.Universal), `is`(nullValue()))
             assertThat(token.postag(POSTagset.LanguageSpecific), `is`(nullValue()))
@@ -272,19 +278,5 @@ class ConlluSentenceStreamTest {
         assertThat(token.dep, `is`(DependencyRelation(token1, "det")))
         assertThat(token.deps, `is`(listOf(DependencyRelation(token3, "test"))))
         assertThat(token.misc, `is`(listOf(SpaceAfter.No)))
-    }
-
-    @Test
-    @DisplayName("SpaceAfter MISC feature")
-    fun spaceAfter() {
-        val sentences = parse(
-            """
-            1	the	the	DET	DT	_	_	_	_	_
-            2	hats	hat	NOUN	NN	Number=Plur	1	det	3:test	SpaceAfter=No
-            """.trimIndent()
-        )
-
-        assertThat(sentences[0].wordLines[0].hasFeature(SpaceAfter.No), `is`(false))
-        assertThat(sentences[0].wordLines[1].hasFeature(SpaceAfter.No), `is`(true))
     }
 }
