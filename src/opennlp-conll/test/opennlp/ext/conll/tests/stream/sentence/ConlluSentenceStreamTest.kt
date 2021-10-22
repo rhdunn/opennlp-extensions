@@ -4,8 +4,8 @@ package opennlp.ext.conll.tests.stream.sentence
 import opennlp.ext.conll.stream.io.PlainTextLineStream
 import opennlp.ext.conll.stream.sentence.ConlluSentenceStream
 import opennlp.ext.conll.treebank.*
-import opennlp.ext.conll.treebank.features.UnknownFeature
 import opennlp.ext.conll.treebank.features.misc.SpaceAfter
+import opennlp.ext.conll.treebank.features.nominal.Number
 import opennlp.ext.conll.treebank.pos.tags.UPennTags
 import opennlp.ext.conll.treebank.pos.tags.UPosTags
 import org.hamcrest.CoreMatchers.`is`
@@ -152,7 +152,7 @@ class ConlluSentenceStreamTest {
             assertThat(token.lemma, `is`("hat"))
             assertThat(token.upos, `is`(UPosTags.NOUN))
             assertThat(token.xpos, `is`(UPennTags.NN))
-            assertThat(token.feats, `is`(listOf(UnknownFeature("Number", "Plur"))))
+            assertThat(token.feats, `is`(listOf(Number.Plur)))
             assertThat(token.dep, `is`(DependencyRelation(token1, "det")))
             assertThat(token.deps, `is`(listOf(DependencyRelation(token3, "test"))))
             assertThat(token.misc, `is`(listOf(SpaceAfter.No)))
@@ -239,7 +239,7 @@ class ConlluSentenceStreamTest {
         assertThat(token.lemma, `is`("hat"))
         assertThat(token.upos, `is`(UPosTags.NOUN))
         assertThat(token.xpos, `is`(UPennTags.NN))
-        assertThat(token.feats, `is`(listOf(UnknownFeature("Number", "Plur"))))
+        assertThat(token.feats, `is`(listOf(Number.Plur)))
         assertThat(token.dep, `is`(DependencyRelation(token1, "det")))
         assertThat(token.deps, `is`(listOf(DependencyRelation(token3, "test"))))
         assertThat(token.misc, `is`(listOf(SpaceAfter.No)))
@@ -274,7 +274,7 @@ class ConlluSentenceStreamTest {
         assertThat(token.lemma, `is`("hat"))
         assertThat(token.upos, `is`(UPosTags.NOUN))
         assertThat(token.xpos, `is`(UPennTags.NN))
-        assertThat(token.feats, `is`(listOf(UnknownFeature("Number", "Plur"))))
+        assertThat(token.feats, `is`(listOf(Number.Plur)))
         assertThat(token.dep, `is`(DependencyRelation(token1, "det")))
         assertThat(token.deps, `is`(listOf(DependencyRelation(token3, "test"))))
         assertThat(token.misc, `is`(listOf(SpaceAfter.No)))

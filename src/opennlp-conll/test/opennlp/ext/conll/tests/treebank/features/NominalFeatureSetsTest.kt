@@ -6,6 +6,7 @@ import opennlp.ext.conll.treebank.features.UnknownFeatureValue
 import opennlp.ext.conll.treebank.features.nominal.Animacy
 import opennlp.ext.conll.treebank.features.nominal.Gender
 import opennlp.ext.conll.treebank.features.nominal.NounClass
+import opennlp.ext.conll.treebank.features.nominal.Number
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.sameInstance
 import org.hamcrest.MatcherAssert.assertThat
@@ -79,5 +80,22 @@ class NominalFeatureSetsTest {
         assertThat(feature("NounClass=Wol11"), `is`(sameInstance(NounClass.Wol11)))
         assertThat(feature("NounClass=Wol12"), `is`(sameInstance(NounClass.Wol12)))
         assertThat(feature("NounClass=Other"), `is`(UnknownFeatureValue("NounClass", "Other")))
+    }
+
+    @Test
+    @DisplayName("Number")
+    fun number() {
+        assertThat(feature("Number=Coll"), `is`(sameInstance(Number.Coll)))
+        assertThat(feature("Number=Count"), `is`(sameInstance(Number.Count)))
+        assertThat(feature("Number=Dual"), `is`(sameInstance(Number.Dual)))
+        assertThat(feature("Number=Grpa"), `is`(sameInstance(Number.Grpa)))
+        assertThat(feature("Number=Grpl"), `is`(sameInstance(Number.Grpl)))
+        assertThat(feature("Number=Inv"), `is`(sameInstance(Number.Inv)))
+        assertThat(feature("Number=Pauc"), `is`(sameInstance(Number.Pauc)))
+        assertThat(feature("Number=Plur"), `is`(sameInstance(Number.Plur)))
+        assertThat(feature("Number=Ptan"), `is`(sameInstance(Number.Ptan)))
+        assertThat(feature("Number=Sing"), `is`(sameInstance(Number.Sing)))
+        assertThat(feature("Number=Tri"), `is`(sameInstance(Number.Tri)))
+        assertThat(feature("Number=Other"), `is`(UnknownFeatureValue("Number", "Other")))
     }
 }

@@ -6,6 +6,7 @@ import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import opennlp.ext.conll.treebank.features.nominal.Animacy
 import opennlp.ext.conll.treebank.features.nominal.Gender
 import opennlp.ext.conll.treebank.features.nominal.NounClass
+import opennlp.ext.conll.treebank.features.nominal.Number
 
 interface FeatureSet {
     val type: String
@@ -19,6 +20,7 @@ interface FeatureSet {
             Foreign.type -> Foreign
             Gender.type -> Gender
             NounClass.type -> NounClass
+            Number.type -> Number
             NumType.type -> NumType
             Poss.type -> Poss
             PronType.type -> PronType
