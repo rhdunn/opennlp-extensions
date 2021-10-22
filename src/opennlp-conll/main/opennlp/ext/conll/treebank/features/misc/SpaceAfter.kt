@@ -2,6 +2,7 @@
 package opennlp.ext.conll.treebank.features.misc
 
 import opennlp.ext.conll.treebank.Feature
+import opennlp.ext.conll.treebank.FeatureSet
 import opennlp.ext.conll.treebank.features.UnknownFeatureValue
 
 // Reference: [CoNLL-U Format](https://universaldependencies.org/format.html)
@@ -13,9 +14,11 @@ enum class SpaceAfter : Feature {
 
     override fun toString(): String = "$type=$value"
 
-    companion object {
-        fun create(value: String): Feature {
-            return values().find { it.value == value } ?: UnknownFeatureValue("SpaceAfter", value)
+    companion object : FeatureSet {
+        override val type: String = "SpaceAfter"
+
+        override fun create(value: String): Feature {
+            return values().find { it.value == value } ?: UnknownFeatureValue(type, value)
         }
     }
 }
