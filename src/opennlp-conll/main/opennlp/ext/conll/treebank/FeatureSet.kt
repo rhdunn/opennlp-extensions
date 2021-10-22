@@ -11,6 +11,7 @@ interface FeatureSet {
 
     companion object {
         operator fun get(type: String): FeatureSet? = when (type) {
+            Abbr.type -> Abbr
             Foreign.type -> Foreign
             NumType.type -> NumType
             Poss.type -> Poss

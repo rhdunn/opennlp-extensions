@@ -68,4 +68,11 @@ class LexicalFeatureSetsTest {
         assertThat(feature("Foreign=Yes"), `is`(sameInstance(Foreign.Yes)))
         assertThat(feature("Foreign=No"), `is`(UnknownFeatureValue("Foreign", "No")))
     }
+
+    @Test
+    @DisplayName("Abbr")
+    fun abbr() {
+        assertThat(feature("Abbr=Yes"), `is`(sameInstance(Abbr.Yes)))
+        assertThat(feature("Abbr=No"), `is`(UnknownFeatureValue("Abbr", "No")))
+    }
 }
