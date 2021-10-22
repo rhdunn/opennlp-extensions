@@ -3,6 +3,7 @@ package opennlp.ext.conll.tests.treebank.features
 
 import opennlp.ext.conll.treebank.Feature
 import opennlp.ext.conll.treebank.features.UnknownFeatureValue
+import opennlp.ext.conll.treebank.features.lexical.NumType
 import opennlp.ext.conll.treebank.features.lexical.PronType
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.sameInstance
@@ -33,5 +34,18 @@ class LexicalFeatureSetsTest {
         assertThat(feature("PronType=Rel"), `is`(sameInstance(PronType.Rel)))
         assertThat(feature("PronType=Tot"), `is`(sameInstance(PronType.Tot)))
         assertThat(feature("PronType=Other"), `is`(UnknownFeatureValue("PronType", "Other")))
+    }
+
+    @Test
+    @DisplayName("NumType")
+    fun numType() {
+        assertThat(feature("NumType=Card"), `is`(sameInstance(NumType.Card)))
+        assertThat(feature("NumType=Dist"), `is`(sameInstance(NumType.Dist)))
+        assertThat(feature("NumType=Frac"), `is`(sameInstance(NumType.Frac)))
+        assertThat(feature("NumType=Mult"), `is`(sameInstance(NumType.Mult)))
+        assertThat(feature("NumType=Ord"), `is`(sameInstance(NumType.Ord)))
+        assertThat(feature("NumType=Range"), `is`(sameInstance(NumType.Range)))
+        assertThat(feature("NumType=Sets"), `is`(sameInstance(NumType.Sets)))
+        assertThat(feature("NumType=Other"), `is`(UnknownFeatureValue("NumType", "Other")))
     }
 }
