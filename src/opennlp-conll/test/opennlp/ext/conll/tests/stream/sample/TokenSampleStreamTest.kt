@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import java.util.*
 
-@DisplayName("TokenSample Stream")
+@DisplayName("OpenNLP TokenSample Stream")
 class TokenSampleStreamTest {
     private fun parse(text: String, properties: Properties = Properties()): List<TokenSample> {
         val tokens = TokenSampleStream.create(text, SentenceStream.CONLLU, properties)

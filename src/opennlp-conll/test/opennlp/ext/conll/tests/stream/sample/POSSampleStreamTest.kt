@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import java.util.*
 
-@DisplayName("POSSample Stream")
+@DisplayName("OpenNLP POSSample Stream")
 class POSSampleStreamTest {
     private fun parse(text: String, properties: Properties = Properties()): List<POSSample> {
         val samples = POSSampleStream.create(text, SentenceStream.CONLLU, properties)

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import java.util.*
 
-@DisplayName("LemmaSample Stream")
+@DisplayName("OpenNLP LemmaSample Stream")
 class LemmaSampleStreamTest {
     private fun parse(text: String, properties: Properties = Properties()): List<LemmaSample> {
         val samples = LemmaSampleStream.create(text, SentenceStream.CONLLU, properties)
