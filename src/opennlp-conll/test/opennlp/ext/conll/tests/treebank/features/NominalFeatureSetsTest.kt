@@ -3,9 +3,7 @@ package opennlp.ext.conll.tests.treebank.features
 
 import opennlp.ext.conll.treebank.Feature
 import opennlp.ext.conll.treebank.features.UnknownFeatureValue
-import opennlp.ext.conll.treebank.features.nominal.Animacy
-import opennlp.ext.conll.treebank.features.nominal.Gender
-import opennlp.ext.conll.treebank.features.nominal.NounClass
+import opennlp.ext.conll.treebank.features.nominal.*
 import opennlp.ext.conll.treebank.features.nominal.Number
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.sameInstance
@@ -97,5 +95,45 @@ class NominalFeatureSetsTest {
         assertThat(feature("Number=Sing"), `is`(sameInstance(Number.Sing)))
         assertThat(feature("Number=Tri"), `is`(sameInstance(Number.Tri)))
         assertThat(feature("Number=Other"), `is`(UnknownFeatureValue("Number", "Other")))
+    }
+
+    @Test
+    @DisplayName("Case")
+    fun case() {
+        assertThat(feature("Case=Abs"), `is`(sameInstance(Case.Abs)))
+        assertThat(feature("Case=Acc"), `is`(sameInstance(Case.Acc)))
+        assertThat(feature("Case=Erg"), `is`(sameInstance(Case.Erg)))
+        assertThat(feature("Case=Nom"), `is`(sameInstance(Case.Nom)))
+        assertThat(feature("Case=Abe"), `is`(sameInstance(Case.Abe)))
+        assertThat(feature("Case=Ben"), `is`(sameInstance(Case.Ben)))
+        assertThat(feature("Case=Cau"), `is`(sameInstance(Case.Cau)))
+        assertThat(feature("Case=Cmp"), `is`(sameInstance(Case.Cmp)))
+        assertThat(feature("Case=Cns"), `is`(sameInstance(Case.Cns)))
+        assertThat(feature("Case=Com"), `is`(sameInstance(Case.Com)))
+        assertThat(feature("Case=Dat"), `is`(sameInstance(Case.Dat)))
+        assertThat(feature("Case=Dis"), `is`(sameInstance(Case.Dis)))
+        assertThat(feature("Case=Equ"), `is`(sameInstance(Case.Equ)))
+        assertThat(feature("Case=Gen"), `is`(sameInstance(Case.Gen)))
+        assertThat(feature("Case=Ins"), `is`(sameInstance(Case.Ins)))
+        assertThat(feature("Case=Par"), `is`(sameInstance(Case.Par)))
+        assertThat(feature("Case=Tem"), `is`(sameInstance(Case.Tem)))
+        assertThat(feature("Case=Tra"), `is`(sameInstance(Case.Tra)))
+        assertThat(feature("Case=Voc"), `is`(sameInstance(Case.Voc)))
+        assertThat(feature("Case=Abl"), `is`(sameInstance(Case.Abl)))
+        assertThat(feature("Case=Add"), `is`(sameInstance(Case.Add)))
+        assertThat(feature("Case=Ade"), `is`(sameInstance(Case.Ade)))
+        assertThat(feature("Case=All"), `is`(sameInstance(Case.All)))
+        assertThat(feature("Case=Del"), `is`(sameInstance(Case.Del)))
+        assertThat(feature("Case=Ela"), `is`(sameInstance(Case.Ela)))
+        assertThat(feature("Case=Ess"), `is`(sameInstance(Case.Ess)))
+        assertThat(feature("Case=Ill"), `is`(sameInstance(Case.Ill)))
+        assertThat(feature("Case=Ine"), `is`(sameInstance(Case.Ine)))
+        assertThat(feature("Case=Lat"), `is`(sameInstance(Case.Lat)))
+        assertThat(feature("Case=Loc"), `is`(sameInstance(Case.Loc)))
+        assertThat(feature("Case=Per"), `is`(sameInstance(Case.Per)))
+        assertThat(feature("Case=Sub"), `is`(sameInstance(Case.Sub)))
+        assertThat(feature("Case=Sup"), `is`(sameInstance(Case.Sup)))
+        assertThat(feature("Case=Ter"), `is`(sameInstance(Case.Ter)))
+        assertThat(feature("Case=Other"), `is`(UnknownFeatureValue("Case", "Other")))
     }
 }

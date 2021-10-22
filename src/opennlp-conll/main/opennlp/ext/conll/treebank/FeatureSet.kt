@@ -3,9 +3,7 @@ package opennlp.ext.conll.treebank
 
 import opennlp.ext.conll.treebank.features.lexical.*
 import opennlp.ext.conll.treebank.features.misc.SpaceAfter
-import opennlp.ext.conll.treebank.features.nominal.Animacy
-import opennlp.ext.conll.treebank.features.nominal.Gender
-import opennlp.ext.conll.treebank.features.nominal.NounClass
+import opennlp.ext.conll.treebank.features.nominal.*
 import opennlp.ext.conll.treebank.features.nominal.Number
 
 interface FeatureSet {
@@ -17,6 +15,7 @@ interface FeatureSet {
         operator fun get(type: String): FeatureSet? = when (type) {
             Abbr.type -> Abbr
             Animacy.type -> Animacy
+            Case.type -> Case
             Foreign.type -> Foreign
             Gender.type -> Gender
             NounClass.type -> NounClass
