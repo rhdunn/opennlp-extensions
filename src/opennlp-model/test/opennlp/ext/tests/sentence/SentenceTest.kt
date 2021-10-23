@@ -38,7 +38,7 @@ class SentenceTest {
         val spans = arrayOf(Span(0, 3), Span(4, 7))
         val sentences = Sentence.split(text, spans)
 
-        assertThat(sentences[0], `is`(Sentence(null, "abc", null)))
+        assertThat(sentences[0], `is`(Sentence(null, "abc", "d")))
         assertThat(sentences[1], `is`(Sentence("d", "efg", null)))
         assertThat(sentences.size, `is`(2))
     }
@@ -50,8 +50,8 @@ class SentenceTest {
         val spans = arrayOf(Span(0, 3), Span(4, 7), Span(8, 11))
         val sentences = Sentence.split(text, spans)
 
-        assertThat(sentences[0], `is`(Sentence(null, "abc", null)))
-        assertThat(sentences[1], `is`(Sentence("d", "efg", null)))
+        assertThat(sentences[0], `is`(Sentence(null, "abc", "d")))
+        assertThat(sentences[1], `is`(Sentence("d", "efg", "h")))
         assertThat(sentences[2], `is`(Sentence("h", "ijk", null)))
         assertThat(sentences.size, `is`(3))
     }
@@ -64,6 +64,17 @@ class SentenceTest {
         val sentences = Sentence.split(text, spans)
 
         assertThat(sentences[0], `is`(Sentence("a", "bcd", null)))
+        assertThat(sentences.size, `is`(1))
+    }
+
+    @Test
+    @DisplayName("text after")
+    fun textAfter() {
+        val text = "abcd"
+        val spans = arrayOf(Span(0, 3))
+        val sentences = Sentence.split(text, spans)
+
+        assertThat(sentences[0], `is`(Sentence(null, "abc", "d")))
         assertThat(sentences.size, `is`(1))
     }
 }
