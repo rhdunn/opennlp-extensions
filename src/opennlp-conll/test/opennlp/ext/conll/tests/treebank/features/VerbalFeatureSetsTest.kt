@@ -105,4 +105,15 @@ class VerbalFeatureSetsTest {
         assertThat(feature("Polarity=Pos"), `is`(sameInstance(Polarity.Pos)))
         assertThat(feature("Polarity=Other"), `is`(UnknownFeatureValue("Polarity", "Other")))
     }
+
+    @Test
+    @DisplayName("Person")
+    fun person() {
+        assertThat(feature("Person=0"), `is`(sameInstance(Person.Zero)))
+        assertThat(feature("Person=1"), `is`(sameInstance(Person.First)))
+        assertThat(feature("Person=2"), `is`(sameInstance(Person.Second)))
+        assertThat(feature("Person=3"), `is`(sameInstance(Person.Third)))
+        assertThat(feature("Person=4"), `is`(sameInstance(Person.Fourth)))
+        assertThat(feature("Person=Other"), `is`(UnknownFeatureValue("Person", "Other")))
+    }
 }
