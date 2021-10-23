@@ -126,4 +126,12 @@ class VerbalFeatureSetsTest {
         assertThat(feature("Polite=Infm"), `is`(sameInstance(Polite.Infm)))
         assertThat(feature("Polite=Other"), `is`(UnknownFeatureValue("Polite", "Other")))
     }
+
+    @Test
+    @DisplayName("Clusivity")
+    fun clusivity() {
+        assertThat(feature("Clusivity=Ex"), `is`(sameInstance(Clusivity.Ex)))
+        assertThat(feature("Clusivity=In"), `is`(sameInstance(Clusivity.In)))
+        assertThat(feature("Clusivity=Other"), `is`(UnknownFeatureValue("Clusivity", "Other")))
+    }
 }

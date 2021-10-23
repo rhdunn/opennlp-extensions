@@ -18,6 +18,7 @@ interface FeatureSet {
             Animacy.type -> Animacy
             Aspect.type -> Aspect
             Case.type -> Case
+            Clusivity.type -> Clusivity
             Definite.type -> Definite
             Degree.type -> Degree
             Evident.type -> Evident
