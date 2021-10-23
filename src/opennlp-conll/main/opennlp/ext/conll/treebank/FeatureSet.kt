@@ -6,6 +6,7 @@ import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import opennlp.ext.conll.treebank.features.nominal.*
 import opennlp.ext.conll.treebank.features.nominal.Number
 import opennlp.ext.conll.treebank.features.verbal.Mood
+import opennlp.ext.conll.treebank.features.verbal.Tense
 import opennlp.ext.conll.treebank.features.verbal.VerbForm
 
 interface FeatureSet {
@@ -30,6 +31,7 @@ interface FeatureSet {
             PronType.type -> PronType
             Reflex.type -> Reflex
             SpaceAfter.type -> SpaceAfter
+            Tense.type -> Tense
             Typo.type -> Typo
             VerbForm.type -> VerbForm
             else -> null

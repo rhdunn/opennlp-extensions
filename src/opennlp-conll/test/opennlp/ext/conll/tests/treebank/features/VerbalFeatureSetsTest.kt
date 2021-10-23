@@ -4,6 +4,7 @@ package opennlp.ext.conll.tests.treebank.features
 import opennlp.ext.conll.treebank.Feature
 import opennlp.ext.conll.treebank.features.UnknownFeatureValue
 import opennlp.ext.conll.treebank.features.verbal.Mood
+import opennlp.ext.conll.treebank.features.verbal.Tense
 import opennlp.ext.conll.treebank.features.verbal.VerbForm
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.sameInstance
@@ -50,5 +51,16 @@ class VerbalFeatureSetsTest {
         assertThat(feature("Mood=Qot"), `is`(sameInstance(Mood.Qot)))
         assertThat(feature("Mood=Sub"), `is`(sameInstance(Mood.Sub)))
         assertThat(feature("Mood=Other"), `is`(UnknownFeatureValue("Mood", "Other")))
+    }
+
+    @Test
+    @DisplayName("Tense")
+    fun tense() {
+        assertThat(feature("Tense=Fut"), `is`(sameInstance(Tense.Fut)))
+        assertThat(feature("Tense=Imp"), `is`(sameInstance(Tense.Imp)))
+        assertThat(feature("Tense=Past"), `is`(sameInstance(Tense.Past)))
+        assertThat(feature("Tense=Pqp"), `is`(sameInstance(Tense.Pqp)))
+        assertThat(feature("Tense=Pres"), `is`(sameInstance(Tense.Pres)))
+        assertThat(feature("Tense=Other"), `is`(UnknownFeatureValue("Tense", "Other")))
     }
 }
