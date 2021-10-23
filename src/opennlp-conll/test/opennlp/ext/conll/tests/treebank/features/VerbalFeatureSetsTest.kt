@@ -116,4 +116,14 @@ class VerbalFeatureSetsTest {
         assertThat(feature("Person=4"), `is`(sameInstance(Person.Fourth)))
         assertThat(feature("Person=Other"), `is`(UnknownFeatureValue("Person", "Other")))
     }
+
+    @Test
+    @DisplayName("Polite")
+    fun polite() {
+        assertThat(feature("Polite=Elev"), `is`(sameInstance(Polite.Elev)))
+        assertThat(feature("Polite=Form"), `is`(sameInstance(Polite.Form)))
+        assertThat(feature("Polite=Humb"), `is`(sameInstance(Polite.Humb)))
+        assertThat(feature("Polite=Infm"), `is`(sameInstance(Polite.Infm)))
+        assertThat(feature("Polite=Other"), `is`(UnknownFeatureValue("Polite", "Other")))
+    }
 }
