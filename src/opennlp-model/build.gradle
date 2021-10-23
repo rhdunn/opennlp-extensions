@@ -1,0 +1,5 @@
+sourceSets.main.kotlin.srcDirs = ['main']
+sourceSets.test.kotlin.srcDirs = ['test']
+
+dependencies {
+}

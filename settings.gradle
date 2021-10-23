@@ -1,2 +1,3 @@
+include ':src:opennlp-model'
 include ':src:opennlp-conll'
 include ':src:opennlp-train'
