@@ -20,6 +20,7 @@ interface FeatureSet {
             Case.type -> Case
             Definite.type -> Definite
             Degree.type -> Degree
+            Evident.type -> Evident
             Foreign.type -> Foreign
             Gender.type -> Gender
             Mood.type -> Mood

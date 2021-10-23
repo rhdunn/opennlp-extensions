@@ -89,4 +89,12 @@ class VerbalFeatureSetsTest {
         assertThat(feature("Voice=Rcp"), `is`(sameInstance(Voice.Rcp)))
         assertThat(feature("Voice=Other"), `is`(UnknownFeatureValue("Voice", "Other")))
     }
+
+    @Test
+    @DisplayName("Evident")
+    fun evident() {
+        assertThat(feature("Evident=Fh"), `is`(sameInstance(Evident.Fh)))
+        assertThat(feature("Evident=Nfh"), `is`(sameInstance(Evident.Nfh)))
+        assertThat(feature("Evident=Other"), `is`(UnknownFeatureValue("Evident", "Other")))
+    }
 }
