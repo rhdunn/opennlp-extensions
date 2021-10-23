@@ -5,6 +5,7 @@ import opennlp.ext.conll.treebank.features.lexical.*
 import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import opennlp.ext.conll.treebank.features.nominal.*
 import opennlp.ext.conll.treebank.features.nominal.Number
+import opennlp.ext.conll.treebank.features.verbal.Mood
 import opennlp.ext.conll.treebank.features.verbal.VerbForm
 
 interface FeatureSet {
@@ -21,6 +22,7 @@ interface FeatureSet {
             Degree.type -> Degree
             Foreign.type -> Foreign
             Gender.type -> Gender
+            Mood.type -> Mood
             NounClass.type -> NounClass
             Number.type -> Number
             NumType.type -> NumType
