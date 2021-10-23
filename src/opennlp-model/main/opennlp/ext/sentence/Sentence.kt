@@ -30,9 +30,15 @@ data class Sentence(val textBefore: String?, val text: String, val textAfter: St
 
         fun split(text: String, spans: Array<Span>): Array<Sentence> {
             val sentences = mutableListOf<Sentence>()
+            var start = 0
             spans.forEach { span ->
+                val textBefore = when (start) {
+                    span.start -> null
+                    else -> text.substring(start, span.start)
+                }
                 val sentence = text.substring(span.start, span.end)
-                sentences.add(Sentence(null, sentence, null))
+                sentences.add(Sentence(textBefore, sentence, null))
+                start = span.end
             }
             return sentences.toTypedArray()
         }

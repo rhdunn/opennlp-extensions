@@ -39,7 +39,7 @@ class SentenceTest {
         val sentences = Sentence.split(text, spans)
 
         assertThat(sentences[0], `is`(Sentence(null, "abc", null)))
-        assertThat(sentences[1], `is`(Sentence(null, "efg", null)))
+        assertThat(sentences[1], `is`(Sentence("d", "efg", null)))
         assertThat(sentences.size, `is`(2))
     }
 
@@ -51,8 +51,19 @@ class SentenceTest {
         val sentences = Sentence.split(text, spans)
 
         assertThat(sentences[0], `is`(Sentence(null, "abc", null)))
-        assertThat(sentences[1], `is`(Sentence(null, "efg", null)))
-        assertThat(sentences[2], `is`(Sentence(null, "ijk", null)))
+        assertThat(sentences[1], `is`(Sentence("d", "efg", null)))
+        assertThat(sentences[2], `is`(Sentence("h", "ijk", null)))
         assertThat(sentences.size, `is`(3))
+    }
+
+    @Test
+    @DisplayName("text before")
+    fun textBefore() {
+        val text = "abcd"
+        val spans = arrayOf(Span(1, 4))
+        val sentences = Sentence.split(text, spans)
+
+        assertThat(sentences[0], `is`(Sentence("a", "bcd", null)))
+        assertThat(sentences.size, `is`(1))
     }
 }
