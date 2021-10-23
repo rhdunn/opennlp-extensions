@@ -4,13 +4,14 @@ package opennlp.ext.sentence
 import opennlp.tools.sentdetect.SentenceDetector
 import opennlp.tools.sentdetect.SentenceDetectorME
 import opennlp.tools.sentdetect.SentenceModel
+import opennlp.tools.util.Span
 import java.io.File
 import java.io.InputStream
 import java.net.URL
 import java.nio.file.Path
 
 @Suppress("MemberVisibilityCanBePrivate")
-class Sentence {
+data class Sentence(val textBefore: String?, val text: String, val textAfter: String?) {
     companion object {
         fun detector(model: SentenceModel): SentenceDetector = SentenceDetectorME(model)
 
@@ -25,6 +26,19 @@ class Sentence {
         fun detector(path: String): SentenceDetector = when {
             path.contains("://") -> detector(URL(path))
             else -> detector(File(path))
+        }
+
+        fun split(text: String, spans: Array<Span>): Array<Sentence> {
+            val sentences = mutableListOf<Sentence>()
+            spans.forEach { span ->
+                val sentence = text.substring(span.start, span.end)
+                sentences.add(Sentence(null, sentence, null))
+            }
+            return sentences.toTypedArray()
+        }
+
+        fun split(text: String, detector: SentenceDetector): Array<Sentence> {
+            return split(text, detector.sentPosDetect(text))
         }
     }
 }
