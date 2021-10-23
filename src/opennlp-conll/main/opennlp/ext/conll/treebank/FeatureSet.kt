@@ -27,6 +27,7 @@ interface FeatureSet {
             NounClass.type -> NounClass
             Number.type -> Number
             NumType.type -> NumType
+            Polarity.type -> Polarity
             Poss.type -> Poss
             PronType.type -> PronType
             Reflex.type -> Reflex
