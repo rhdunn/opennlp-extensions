@@ -5,10 +5,7 @@ import opennlp.ext.conll.treebank.features.lexical.*
 import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import opennlp.ext.conll.treebank.features.nominal.*
 import opennlp.ext.conll.treebank.features.nominal.Number
-import opennlp.ext.conll.treebank.features.verbal.Aspect
-import opennlp.ext.conll.treebank.features.verbal.Mood
-import opennlp.ext.conll.treebank.features.verbal.Tense
-import opennlp.ext.conll.treebank.features.verbal.VerbForm
+import opennlp.ext.conll.treebank.features.verbal.*
 
 interface FeatureSet {
     val type: String
@@ -36,6 +33,7 @@ interface FeatureSet {
             Tense.type -> Tense
             Typo.type -> Typo
             VerbForm.type -> VerbForm
+            Voice.type -> Voice
             else -> null
         }
     }

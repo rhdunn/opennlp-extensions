@@ -3,10 +3,7 @@ package opennlp.ext.conll.tests.treebank.features
 
 import opennlp.ext.conll.treebank.Feature
 import opennlp.ext.conll.treebank.features.UnknownFeatureValue
-import opennlp.ext.conll.treebank.features.verbal.Aspect
-import opennlp.ext.conll.treebank.features.verbal.Mood
-import opennlp.ext.conll.treebank.features.verbal.Tense
-import opennlp.ext.conll.treebank.features.verbal.VerbForm
+import opennlp.ext.conll.treebank.features.verbal.*
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.sameInstance
 import org.hamcrest.MatcherAssert.assertThat
@@ -75,5 +72,21 @@ class VerbalFeatureSetsTest {
         assertThat(feature("Aspect=Prog"), `is`(sameInstance(Aspect.Prog)))
         assertThat(feature("Aspect=Prosp"), `is`(sameInstance(Aspect.Prosp)))
         assertThat(feature("Aspect=Other"), `is`(UnknownFeatureValue("Aspect", "Other")))
+    }
+
+    @Test
+    @DisplayName("Voice")
+    fun voice() {
+        assertThat(feature("Voice=Act"), `is`(sameInstance(Voice.Act)))
+        assertThat(feature("Voice=Antip"), `is`(sameInstance(Voice.Antip)))
+        assertThat(feature("Voice=Bfoc"), `is`(sameInstance(Voice.Bfoc)))
+        assertThat(feature("Voice=Cau"), `is`(sameInstance(Voice.Cau)))
+        assertThat(feature("Voice=Dir"), `is`(sameInstance(Voice.Dir)))
+        assertThat(feature("Voice=Inv"), `is`(sameInstance(Voice.Inv)))
+        assertThat(feature("Voice=Lfoc"), `is`(sameInstance(Voice.Lfoc)))
+        assertThat(feature("Voice=Mid"), `is`(sameInstance(Voice.Mid)))
+        assertThat(feature("Voice=Pass"), `is`(sameInstance(Voice.Pass)))
+        assertThat(feature("Voice=Rcp"), `is`(sameInstance(Voice.Rcp)))
+        assertThat(feature("Voice=Other"), `is`(UnknownFeatureValue("Voice", "Other")))
     }
 }
