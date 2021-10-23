@@ -3,6 +3,7 @@ package opennlp.ext.conll.tests.treebank.features
 
 import opennlp.ext.conll.treebank.Feature
 import opennlp.ext.conll.treebank.features.UnknownFeatureValue
+import opennlp.ext.conll.treebank.features.verbal.Aspect
 import opennlp.ext.conll.treebank.features.verbal.Mood
 import opennlp.ext.conll.treebank.features.verbal.Tense
 import opennlp.ext.conll.treebank.features.verbal.VerbForm
@@ -62,5 +63,17 @@ class VerbalFeatureSetsTest {
         assertThat(feature("Tense=Pqp"), `is`(sameInstance(Tense.Pqp)))
         assertThat(feature("Tense=Pres"), `is`(sameInstance(Tense.Pres)))
         assertThat(feature("Tense=Other"), `is`(UnknownFeatureValue("Tense", "Other")))
+    }
+
+    @Test
+    @DisplayName("Aspect")
+    fun aspect() {
+        assertThat(feature("Aspect=Hab"), `is`(sameInstance(Aspect.Hab)))
+        assertThat(feature("Aspect=Imp"), `is`(sameInstance(Aspect.Imp)))
+        assertThat(feature("Aspect=Iter"), `is`(sameInstance(Aspect.Iter)))
+        assertThat(feature("Aspect=Perf"), `is`(sameInstance(Aspect.Perf)))
+        assertThat(feature("Aspect=Prog"), `is`(sameInstance(Aspect.Prog)))
+        assertThat(feature("Aspect=Prosp"), `is`(sameInstance(Aspect.Prosp)))
+        assertThat(feature("Aspect=Other"), `is`(UnknownFeatureValue("Aspect", "Other")))
     }
 }

@@ -5,6 +5,7 @@ import opennlp.ext.conll.treebank.features.lexical.*
 import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import opennlp.ext.conll.treebank.features.nominal.*
 import opennlp.ext.conll.treebank.features.nominal.Number
+import opennlp.ext.conll.treebank.features.verbal.Aspect
 import opennlp.ext.conll.treebank.features.verbal.Mood
 import opennlp.ext.conll.treebank.features.verbal.Tense
 import opennlp.ext.conll.treebank.features.verbal.VerbForm
@@ -18,6 +19,7 @@ interface FeatureSet {
         operator fun get(type: String): FeatureSet? = when (type) {
             Abbr.type -> Abbr
             Animacy.type -> Animacy
+            Aspect.type -> Aspect
             Case.type -> Case
             Definite.type -> Definite
             Degree.type -> Degree
