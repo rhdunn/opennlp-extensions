@@ -5,6 +5,7 @@ import opennlp.ext.conll.treebank.features.lexical.*
 import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import opennlp.ext.conll.treebank.features.nominal.*
 import opennlp.ext.conll.treebank.features.nominal.Number
+import opennlp.ext.conll.treebank.features.verbal.VerbForm
 
 interface FeatureSet {
     val type: String
@@ -28,6 +29,7 @@ interface FeatureSet {
             Reflex.type -> Reflex
             SpaceAfter.type -> SpaceAfter
             Typo.type -> Typo
+            VerbForm.type -> VerbForm
             else -> null
         }
     }
