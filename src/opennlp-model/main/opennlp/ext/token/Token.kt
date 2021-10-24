@@ -10,7 +10,7 @@ import java.net.URL
 import java.nio.file.Path
 
 @Suppress("MemberVisibilityCanBePrivate")
-class Token {
+data class Token(val textBefore: String?, val text: String) {
     companion object {
         fun tokenizer(model: TokenizerModel): Tokenizer = TokenizerME(model)
 
