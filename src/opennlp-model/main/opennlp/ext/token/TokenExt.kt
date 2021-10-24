@@ -8,14 +8,14 @@ fun String.tokenize(spans: Array<Span>): Array<Token> {
     val tokens = mutableListOf<Token>()
     var start = 0
 
-    spans.forEach { span ->
+    spans.withIndex().forEach { (index, span) ->
         val textBefore = when (start) {
             span.start -> null
             else -> substring(start, span.start)
         }
 
         val token = substring(span.start, span.end)
-        tokens.add(Token(textBefore, token))
+        tokens.add(Token(index, textBefore, token))
         start = span.end
     }
 
