@@ -2,6 +2,7 @@
 package opennlp.ext.tests.sentence
 
 import opennlp.ext.sentence.Sentence
+import opennlp.ext.sentence.sentences
 import opennlp.tools.util.Span
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
@@ -15,7 +16,7 @@ class SentenceTest {
     fun empty() {
         val text = ""
         val spans = arrayOf<Span>()
-        val sentences = Sentence.split(text, spans)
+        val sentences = text.sentences(spans)
 
         assertThat(sentences.size, `is`(0))
     }
@@ -25,7 +26,7 @@ class SentenceTest {
     fun one() {
         val text = "abc"
         val spans = arrayOf(Span(0, 3))
-        val sentences = Sentence.split(text, spans)
+        val sentences = text.sentences(spans)
 
         assertThat(sentences[0], `is`(Sentence(null, "abc", null)))
         assertThat(sentences.size, `is`(1))
@@ -36,7 +37,7 @@ class SentenceTest {
     fun two() {
         val text = "abcdefg"
         val spans = arrayOf(Span(0, 3), Span(4, 7))
-        val sentences = Sentence.split(text, spans)
+        val sentences = text.sentences(spans)
 
         assertThat(sentences[0], `is`(Sentence(null, "abc", "d")))
         assertThat(sentences[1], `is`(Sentence("d", "efg", null)))
@@ -48,7 +49,7 @@ class SentenceTest {
     fun multiple() {
         val text = "abcdefghijk"
         val spans = arrayOf(Span(0, 3), Span(4, 7), Span(8, 11))
-        val sentences = Sentence.split(text, spans)
+        val sentences = text.sentences(spans)
 
         assertThat(sentences[0], `is`(Sentence(null, "abc", "d")))
         assertThat(sentences[1], `is`(Sentence("d", "efg", "h")))
@@ -61,7 +62,7 @@ class SentenceTest {
     fun textBefore() {
         val text = "abcd"
         val spans = arrayOf(Span(1, 4))
-        val sentences = Sentence.split(text, spans)
+        val sentences = text.sentences(spans)
 
         assertThat(sentences[0], `is`(Sentence("a", "bcd", null)))
         assertThat(sentences.size, `is`(1))
@@ -72,7 +73,7 @@ class SentenceTest {
     fun textAfter() {
         val text = "abcd"
         val spans = arrayOf(Span(0, 3))
-        val sentences = Sentence.split(text, spans)
+        val sentences = text.sentences(spans)
 
         assertThat(sentences[0], `is`(Sentence(null, "abc", "d")))
         assertThat(sentences.size, `is`(1))
