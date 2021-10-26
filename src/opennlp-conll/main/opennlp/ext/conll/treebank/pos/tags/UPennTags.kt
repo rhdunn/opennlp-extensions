@@ -5,13 +5,12 @@ import opennlp.ext.conll.treebank.pos.PosTag
 import opennlp.ext.conll.treebank.pos.PosTagset
 import opennlp.ext.conll.treebank.pos.WordClass
 
-// Reference: [Penn Treebank P.O.S. Tags](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)
-// Reference: [The Penn Treebank POS Tagset](https://ufal.mff.cuni.cz/pdt/Morphology_and_Tagging/Doc/PTTags.pdf)
 enum class UPennTags(
     override val tag: String,
     override val label: String,
     override val wordClass: WordClass
 ) : PosTag {
+// Core -- [Penn Treebank P.O.S. Tags](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)
     CC("CC", "coordinating conjunction", WordClass.Closed),
     CD("CD", "cardinal number", WordClass.Closed),
     DT("DT", "determiner", WordClass.Closed),
@@ -48,17 +47,18 @@ enum class UPennTags(
     WP("WP", "wh-pronoun", WordClass.Closed),
     WPS("WP$", "possessive wh-pronoun", WordClass.Closed),
     WRB("WRB", "wh-adverb", WordClass.Open),
+// Punctuation -- [Building a Large Annotated Corpus of English: The Penn Treebank](https://aclanthology.org/J93-2004.pdf)
     POUND("#", "pound symbol", WordClass.Other),
     DOLLAR("$", "dollar symbol", WordClass.Other),
     SENT(".", "sentence final punctuation", WordClass.Other),
     COMMA(",", "comma", WordClass.Other),
     COLON(":", "other punctuation", WordClass.Other),
-    PARO("(", "open parenthesis", WordClass.Other),
-    PARC(")", "close parenthesis", WordClass.Other),
-    DQUOO("``", "open double quotes", WordClass.Other),
-    DQUOC("''", "close double quotes", WordClass.Other),
-    SQUOO("`", "open single quotes", WordClass.Other),
-    SQUOC("'", "close single quotes", WordClass.Other);
+    LPAR("(", "left parenthesis", WordClass.Other),
+    RPAR(")", "right parenthesis", WordClass.Other),
+    LDQUO("``", "left double quotes", WordClass.Other),
+    RDQUO("''", "right double quotes", WordClass.Other),
+    LSQUO("`", "open single quotes", WordClass.Other),
+    RSQUO("'", "close single quotes", WordClass.Other);
 
     override fun toString(): String = tag
 
