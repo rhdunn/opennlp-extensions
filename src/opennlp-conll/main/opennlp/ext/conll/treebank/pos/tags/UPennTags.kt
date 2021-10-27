@@ -48,17 +48,11 @@ enum class UPennTags(
     WPS("WP$", "possessive wh-pronoun", WordClass.Closed),
     WRB("WRB", "wh-adverb", WordClass.Open),
 // Punctuation -- [Building a Large Annotated Corpus of English: The Penn Treebank](https://aclanthology.org/J93-2004.pdf)
-    POUND("#", "pound symbol", WordClass.Other),
-    DOLLAR("$", "dollar symbol", WordClass.Other),
-    SENT(".", "sentence final punctuation", WordClass.Other),
+    POUND("#", "pound sign", WordClass.Other),
+    DOLLAR("$", "dollar sign", WordClass.Other),
+    SENT(".", "sentence-final punctuation", WordClass.Other),
     COMMA(",", "comma", WordClass.Other),
-    COLON(":", "other punctuation", WordClass.Other),
-    LPAR("(", "left parenthesis", WordClass.Other),
-    RPAR(")", "right parenthesis", WordClass.Other),
-    LDQUO("``", "left double quotes", WordClass.Other),
-    RDQUO("''", "right double quotes", WordClass.Other),
-    LSQUO("`", "open single quotes", WordClass.Other),
-    RSQUO("'", "close single quotes", WordClass.Other);
+    COLON(":", "colon, semi-colon", WordClass.Other);
 
     override fun toString(): String = tag
 
