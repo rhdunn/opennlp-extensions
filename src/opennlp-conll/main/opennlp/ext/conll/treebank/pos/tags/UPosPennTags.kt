@@ -167,5 +167,12 @@ enum class UPosPennTags(val upos: PosTag, val xpos: PosTag) : PosTag {
             "_" -> null
             else -> values().find { it.tag == tag } ?: PosTag.Unknown(tag)
         }
+
+        operator fun get(upos: PosTag?, xpos: PosTag?): PosTag? = when {
+            upos == null && xpos == null -> null
+            upos == null -> xpos
+            xpos == null -> upos
+            else -> values().find { it.upos == upos && it.xpos == xpos } ?: PosTag.Unknown("$upos-$xpos")
+        }
     }
 }

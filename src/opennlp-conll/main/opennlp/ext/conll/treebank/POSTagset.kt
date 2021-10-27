@@ -5,5 +5,6 @@ package opennlp.ext.conll.treebank
 // Reference: [CoNLL-U Format](https://universaldependencies.org/format.html)
 enum class POSTagset(val conllxField: String, val conlluField: String) {
     Universal("CPOSTAG", "UPOS"),
-    LanguageSpecific("POSTAG", "XPOS")
+    LanguageSpecific("POSTAG", "XPOS"),
+    UniversalAndPTB("CPOSTAG-PTB", "UPOS-PTB")
 }

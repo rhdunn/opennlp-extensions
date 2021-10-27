@@ -2,6 +2,7 @@
 package opennlp.ext.conll.treebank
 
 import opennlp.ext.conll.treebank.pos.PosTag
+import opennlp.ext.conll.treebank.pos.tags.UPosPennTags
 
 // Reference: [CoNLL-X Format](https://ilk.uvt.nl/~emarsi/download/pubs/14964.pdf)
 // Reference: [CoNLL-U Format](https://universaldependencies.org/format.html)
@@ -26,6 +27,7 @@ data class WordLine(
     fun postag(tagset: POSTagset): PosTag? = when (tagset) {
         POSTagset.Universal -> upos
         POSTagset.LanguageSpecific -> xpos
+        POSTagset.UniversalAndPTB -> UPosPennTags[upos, xpos]
     }
 
     class InvalidWorldLineException(line: String) : RuntimeException("Invalid word line: $line")
