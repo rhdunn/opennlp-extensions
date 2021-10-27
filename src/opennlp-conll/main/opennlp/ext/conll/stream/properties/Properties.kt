@@ -17,7 +17,7 @@ fun multiTokenWords(properties: Properties): MultiTokenWords {
     }
 }
 
-const val POS_TAGSET: String = "pos.tagset" // string -- one of: "UPOS" | "XPOS"
+const val POS_TAGSET: String = "pos.tagset" // string/ -- one of: "UPOS" | "XPOS" | etc.
 
 fun posTagset(properties: Properties): POSTagset {
     return when (val value = properties.getOrDefault(POS_TAGSET, POSTagset.Universal.conlluField) as String) {
@@ -25,6 +25,8 @@ fun posTagset(properties: Properties): POSTagset {
         POSTagset.LanguageSpecific.conllxField -> POSTagset.LanguageSpecific
         POSTagset.Universal.conlluField -> POSTagset.Universal
         POSTagset.Universal.conllxField -> POSTagset.Universal
+        POSTagset.UniversalAndPTB.conlluField -> POSTagset.UniversalAndPTB
+        POSTagset.UniversalAndPTB.conllxField -> POSTagset.UniversalAndPTB
         else -> throw InvalidPropertyValue(POS_TAGSET, value)
     }
 }

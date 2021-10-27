@@ -62,7 +62,7 @@ The following properties are supported by the `POSSampleStream` class:
 | Parameter           | Type          | Values                              | Default |
 |---------------------|---------------|-------------------------------------|---------|
 | `multi.token.words` | `enumeration` | `split`, `join`                     | `split` |
-| `pos.tagset`        | `enumeration` | `UPOS`, `XPOS`, `CPOSTAG`, `POSTAG` | `UPOS`  |
+| `pos.tagset`        | `enumeration` | See [pos.tagset](#postagset).       | `UPOS`  |
 
 ### Lemma Sample Stream
 The `opennlp.ext.conll.stream.sample.LemmaSampleStream` class creates `LemmaSample`
@@ -73,7 +73,7 @@ The following properties are supported by the `LemmaSampleStream` class:
 | Parameter           | Type          | Values                              | Default |
 |---------------------|---------------|-------------------------------------|---------|
 | `multi.token.words` | `enumeration` | `split`, `join`                     | `split` |
-| `pos.tagset`        | `enumeration` | `UPOS`, `XPOS`, `CPOSTAG`, `POSTAG` | `UPOS`  |
+| `pos.tagset`        | `enumeration` | See [pos.tagset](#postagset).       | `UPOS`  |
 
 ## opennlp-train
 This is a collection of helper classes and functions for training OpenNLP
@@ -185,7 +185,7 @@ The following properties are supported by the
 | `language`            | `string`      | ISO 639                             | `en`     |
 | `pos.dictionary`      | `path`        |                                     |          |
 | `multi.token.words`   | `enumeration` | `split`, `join`                     | `split`  |
-| `pos.tagset`          | `enumeration` | `UPOS`, `XPOS`, `CPOSTAG`, `POSTAG` | `UPOS`   |
+| `pos.tagset`          | `enumeration` | See [pos.tagset](#postagset).       | `UPOS`   |
 | `upos.tagset`         | `enumeration` | `upos`, `upenn`                     | `upos`   |
 | `xpos.tagset`         | `enumeration` | `upos`, `upenn`                     | `upenn`  |
 
@@ -202,9 +202,18 @@ The following properties are supported by the
 | `training.threads`    | `integer`     |                                     | 4        |
 | `language`            | `string`      | ISO 639                             | `en`     |
 | `multi.token.words`   | `enumeration` | `split`, `join`                     | `split`  |
-| `pos.tagset`          | `enumeration` | `UPOS`, `XPOS`, `CPOSTAG`, `POSTAG` | `UPOS`   |
+| `pos.tagset`          | `enumeration` | See [pos.tagset](#postagset).       | `UPOS`   |
 | `upos.tagset`         | `enumeration` | `upos`, `upenn`                     | `upos`   |
 | `xpos.tagset`         | `enumeration` | `upos`, `upenn`                     | `upenn`  |
+
+## Enumeration Types
+
+### pos.tagset
+The `pos.tagset` property can be one of the following enumeration values:
+1. `UPOS`, or `CPOSTAG` -- The universal/coarse part of speech tag.
+2. `XPOS`, or `POSTAG` -- The language-specific part of speech tag.
+3. `UPOS-PTB`, or `CPOSTAG-PTB` -- The universal part of speech tag followed by the PTB (Penn TreeBank)
+   part of speech tag separated by a hyphen, e.g. `DET-DT`.
 
 ## License
 Copyright (C) 2021 Reece H. Dunn

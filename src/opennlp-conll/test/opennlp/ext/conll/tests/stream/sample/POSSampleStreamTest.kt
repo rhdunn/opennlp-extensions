@@ -166,6 +166,50 @@ class POSSampleStreamTest {
 
             assertThat(samples.size, `is`(1))
         }
+
+        @Test
+        @DisplayName("UPOS-PTB")
+        fun uposPtb() {
+            val properties = Properties()
+            properties[POS_TAGSET] = "UPOS-PTB"
+
+            val samples = parse(
+                """
+                1	I	I	PRON	PRP	_	_	_	_	_
+                2	like	like	VERB	VBP	_	_	_	_	_
+                3	cars	car	NOUN	NNS	_	_	_	_	_
+                4	.	.	PUNCT	.	_	_	_	_	_
+                """.trimIndent(),
+                properties
+            )
+
+            assertThat(samples[0].sentence, `is`(arrayOf("I", "like", "cars", ".")))
+            assertThat(samples[0].tags, `is`(arrayOf("PRON-PRP", "VERB-VBP", "NOUN-NNS", "PUNCT-.")))
+
+            assertThat(samples.size, `is`(1))
+        }
+
+        @Test
+        @DisplayName("CPOSTAG-PTB")
+        fun cpostagPtb() {
+            val properties = Properties()
+            properties[POS_TAGSET] = "CPOSTAG-PTB"
+
+            val samples = parse(
+                """
+                1	I	I	PRON	PRP	_	_	_	_	_
+                2	like	like	VERB	VBP	_	_	_	_	_
+                3	cars	car	NOUN	NNS	_	_	_	_	_
+                4	.	.	PUNCT	.	_	_	_	_	_
+                """.trimIndent(),
+                properties
+            )
+
+            assertThat(samples[0].sentence, `is`(arrayOf("I", "like", "cars", ".")))
+            assertThat(samples[0].tags, `is`(arrayOf("PRON-PRP", "VERB-VBP", "NOUN-NNS", "PUNCT-.")))
+
+            assertThat(samples.size, `is`(1))
+        }
     }
 
     @Nested
