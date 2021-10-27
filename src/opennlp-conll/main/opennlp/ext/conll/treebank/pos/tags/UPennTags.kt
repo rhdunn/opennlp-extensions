@@ -10,7 +10,8 @@ enum class UPennTags(
     override val label: String,
     override val wordClass: WordClass
 ) : PosTag {
-// Core -- [Penn Treebank P.O.S. Tags](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)
+// region Core Tags
+// Reference: [Penn Treebank P.O.S. Tags](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)
     CC("CC", "coordinating conjunction", WordClass.Closed),
     CD("CD", "cardinal number", WordClass.Closed),
     DT("DT", "determiner", WordClass.Closed),
@@ -47,12 +48,28 @@ enum class UPennTags(
     WP("WP", "wh-pronoun", WordClass.Closed),
     WPS("WP$", "possessive wh-pronoun", WordClass.Closed),
     WRB("WRB", "wh-adverb", WordClass.Open),
-// Punctuation -- [Building a Large Annotated Corpus of English: The Penn Treebank](https://aclanthology.org/J93-2004.pdf)
+// endregion
+// region Punctuation Tags
+// Reference: [Building a Large Annotated Corpus of English: The Penn Treebank](https://aclanthology.org/J93-2004.pdf)
     POUND("#", "pound sign", WordClass.Other),
     DOLLAR("$", "dollar sign", WordClass.Other),
     SENT(".", "sentence-final punctuation", WordClass.Other),
-    COMMA(",", "comma", WordClass.Other),
-    COLON(":", "colon, semi-colon", WordClass.Other);
+    COMMA(",", "comma, and mid-sentence punctuation", WordClass.Other),
+    COLON(":", "colon, semi-colon, and dashes", WordClass.Other),
+// endregion
+// region Other
+// Reference: [Supplementary Guidelines for ETTB 2.0](https://catalog.ldc.upenn.edu/docs/LDC2009T24/treebank/english-translation-treebank-guidelines.pdf)
+    ADD("ADD", "web or email address", WordClass.Other),
+    AFX("AFX", "affix", WordClass.Other),
+    GW("GW", "grouped word", WordClass.Other),
+    HYPH("HYPH", "hyphenation", WordClass.Other),
+    LQUO("``", "left single or double quotes", WordClass.Other),
+    LRB("-LRB-", "left parenthesis or bracket", WordClass.Other),
+    NFP("NFP", "non-final punctuation", WordClass.Other),
+    RQUO("''", "right single or double quotes", WordClass.Other),
+    RRB("-RRB-", "right parenthesis or bracket", WordClass.Other),
+    XX("XX", "incomplete material, partial word", WordClass.Other);
+// endregion
 
     override fun toString(): String = tag
 
