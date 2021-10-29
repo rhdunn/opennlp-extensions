@@ -74,9 +74,6 @@ enum class UPennTags(
     override fun toString(): String = tag
 
     companion object : PosTagset {
-        override fun get(tag: String): PosTag? = when (tag) {
-            "_" -> null
-            else -> values().find { it.tag == tag } ?: PosTag.Unknown(tag)
-        }
+        override fun get(tag: String): PosTag = values().find { it.tag == tag } ?: PosTag.Unknown(tag)
     }
 }

@@ -5,7 +5,7 @@ import opennlp.ext.pos.tags.UPennTags
 import opennlp.ext.pos.tags.UPosTags
 
 interface PosTagset {
-    operator fun get(tag: String): PosTag?
+    operator fun get(tag: String): PosTag
 
     class UnsupportedTagsetException(tagset: String) : RuntimeException("Unsupported POS tagset: $tagset")
 
