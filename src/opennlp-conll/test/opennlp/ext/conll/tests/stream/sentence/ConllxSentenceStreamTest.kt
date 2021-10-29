@@ -5,8 +5,8 @@ import opennlp.ext.conll.stream.io.PlainTextLineStream
 import opennlp.ext.conll.stream.sentence.ConllxSentenceStream
 import opennlp.ext.conll.treebank.*
 import opennlp.ext.conll.treebank.features.nominal.Number
-import opennlp.ext.conll.treebank.pos.tags.UPennTags
-import opennlp.ext.conll.treebank.pos.tags.UPosTags
+import opennlp.ext.pos.tags.UPennTags
+import opennlp.ext.pos.tags.UPosTags
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat

@@ -2,7 +2,7 @@
 package opennlp.ext.conll.stream.properties
 
 import opennlp.ext.conll.treebank.POSTagset
-import opennlp.ext.conll.treebank.pos.PosTagset
+import opennlp.ext.pos.PosTagset
 import java.util.*
 
 class InvalidPropertyValue(key: String, value: String) : RuntimeException("Invalid $key property value: $value")

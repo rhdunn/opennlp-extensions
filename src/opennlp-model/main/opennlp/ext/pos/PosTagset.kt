@@ -1,8 +1,8 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
-package opennlp.ext.conll.treebank.pos
+package opennlp.ext.pos
 
-import opennlp.ext.conll.treebank.pos.tags.UPennTags
-import opennlp.ext.conll.treebank.pos.tags.UPosTags
+import opennlp.ext.pos.tags.UPennTags
+import opennlp.ext.pos.tags.UPosTags
 
 interface PosTagset {
     operator fun get(tag: String): PosTag?

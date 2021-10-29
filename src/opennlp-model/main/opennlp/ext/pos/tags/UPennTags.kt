@@ -1,9 +1,9 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
-package opennlp.ext.conll.treebank.pos.tags
+package opennlp.ext.pos.tags
 
-import opennlp.ext.conll.treebank.pos.PosTag
-import opennlp.ext.conll.treebank.pos.PosTagset
-import opennlp.ext.conll.treebank.pos.WordClass
+import opennlp.ext.pos.PosTag
+import opennlp.ext.pos.PosTagset
+import opennlp.ext.pos.WordClass
 
 enum class UPennTags(
     override val tag: String,

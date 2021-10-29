@@ -2,4 +2,5 @@ sourceSets.main.kotlin.srcDirs = ['main']
 sourceSets.test.kotlin.srcDirs = ['test']
 
 dependencies {
+    implementation project(':src:opennlp-model')
 }

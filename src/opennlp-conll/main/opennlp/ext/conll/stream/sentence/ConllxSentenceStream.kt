@@ -4,9 +4,9 @@ package opennlp.ext.conll.stream.sentence
 import opennlp.ext.conll.stream.properties.uposTagset
 import opennlp.ext.conll.stream.properties.xposTagset
 import opennlp.ext.conll.treebank.*
-import opennlp.ext.conll.treebank.pos.PosTagset
-import opennlp.ext.conll.treebank.pos.tags.UPennTags
-import opennlp.ext.conll.treebank.pos.tags.UPosTags
+import opennlp.ext.pos.PosTagset
+import opennlp.ext.pos.tags.UPennTags
+import opennlp.ext.pos.tags.UPosTags
 import opennlp.tools.util.FilterObjectStream
 import opennlp.tools.util.ObjectStream
 import java.util.*

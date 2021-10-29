@@ -1,8 +1,8 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.treebank
 
-import opennlp.ext.conll.treebank.pos.PosTag
-import opennlp.ext.conll.treebank.pos.tags.UPosPennTags
+import opennlp.ext.pos.PosTag
+import opennlp.ext.pos.tags.UPosPennTags
 
 // Reference: [CoNLL-X Format](https://ilk.uvt.nl/~emarsi/download/pubs/14964.pdf)
 // Reference: [CoNLL-U Format](https://universaldependencies.org/format.html)
