@@ -11,6 +11,8 @@ import java.nio.file.Path
 
 @Suppress("MemberVisibilityCanBePrivate")
 data class Sentence(val textBefore: String?, val text: String, val textAfter: String?) {
+    var tokens: Array<String> = arrayOf()
+
     companion object {
         fun detector(model: SentenceModel): SentenceDetector = SentenceDetectorME(model)
 
