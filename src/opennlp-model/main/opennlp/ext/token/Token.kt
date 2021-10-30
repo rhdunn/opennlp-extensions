@@ -11,7 +11,13 @@ import java.net.URL
 import java.nio.file.Path
 
 @Suppress("MemberVisibilityCanBePrivate")
-data class Token(val index: Int, val textBefore: String?, val text: String, val span: Span) {
+data class Token(val index: Int, val textBefore: String?, val sentenceText: String, val span: Span) {
+    val text: String by lazy { sentenceText.substring(span.start, span.end) }
+
+    override fun toString(): String {
+        return "Token(index=$index, textBefore=$textBefore, text=$text, span=$span)"
+    }
+
     companion object {
         fun tokenizer(model: TokenizerModel): Tokenizer = TokenizerME(model)
 

@@ -28,8 +28,10 @@ class TokenTest {
         val spans = arrayOf(Span(0, 3))
         val tokens = text.tokenize(spans)
 
-        assertThat(tokens[0], `is`(Token(0, null, "abc", Span(0, 3))))
+        assertThat(tokens[0], `is`(Token(0, null, text, Span(0, 3))))
         assertThat(tokens.size, `is`(1))
+
+        assertThat(tokens[0].text, `is`("abc"))
     }
 
     @Test
@@ -39,9 +41,12 @@ class TokenTest {
         val spans = arrayOf(Span(0, 3), Span(4, 7))
         val tokens = text.tokenize(spans)
 
-        assertThat(tokens[0], `is`(Token(0, null, "abc", Span(0, 3))))
-        assertThat(tokens[1], `is`(Token(1, "d", "efg", Span(4, 7))))
+        assertThat(tokens[0], `is`(Token(0, null, text, Span(0, 3))))
+        assertThat(tokens[1], `is`(Token(1, "d", text, Span(4, 7))))
         assertThat(tokens.size, `is`(2))
+
+        assertThat(tokens[0].text, `is`("abc"))
+        assertThat(tokens[1].text, `is`("efg"))
     }
 
     @Test
@@ -51,9 +56,13 @@ class TokenTest {
         val spans = arrayOf(Span(0, 3), Span(4, 7), Span(8, 11))
         val tokens = text.tokenize(spans)
 
-        assertThat(tokens[0], `is`(Token(0, null, "abc", Span(0, 3))))
-        assertThat(tokens[1], `is`(Token(1, "d", "efg", Span(4, 7))))
-        assertThat(tokens[2], `is`(Token(2, "h", "ijk", Span(8, 11))))
+        assertThat(tokens[0], `is`(Token(0, null, text, Span(0, 3))))
+        assertThat(tokens[1], `is`(Token(1, "d", text, Span(4, 7))))
+        assertThat(tokens[2], `is`(Token(2, "h", text, Span(8, 11))))
         assertThat(tokens.size, `is`(3))
+
+        assertThat(tokens[0].text, `is`("abc"))
+        assertThat(tokens[1].text, `is`("efg"))
+        assertThat(tokens[2].text, `is`("ijk"))
     }
 }

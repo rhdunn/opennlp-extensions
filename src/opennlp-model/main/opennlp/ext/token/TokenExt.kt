@@ -15,8 +15,7 @@ fun String.tokenize(spans: Array<Span>): Array<Token> {
             else -> substring(start, span.start)
         }
 
-        val token = substring(span.start, span.end)
-        tokens.add(Token(index, textBefore, token, span))
+        tokens.add(Token(index, textBefore, this, span))
         start = span.end
     }
 
