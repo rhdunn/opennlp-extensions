@@ -9,8 +9,20 @@ fun Sentence.tag(tagger: POSTagger, context: Array<Any>? = null): Array<String> 
     return tagger.tag(tokens, context)
 }
 
-fun Sentence.tag(tagger: POSTagger, tagset: PosTagset, context: Array<Any>? = null): Array<PosTag> {
-    return tagger.tag(tokens, context).map { tagset[it] }.toTypedArray()
+inline fun <reified T> Sentence.tag(tagger: POSTagger, context: Array<Any>?, transform: (String) -> T): Array<T> {
+    return tagger.tag(tokens, context).map(transform).toTypedArray()
+}
+
+inline fun <reified T> Sentence.tag(tagger: POSTagger, transform: (String) -> T): Array<T> {
+    return tag(tagger, null, transform)
+}
+
+fun Sentence.tag(tagger: POSTagger, context: Array<Any>?, tagset: PosTagset): Array<PosTag> {
+    return tag(tagger, context) { tagset[it] }
+}
+
+fun Sentence.tag(tagger: POSTagger, tagset: PosTagset): Array<PosTag> {
+    return tag(tagger, null) { tagset[it] }
 }
 
 fun Sentence.topKSequences(tagger: POSTagger, context: Array<Any>? = null): Array<Sequence> {
