@@ -1,6 +1,7 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.token
 
+import opennlp.ext.pos.PosTag
 import opennlp.tools.tokenize.Tokenizer
 import opennlp.tools.tokenize.TokenizerME
 import opennlp.tools.tokenize.TokenizerModel
@@ -14,8 +15,11 @@ import java.nio.file.Path
 data class Token(val index: Int, val textBefore: String?, val sentenceText: String, val span: Span) {
     val text: String by lazy { sentenceText.substring(span.start, span.end) }
 
+    var pos: PosTag? = null
+    var lemma: String? = null
+
     override fun toString(): String {
-        return "Token(index=$index, textBefore=$textBefore, text=$text, span=$span)"
+        return "Token(index=$index, textBefore=$textBefore, text=$text, span=$span, pos=$pos, lemma=$lemma)"
     }
 
     companion object {
