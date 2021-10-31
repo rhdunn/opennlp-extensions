@@ -1,5 +1,5 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
-package opennlp.ext.conll.stream.io
+package opennlp.ext.stream
 
 import opennlp.tools.util.InputStreamFactory
 import opennlp.tools.util.MarkableFileInputStreamFactory

@@ -1,7 +1,7 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.tests.stream.sentence
 
-import opennlp.ext.conll.stream.io.PlainTextLineStream
+import opennlp.ext.stream.PlainTextLineStream
 import opennlp.ext.conll.stream.sentence.ConlluSentenceStream
 import opennlp.ext.conll.treebank.*
 import opennlp.ext.conll.treebank.features.misc.SpaceAfter

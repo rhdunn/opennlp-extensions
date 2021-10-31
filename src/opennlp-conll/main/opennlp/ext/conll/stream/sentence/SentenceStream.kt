@@ -1,7 +1,7 @@
 // Copyright (C) 2021 Reece H. Dunn. SPDX-License-Identifier: Apache-2.0
 package opennlp.ext.conll.stream.sentence
 
-import opennlp.ext.conll.stream.io.PlainTextLineStream
+import opennlp.ext.stream.PlainTextLineStream
 import opennlp.ext.conll.treebank.Sentence
 import opennlp.tools.util.InputStreamFactory
 import opennlp.tools.util.ObjectStream
