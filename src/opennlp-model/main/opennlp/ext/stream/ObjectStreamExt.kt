@@ -10,3 +10,12 @@ fun <T> ObjectStream<T>.forEach(action: (T) -> Unit) {
         item = read()
     }
 }
+
+fun <T> ObjectStream<T>.forEachIndexed(action: (index: Int, T) -> Unit) {
+    var index = 0
+    var item: T? = read()
+    while (item != null) {
+        action(index++, item)
+        item = read()
+    }
+}
