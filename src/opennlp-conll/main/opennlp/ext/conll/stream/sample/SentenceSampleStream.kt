@@ -4,6 +4,7 @@ package opennlp.ext.conll.stream.sample
 import opennlp.ext.conll.stream.properties.sentencesPerSample
 import opennlp.ext.conll.stream.sentence.SentenceStream
 import opennlp.ext.conll.treebank.Sentence
+import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import opennlp.tools.sentdetect.SentenceSample
 import opennlp.tools.util.FilterObjectStream
 import opennlp.tools.util.InputStreamFactory
@@ -24,14 +25,20 @@ class SentenceSampleStream(
     override fun read(): SentenceSample? {
         val text = StringBuilder()
         val spans = mutableListOf<Span>()
+        var spaceAfter = true
 
         (1..sentencesPerSample).forEach { i ->
             val sentence = samples.read() ?: return@forEach
-            if (i != 1) text.append(' ')
+            if (i != 1 && spaceAfter) {
+                text.append(' ')
+            }
 
             val spanStart = text.length
             text.append(sentence.text ?: "")
             spans.add(Span(spanStart, text.length))
+
+            val token = sentence.wordLines.lastOrNull()
+            spaceAfter = token == null || !token.hasFeature(SpaceAfter.No)
         }
 
         return when (text.length) {

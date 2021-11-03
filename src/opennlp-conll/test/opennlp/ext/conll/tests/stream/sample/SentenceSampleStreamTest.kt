@@ -132,4 +132,30 @@ class SentenceSampleStreamTest {
             assertThat(samples.size, `is`(2))
         }
     }
+
+    @Test
+    @DisplayName("SpaceAfter=No")
+    fun spaceAfterNo() {
+        val samples = parse(
+            """
+                # text = Lorem ipsum.--
+                1	Lorem	lorem	X	FW	_	_	_	_	_
+                2	ipsum	ipsum	X	FW	_	_	_	_	SpaceAfter=No
+                3	.	.	PUNCT	.	_	_	_	_	SpaceAfter=No
+                4	--	--	PUNCT	:	_	_	_	_	SpaceAfter=No
+
+                # text = Dolor sed emit.
+
+                # text = Consectetur adipiscing elit.
+                """.trimIndent()
+        )
+
+        assertThat(samples[0].document, `is`("Lorem ipsum.--Dolor sed emit. Consectetur adipiscing elit."))
+        assertThat(
+            sentences(samples[0]),
+            `is`(listOf("Lorem ipsum.--", "Dolor sed emit.", "Consectetur adipiscing elit."))
+        )
+
+        assertThat(samples.size, `is`(1))
+    }
 }
