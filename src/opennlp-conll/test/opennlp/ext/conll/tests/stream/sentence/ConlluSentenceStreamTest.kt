@@ -8,6 +8,7 @@ import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import opennlp.ext.conll.treebank.features.nominal.Number
 import opennlp.ext.pos.tags.UPennTags
 import opennlp.ext.pos.tags.UPosTags
+import opennlp.tools.util.Span
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
@@ -221,6 +222,7 @@ class ConlluSentenceStreamTest {
             """.trimIndent()
         )
         assertThat(sentences.size, `is`(1))
+        assertThat(sentences[0].lines, `is`(Span(1, 3)))
 
         var token = sentences[0].wordLines[0]
         assertThat(token.id, `is`(token1))
@@ -256,6 +258,8 @@ class ConlluSentenceStreamTest {
             """.trimIndent()
         )
         assertThat(sentences.size, `is`(2))
+        assertThat(sentences[0].lines, `is`(Span(1, 2)))
+        assertThat(sentences[1].lines, `is`(Span(3, 4)))
 
         var token = sentences[0].wordLines[0]
         assertThat(token.id, `is`(token1))

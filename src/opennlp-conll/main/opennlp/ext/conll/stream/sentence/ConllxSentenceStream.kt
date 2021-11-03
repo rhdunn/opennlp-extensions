@@ -9,6 +9,7 @@ import opennlp.ext.pos.tags.UPennTags
 import opennlp.ext.pos.tags.UPosTags
 import opennlp.tools.util.FilterObjectStream
 import opennlp.tools.util.ObjectStream
+import opennlp.tools.util.Span
 import java.util.*
 
 // Reference: [CoNLL-X Format](https://ilk.uvt.nl/~emarsi/download/pubs/14964.pdf)
@@ -17,6 +18,8 @@ class ConllxSentenceStream(
     private val uposTagset: PosTagset = UPosTags,
     private val xposTagset: PosTagset = UPennTags
 ) : FilterObjectStream<String, Sentence>(stream) {
+    private var lineNumber: Int = 0
+
     constructor(stream: ObjectStream<String>, properties: Properties) : this(
         stream,
         uposTagset(properties),
@@ -25,13 +28,17 @@ class ConllxSentenceStream(
 
     override fun read(): Sentence? {
         var line: String? = samples.read() ?: return null
+        lineNumber++
 
+        val lineStart = lineNumber
         val wordLines = mutableListOf<WordLine>()
         while (!line.isNullOrEmpty()) {
             wordLines.add(parseWordLine(line.split('\t')))
+
             line = samples.read()
+            lineNumber++
         }
-        return Sentence(listOf(), wordLines)
+        return Sentence(Span(lineStart, lineNumber), listOf(), wordLines)
     }
 
     private fun parseWordLine(fields: List<String>): WordLine = when (fields.size) {
