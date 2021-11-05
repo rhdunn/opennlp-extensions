@@ -2,6 +2,7 @@
 package opennlp.ext.conll.treebank
 
 import opennlp.ext.conll.treebank.features.lexical.*
+import opennlp.ext.conll.treebank.features.misc.CorrectSpaceAfter
 import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import opennlp.ext.conll.treebank.features.nominal.*
 import opennlp.ext.conll.treebank.features.nominal.Number
@@ -19,6 +20,7 @@ interface FeatureSet {
             Aspect.type -> Aspect
             Case.type -> Case
             Clusivity.type -> Clusivity
+            CorrectSpaceAfter.type -> CorrectSpaceAfter
             Definite.type -> Definite
             Degree.type -> Degree
             Evident.type -> Evident

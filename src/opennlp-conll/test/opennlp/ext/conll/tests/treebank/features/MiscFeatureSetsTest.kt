@@ -3,6 +3,7 @@ package opennlp.ext.conll.tests.treebank.features
 
 import opennlp.ext.conll.treebank.Feature
 import opennlp.ext.conll.treebank.features.UnknownFeatureValue
+import opennlp.ext.conll.treebank.features.misc.CorrectSpaceAfter
 import opennlp.ext.conll.treebank.features.misc.SpaceAfter
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.sameInstance
@@ -24,5 +25,13 @@ class MiscFeatureSetsTest {
     fun spaceAfter() {
         assertThat(feature("SpaceAfter=No"), `is`(sameInstance(SpaceAfter.No)))
         assertThat(feature("SpaceAfter=Yes"), `is`(UnknownFeatureValue("SpaceAfter", "Yes")))
+    }
+
+    @Test
+    @DisplayName("CorrectSpaceAfter")
+    fun correctSpaceAfter() {
+        assertThat(feature("CorrectSpaceAfter=No"), `is`(sameInstance(CorrectSpaceAfter.No)))
+        assertThat(feature("CorrectSpaceAfter=Yes"), `is`(sameInstance(CorrectSpaceAfter.Yes)))
+        assertThat(feature("CorrectSpaceAfter=None"), `is`(UnknownFeatureValue("CorrectSpaceAfter", "None")))
     }
 }
